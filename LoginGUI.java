@@ -1,5 +1,8 @@
+import constants.Constants;
 import custom.PasswordFieldCustom;
 import custom.TextFieldCustom;
+import databases.AdminDB;
+import databases.CustomerDB;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +29,7 @@ public class LoginGUI extends JFrame implements ActionListener {
     private void addGuiComponent(){
         JLabel loginImage = CustomTools.loadImage(Constants.LOGIN_IMAGE_PATH);
         loginImage.setBounds((Constants.FRAME_SIZE.width - loginImage.getPreferredSize().width)/2,
-                25,Constants.LOGIN_IMAGE_SIZE.width,Constants.LOGIN_IMAGE_SIZE.height
+                25, Constants.LOGIN_IMAGE_SIZE.width, Constants.LOGIN_IMAGE_SIZE.height
         );
 
         // username field
@@ -56,7 +59,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         loginButton.setBounds(
                 50,
                 passwordField.getY()+ 100,
-                Constants.BUTTON_SIZE.width,Constants.BUTTON_SIZE.height
+                Constants.BUTTON_SIZE.width, Constants.BUTTON_SIZE.height
 
         );
         loginButton.addActionListener(this);
@@ -68,8 +71,6 @@ public class LoginGUI extends JFrame implements ActionListener {
         registerLabel.setForeground(Color.WHITE);
         registerLabel.setBounds( (Constants.FRAME_SIZE.width-registerLabel.getPreferredSize().width)/2,
                 loginButton.getY()+100, registerLabel.getPreferredSize().width+10,registerLabel.getPreferredSize().height );
-        //to debug
-        registerLabel.setBorder(BorderFactory.createLineBorder(Color.RED));
         registerLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -99,7 +100,7 @@ public class LoginGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        if(command.equalsIgnoreCase("Login")){
+        if (command.equalsIgnoreCase("Login")) {
             // create dialog box
             JDialog resultDialog = new JDialog();
             resultDialog.setPreferredSize(Constants.RESULT_DIALOG_SIZE);
@@ -117,29 +118,32 @@ public class LoginGUI extends JFrame implements ActionListener {
             String username = usernameField.getText();
             String password = passwordField.getText();
 
-            // validate credentials in UserDB
-            if(UserDB.getUser(username) !=null){
+            // validate credentials in databases.CustomerDB
+            if (CustomerDB.getCustomer(username) != null) {
                 // checks password
-                String validPass = UserDB.getUser(username);
-                if(password.equals(validPass)){
+                String validPass = CustomerDB.getCustomer(username);
+                if (password.equals(validPass)) {
                     //display a success dialog
                     resultLabel.setText("Login Successful!");
-                }
-                else{
+                } else {
                     // display an incorrect password dialog
                     resultLabel.setText("Invalid Password");
                 }
+            } else if (AdminDB.getAdmin(username) != null) {
+                // checks password
+                String validPass = AdminDB.getAdmin(username);
+                if (password.equals(validPass)) {
+                    //display a success dialog
+                    resultLabel.setText("Admin Login Successful!");
+                } else {
+                    // display an incorrect username dialog
+                    resultLabel.setText("Invalid Username");
+
+                }
             }
-            else{
-                // display an incorrect username dialog
-                resultLabel.setText("Invalid Username");
+                resultDialog.setVisible(true);
+
 
             }
-            resultDialog.setVisible(true);
-
-
-
-
         }
     }
-}
