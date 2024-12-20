@@ -19,14 +19,18 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
+        getContentPane().setBackground(Constants.PRIMARY_COLOR);
         addGuiComponents();
     }
     private void addGuiComponents(){
         JLabel registerLabel = new JLabel("Register");
         registerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        registerLabel.setForeground(Constants.SECONDARY_COLOR);
         registerLabel.setBounds(0,0,Constants.REGISTER_LABEL_SIZE.width,Constants.REGISTER_LABEL_SIZE.height);
         //username field
         usernameField = new TextFieldCustom("Enter username",30);
+        usernameField.setBackground(Constants.SECONDARY_COLOR);
+        usernameField.setForeground(Color.WHITE);
         usernameField.setBounds(50,registerLabel.getY()+100,Constants.TEXTFIELD_SIZE.width,Constants.TEXTFIELD_SIZE.height);
 
         usernameField.addFocusListener(this);
@@ -37,12 +41,16 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
         // password field
         passwordField = new PasswordFieldCustom("Enter Password",30);
         passwordField.setBounds(50,usernameField.getY()+100,Constants.TEXTFIELD_SIZE.width,Constants.TEXTFIELD_SIZE.height);
+        passwordField.setBackground(Constants.SECONDARY_COLOR);
+        passwordField.setForeground(Color.WHITE);
         passwordField.addFocusListener(this);
         // password error label
         passwordErrorLabel = new ErrorLabel("Invalid: Size > 6, At Least 1 Upper and Lower Case Letter, 1 Special Char, 1 Number");
         passwordErrorLabel.setBounds(50,passwordField.getY()+50,Constants.TEXTFIELD_SIZE.width,25);
         // confirm password field
         confirmPasswordField =new PasswordFieldCustom("Confirm Password",30);
+        confirmPasswordField.setBackground(Constants.SECONDARY_COLOR);
+        confirmPasswordField.setForeground(Color.WHITE);
         confirmPasswordField.setBounds(50,
                 passwordField.getY()+100,
                 Constants.TEXTFIELD_SIZE.width,Constants.TEXTFIELD_SIZE.height);
@@ -53,6 +61,8 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
         confirmPasswordErrorLabel.setBounds(50,confirmPasswordField.getY()+50,Constants.TEXTFIELD_SIZE.width,25);
         // email field
         emailField = new TextFieldCustom("Enter E-mail",30);
+        emailField.setBackground(Constants.SECONDARY_COLOR);
+        emailField.setForeground(Color.WHITE);
         emailField.setBounds(50,confirmPasswordField.getY()+100,Constants.TEXTFIELD_SIZE.width,Constants.TEXTFIELD_SIZE.height);
         emailField.addFocusListener(this);
         // email field error label
@@ -64,6 +74,8 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
         JButton registerButton = new JButton("Register");
         registerButton.setBounds(50,emailField.getY()+100,Constants.TEXTFIELD_SIZE.width,Constants.TEXTFIELD_SIZE.height);
         registerButton.addActionListener( this);
+        registerButton.setBackground(Constants.BUTTON_COLOR);
+        registerButton.setForeground(Color.WHITE);
 
 
 
@@ -71,7 +83,7 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
         JLabel loginLabel = new JLabel("Already a user? Login Here");
         loginLabel.setBorder(BorderFactory.createLineBorder(Color.RED));
         loginLabel.setBounds((Constants.FRAME_SIZE.width-loginLabel.getPreferredSize().width)/2,registerButton.getY()+100,loginLabel.getPreferredSize().width+10,loginLabel.getPreferredSize().height);
-
+        loginLabel.setForeground(Constants.SECONDARY_COLOR);
         loginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         loginLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -171,6 +183,8 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
             JLabel resultLabel = new JLabel();
             resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
             resultDialog.add(resultLabel);
+            resultDialog.getContentPane().setBackground(Constants.PRIMARY_COLOR);
+            resultLabel.setForeground(Constants.SECONDARY_COLOR);
 
             if(isValid){
                 String username = usernameField.getText();

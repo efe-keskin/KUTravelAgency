@@ -1,6 +1,7 @@
 package custom;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class TextFieldCustom extends JTextField {
@@ -13,6 +14,7 @@ public class TextFieldCustom extends JTextField {
         hasPlaceHolder = true;
         setDocument(new LimitText(charLimit));
         setText(this.placeHolderText);
+        setMargin(new Insets(0,10,0,0));
         addListeners();
     }
 

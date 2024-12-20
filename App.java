@@ -6,7 +6,7 @@ public class App {
             @Override
             public void run() {
                 new LoginGUI().setVisible(true);
-                new RegisterGUI().setVisible(true);
+                new RegisterGUI().setVisible(false);
             }
         });
     }

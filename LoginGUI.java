@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 public class LoginGUI extends JFrame implements ActionListener {
     private TextFieldCustom usernameField;
     private PasswordFieldCustom passwordField;
+
     public LoginGUI(){
         super("KU Travel App Login");
         setSize(Constants.FRAME_SIZE);
@@ -18,6 +19,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(null);
+        getContentPane().setBackground(Constants.PRIMARY_COLOR);
 
         addGuiComponent();
     }
@@ -29,6 +31,9 @@ public class LoginGUI extends JFrame implements ActionListener {
 
         // username field
         usernameField = new TextFieldCustom("Enter Username",30);
+
+        usernameField.setBackground(Constants.SECONDARY_COLOR);
+        usernameField.setForeground(Color.WHITE);
         usernameField.setBounds(
                 50,
                 loginImage.getY()+315,
@@ -36,6 +41,8 @@ public class LoginGUI extends JFrame implements ActionListener {
         );
         // password field
         passwordField = new PasswordFieldCustom("Enter Password",30);
+        passwordField.setBackground(Constants.SECONDARY_COLOR);
+        passwordField.setForeground(Color.WHITE);
         passwordField.setBounds(
                 50,
                 usernameField.getY()+100,
@@ -44,6 +51,8 @@ public class LoginGUI extends JFrame implements ActionListener {
 
         // login button
         JButton loginButton = new JButton("Login");
+        loginButton.setBackground(Constants.BUTTON_COLOR);
+        loginButton.setForeground(Color.WHITE);
         loginButton.setBounds(
                 50,
                 passwordField.getY()+ 100,
@@ -55,6 +64,8 @@ public class LoginGUI extends JFrame implements ActionListener {
         // login -> register label
         JLabel registerLabel = new JLabel("Not registered? Click Here!");
         registerLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        registerLabel.setBackground(Constants.SECONDARY_COLOR);
+        registerLabel.setForeground(Color.WHITE);
         registerLabel.setBounds( (Constants.FRAME_SIZE.width-registerLabel.getPreferredSize().width)/2,
                 loginButton.getY()+100, registerLabel.getPreferredSize().width+10,registerLabel.getPreferredSize().height );
         //to debug
@@ -68,12 +79,13 @@ public class LoginGUI extends JFrame implements ActionListener {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
+                registerLabel.setForeground(Color.WHITE);
+
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
+                registerLabel.setForeground(Constants.SECONDARY_COLOR);
             }
         });
         // add to frame
@@ -98,15 +110,17 @@ public class LoginGUI extends JFrame implements ActionListener {
             JLabel resultLabel = new JLabel();
             resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
             resultDialog.add(resultLabel);
+            resultDialog.getContentPane().setBackground(Constants.PRIMARY_COLOR);
+            resultLabel.setForeground(Constants.SECONDARY_COLOR);
 
             // retrieve entered credentials
             String username = usernameField.getText();
             String password = passwordField.getText();
 
             // validate credentials in UserDB
-            if(UserDB.userDB.get(username) !=null){
+            if(UserDB.getUser(username) !=null){
                 // checks password
-                String validPass = UserDB.userDB.get(username);
+                String validPass = UserDB.getUser(username);
                 if(password.equals(validPass)){
                     //display a success dialog
                     resultLabel.setText("Login Successful!");

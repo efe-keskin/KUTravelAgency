@@ -1,6 +1,7 @@
 package custom;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class PasswordFieldCustom extends JPasswordField {
@@ -14,6 +15,7 @@ public class PasswordFieldCustom extends JPasswordField {
         setDocument(new LimitText(charLimit));
         setText(this.placeHolderText);
         setEchoChar((char) 0);
+        setMargin(new Insets(0,10,0,0));
         addListeners();
     }
 
