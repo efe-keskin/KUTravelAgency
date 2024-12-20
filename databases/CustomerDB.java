@@ -55,9 +55,12 @@ public class CustomerDB {
     }
 
     // Retrieve a user's password
-    public static String getCustomer(String username) {
+    public static String getCustomerPass(String username) {
         if(customerDB.get(username) == null){return null;}
         return customerDB.get(username).getPassword();
+    }
+    public static Customer getCustomer(String username){
+        return customerDB.get(username);
     }
     public static Boolean hasCustomer(String username){
         if(customerDB.containsKey(username)){

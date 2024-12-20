@@ -1,5 +1,6 @@
 package databases;
 import Users.Admin;
+import Users.User;
 import constants.Constants;
 
 import java.io.*;
@@ -28,7 +29,7 @@ public class AdminDB {
 
 
     // Retrieve a user's password
-    public static String getAdmin(String username) {
+    public static String getAdminPass(String username) {
         return adminDB.get(username).getPassword();
     }
     public static Boolean hasAdmin(String username){
@@ -36,5 +37,9 @@ public class AdminDB {
             return true;
         }
         return false;
+    }
+
+    public static User getAdmin(String username) {
+        return adminDB.get(username);
     }
 }

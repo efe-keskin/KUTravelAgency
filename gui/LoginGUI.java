@@ -1,4 +1,8 @@
+package gui;
+
 import constants.Constants;
+import core.App;
+import resources.CustomTools;
 import custom.PasswordFieldCustom;
 import custom.TextFieldCustom;
 import databases.AdminDB;
@@ -17,7 +21,7 @@ public class LoginGUI extends JFrame implements ActionListener {
 
     public LoginGUI(){
         super("KU Travel App Login");
-        setSize(Constants.FRAME_SIZE);
+        setSize(Constants.LOGINFRAME_SIZE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -28,7 +32,7 @@ public class LoginGUI extends JFrame implements ActionListener {
     }
     private void addGuiComponent(){
         JLabel loginImage = CustomTools.loadImage(Constants.LOGIN_IMAGE_PATH);
-        loginImage.setBounds((Constants.FRAME_SIZE.width - loginImage.getPreferredSize().width)/2,
+        loginImage.setBounds((Constants.LOGINFRAME_SIZE.width - loginImage.getPreferredSize().width)/2,
                 25, Constants.LOGIN_IMAGE_SIZE.width, Constants.LOGIN_IMAGE_SIZE.height
         );
 
@@ -69,7 +73,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         registerLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         registerLabel.setBackground(Constants.SECONDARY_COLOR);
         registerLabel.setForeground(Color.WHITE);
-        registerLabel.setBounds( (Constants.FRAME_SIZE.width-registerLabel.getPreferredSize().width)/2,
+        registerLabel.setBounds( (Constants.LOGINFRAME_SIZE.width-registerLabel.getPreferredSize().width)/2,
                 loginButton.getY()+100, registerLabel.getPreferredSize().width+10,registerLabel.getPreferredSize().height );
         registerLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -119,22 +123,31 @@ public class LoginGUI extends JFrame implements ActionListener {
             String password = passwordField.getText();
 
             // validate credentials in databases.CustomerDB
-            if (CustomerDB.getCustomer(username) != null) {
+            if (CustomerDB.getCustomerPass(username) != null) {
                 // checks password
-                String validPass = CustomerDB.getCustomer(username);
+                String validPass = CustomerDB.getCustomerPass(username);
                 if (password.equals(validPass)) {
                     //display a success dialog
                     resultLabel.setText("Login Successful!");
+                    App.loggedIn= true;
+                    App.user = CustomerDB.getCustomer(username);
+                    dispose();
+                    new MenuGUI().setVisible(true);
                 } else {
                     // display an incorrect password dialog
                     resultLabel.setText("Invalid Password");
                 }
-            } else if (AdminDB.getAdmin(username) != null) {
+            } else if (AdminDB.getAdminPass(username) != null) {
                 // checks password
-                String validPass = AdminDB.getAdmin(username);
+                String validPass = AdminDB.getAdminPass(username);
                 if (password.equals(validPass)) {
                     //display a success dialog
+                    App.loggedIn= true;
+                    App.isAdmin = true;
+                    App.user = AdminDB.getAdmin(username);
                     resultLabel.setText("Admin Login Successful!");
+                    dispose();
+                    new MenuGUI().setVisible(true);
                 } else {
                     // display an incorrect username dialog
                     resultLabel.setText("Invalid Username");

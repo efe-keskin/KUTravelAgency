@@ -1,6 +1,6 @@
 package Users;
 
-public class Admin {
+public class Admin implements User{
     private final String username;
     private final String password;
     public Admin (String username, String password){

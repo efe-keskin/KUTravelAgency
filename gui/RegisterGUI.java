@@ -1,3 +1,5 @@
+package gui;
+
 import constants.Constants;
 import custom.ErrorLabel;
 import custom.PasswordFieldCustom;
@@ -17,7 +19,7 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
     private PasswordFieldCustom passwordField,confirmPasswordField;
     public RegisterGUI(){
         super("KU Travel Agency Register");
-        setSize(Constants.FRAME_SIZE);
+        setSize(Constants.LOGINFRAME_SIZE);
         setLocationRelativeTo(null); // centers the JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -78,7 +80,7 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
         // register --> login
         JLabel loginLabel = new JLabel("Already a user? Login Here");
         loginLabel.setBorder(BorderFactory.createLineBorder(Color.RED));
-        loginLabel.setBounds((Constants.FRAME_SIZE.width-loginLabel.getPreferredSize().width)/2,registerButton.getY()+100,loginLabel.getPreferredSize().width+10,loginLabel.getPreferredSize().height);
+        loginLabel.setBounds((Constants.LOGINFRAME_SIZE.width-loginLabel.getPreferredSize().width)/2,registerButton.getY()+100,loginLabel.getPreferredSize().width+10,loginLabel.getPreferredSize().height);
         loginLabel.setForeground(Constants.SECONDARY_COLOR);
         loginLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         loginLabel.addMouseListener(new MouseAdapter() {
