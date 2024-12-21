@@ -1,0 +1,841 @@
+﻿Flight ID,Airline,Departure City,Arrival City,Departure Time,Arrival Time,Ticket Class,Price ($),Available Seats,Stopover City,Final Arrival City,Leg 1 Departure Time,Leg 1 Arrival Time,Leg 2 Departure Time,Leg 2 Arrival Time
+FL8604,Turkish Airlines,Istanbul,Paris,18:00,23:00,Economy,1375.01,26,,,,,,
+FL1331,Pegasus Airlines,Istanbul,,,,First Class,1103.77,34,Prague,Paris,7:30,9:30,12:30,14:30
+FL5928,JavaAir,Istanbul,Berlin,16:00,21:00,Business,711.99,52,,,,,,
+FL9557,GlobalJet,Istanbul,,,,Economy,1398.28,111,Amsterdam,Berlin,7:00,12:00,15:00,19:00
+FL7392,Pegasus Airlines,Istanbul,Rome,12:00,14:00,Economy,623.63,104,,,,,,
+FL3977,KUFly,Istanbul,,,,Economy,1379.19,26,Prague,Rome,11:00,15:00,17:00,21:00
+FL9290,Turkish Airlines,Istanbul,Amsterdam,12:00,16:00,Economy,946.7,65,,,,,,
+FL8863,KUFly,Istanbul,,,,Business,520.14,71,Prague,Amsterdam,21:30,1:30,4:30,6:30
+FL5954,EuroWings,Istanbul,Madrid,15:00,17:00,First Class,706.47,49,,,,,,
+FL2172,AeroFly,Istanbul,,,,Business,923.69,64,Oslo,Madrid,7:30,9:30,11:30,15:30
+FL6473,Pegasus Airlines,Istanbul,Vienna,13:00,15:00,Economy,626.91,113,,,,,,
+FL3167,Turkish Airlines,Istanbul,,,,First Class,1752.32,57,Edinburgh,Vienna,15:30,18:30,21:30,1:30
+FL2832,JavaAir,Istanbul,Prague,10:00,14:00,Economy,1485.13,85,,,,,,
+FL3519,GlobalJet,Istanbul,,,,First Class,1962.57,80,Edinburgh,Prague,15:30,18:30,20:30,1:30
+FL4343,JavaAir,Istanbul,Budapest,22:00,3:00,Economy,866.75,34,,,,,,
+FL4342,Comp132Fly,Istanbul,,,,Economy,1664.25,69,Zurich,Budapest,20:30,23:30,0:30,3:30
+FL7083,Pegasus Airlines,Istanbul,Dublin,12:00,15:00,Economy,637.89,110,,,,,,
+FL7196,AnadoluJet,Istanbul,,,,Business,1113.7,102,Prague,Dublin,11:30,13:30,16:30,21:30
+FL6364,KUFly,Istanbul,Copenhagen,16:00,20:00,First Class,815.84,72,,,,,,
+FL7223,KUFly,Istanbul,,,,Business,921.77,79,Dubai,Copenhagen,14:00,20:00,21:00,2:00
+FL4382,EuroWings,Istanbul,Stockholm,8:00,13:00,Economy,1238.11,52,,,,,,
+FL7340,KUFly,Istanbul,,,,Business,1039.57,52,Copenhagen,Stockholm,11:30,16:30,18:30,22:30
+FL9839,JavaAir,Istanbul,Helsinki,21:30,23:30,Economy,1122.45,55,,,,,,
+FL7699,GlobalJet,Istanbul,,,,Business,664.13,99,Lisbon,Helsinki,6:00,10:00,11:00,13:00
+FL1143,KUFly,Istanbul,Ankara,8:30,9:30,First Class,930.96,19,,,,,,
+FL7441,KUFly,Istanbul,,,,First Class,161.63,16,Madrid,Ankara,19:00,0:00,2:00,5:00
+FL8544,FlyDubai,Istanbul,Lisbon,16:00,19:00,First Class,1164.63,87,,,,,,
+FL9518,JavaAir,Istanbul,,,,Business,1844.35,17,Amsterdam,Lisbon,18:30,23:30,1:30,4:30
+FL4716,Pegasus Airlines,Istanbul,Brussels,10:30,15:30,Business,1362.23,93,,,,,,
+FL6764,FlyDubai,Istanbul,,,,Business,960.53,38,Vienna,Brussels,11:30,13:30,14:30,17:30
+FL2886,Comp132Fly,Istanbul,Zurich,7:30,11:30,Economy,468.01,56,,,,,,
+FL8667,Comp132Fly,Istanbul,,,,Economy,1758.13,79,Ankara,Zurich,19:30,21:30,23:30,2:30
+FL1061,FlyAsia,Istanbul,Oslo,20:00,23:00,First Class,1456.26,78,,,,,,
+FL8343,Pegasus Airlines,Istanbul,,,,First Class,1204.17,113,Edinburgh,Oslo,10:30,12:30,15:30,18:30
+FL8138,JavaAir,Istanbul,Athens,11:30,12:30,First Class,491.85,60,,,,,,
+FL8844,Turkish Airlines,Istanbul,,,,First Class,196.54,108,Lisbon,Athens,12:30,17:30,20:30,23:30
+FL3695,GlobalJet,Istanbul,Edinburgh,9:30,13:30,First Class,1218.52,9,,,,,,
+FL3149,FlyAsia,Istanbul,,,,Economy,1424.3,20,Berlin,Edinburgh,7:30,11:30,13:30,18:30
+FL4464,FlyAsia,Istanbul,Dubai,10:00,15:00,Business,519.39,34,,,,,,
+FL5998,GlobalJet,Istanbul,,,,Economy,1417.04,100,Paris,Dubai,11:00,16:00,19:00,1:00
+FL7654,KUFly,Paris,Istanbul,20:30,0:30,First Class,1284.3,81,,,,,,
+FL3461,EuroWings,Paris,,,,Business,875.94,53,Prague,Istanbul,6:30,9:30,10:30,15:30
+FL8876,FlyDubai,Paris,Berlin,6:00,9:00,First Class,725.26,55,,,,,,
+FL1812,FlyDubai,Paris,,,,First Class,1438.4,95,Oslo,Berlin,15:00,20:00,22:00,2:00
+FL3626,KUFly,Paris,Rome,18:30,21:30,First Class,995.13,11,,,,,,
+FL3231,Comp132Fly,Paris,,,,Economy,543.81,113,Dublin,Rome,9:30,12:30,14:30,19:30
+FL3768,Pegasus Airlines,Paris,Amsterdam,13:30,17:30,First Class,102.56,78,,,,,,
+FL3861,Pegasus Airlines,Paris,,,,First Class,921.81,68,Athens,Amsterdam,6:30,8:30,11:30,15:30
+FL2931,EuroWings,Paris,Madrid,11:30,14:30,Economy,779.32,38,,,,,,
+FL5572,EuroWings,Paris,,,,First Class,300.63,81,Berlin,Madrid,7:30,10:30,12:30,15:30
+FL9951,AeroFly,Paris,Vienna,11:00,14:00,Business,256.35,56,,,,,,
+FL5358,Turkish Airlines,Paris,,,,Business,1119.18,78,Oslo,Vienna,16:00,18:00,21:00,1:00
+FL8530,KUFly,Paris,Prague,8:00,10:00,Business,121.77,82,,,,,,
+FL5920,FlyAsia,Paris,,,,First Class,1725.07,57,Dublin,Prague,8:30,10:30,11:30,16:30
+FL6587,FlyDubai,Paris,Budapest,17:30,22:30,First Class,1067.89,84,,,,,,
+FL2443,FlyDubai,Paris,,,,Business,894.54,108,Istanbul,Budapest,11:00,15:00,17:00,20:00
+FL3411,Pegasus Airlines,Paris,Dublin,7:00,9:00,Economy,415.87,37,,,,,,
+FL4659,JavaAir,Paris,,,,Economy,813.35,104,Edinburgh,Dublin,11:30,15:30,16:30,19:30
+FL9246,AnadoluJet,Paris,Copenhagen,10:00,13:00,Economy,1274.57,99,,,,,,
+FL8449,AeroFly,Paris,,,,Economy,1916.07,34,Edinburgh,Copenhagen,13:30,16:30,17:30,20:30
+FL6010,FlyAsia,Paris,Stockholm,16:30,20:30,Business,797.92,20,,,,,,
+FL2120,AnadoluJet,Paris,,,,Economy,1955.34,32,Istanbul,Stockholm,20:30,23:30,0:30,3:30
+FL4462,KUFly,Paris,Helsinki,21:00,23:00,First Class,1354.54,26,,,,,,
+FL6764,Pegasus Airlines,Paris,,,,Economy,591.23,74,Prague,Helsinki,16:30,18:30,20:30,0:30
+FL8467,FlyDubai,Paris,Ankara,10:00,12:00,Business,954.24,4,,,,,,
+FL9604,Turkish Airlines,Paris,,,,Business,1440.52,57,Prague,Ankara,19:00,0:00,2:00,4:00
+FL1364,FlyDubai,Paris,Lisbon,17:30,19:30,First Class,449.9,114,,,,,,
+FL2550,Comp132Fly,Paris,,,,Economy,195.68,82,Berlin,Lisbon,8:30,12:30,14:30,19:30
+FL1197,FlyDubai,Paris,Brussels,21:00,2:00,First Class,626.53,93,,,,,,
+FL8271,KUFly,Paris,,,,Economy,808.49,47,Athens,Brussels,21:30,1:30,4:30,7:30
+FL8946,EuroWings,Paris,Zurich,15:30,17:30,Economy,247.85,22,,,,,,
+FL6220,FlyAsia,Paris,,,,First Class,591.55,96,Istanbul,Zurich,13:30,18:30,20:30,23:30
+FL9613,EuroWings,Paris,Oslo,15:30,18:30,First Class,414.11,23,,,,,,
+FL7949,JavaAir,Paris,,,,Business,1128.66,70,Copenhagen,Oslo,20:00,0:00,3:00,7:00
+FL3888,JavaAir,Paris,Athens,7:30,10:30,First Class,164.38,14,,,,,,
+FL1977,KUFly,Paris,,,,Economy,523.63,5,Berlin,Athens,15:00,18:00,19:00,21:00
+FL5063,AnadoluJet,Paris,Edinburgh,22:00,2:00,First Class,1204.36,92,,,,,,
+FL6692,EuroWings,Paris,,,,Economy,642.05,65,Lisbon,Edinburgh,22:30,3:30,4:30,9:30
+FL9614,EuroWings,Paris,Dubai,19:00,1:00,First Class,624.95,101,,,,,,
+FL3665,Pegasus Airlines,Paris,,,,Economy,780.18,74,Helsinki,Dubai,13:00,15:00,17:00,0:00
+FL4189,GlobalJet,Berlin,Istanbul,10:30,12:30,Business,828.96,88,,,,,,
+FL3935,GlobalJet,Berlin,,,,Business,837.45,109,Amsterdam,Istanbul,17:00,21:00,23:00,1:00
+FL2169,Turkish Airlines,Berlin,Paris,6:30,8:30,Business,159.66,60,,,,,,
+FL5522,AeroFly,Berlin,,,,First Class,1401.6,77,Istanbul,Paris,20:00,1:00,2:00,4:00
+FL6824,KUFly,Berlin,Rome,21:00,23:00,Business,275.14,74,,,,,,
+FL3806,AeroFly,Berlin,,,,First Class,1523.67,105,Lisbon,Rome,6:30,8:30,9:30,11:30
+FL5261,Turkish Airlines,Berlin,Amsterdam,16:00,20:00,Business,1123.09,12,,,,,,
+FL2611,JavaAir,Berlin,,,,First Class,316.77,39,Madrid,Amsterdam,8:00,11:00,13:00,17:00
+FL8362,JavaAir,Berlin,Madrid,9:00,12:00,Business,383.64,99,,,,,,
+FL7071,AeroFly,Berlin,,,,First Class,633.51,77,Paris,Madrid,7:30,11:30,12:30,15:30
+FL3149,Turkish Airlines,Berlin,Vienna,13:00,18:00,Business,1472.09,79,,,,,,
+FL9236,Comp132Fly,Berlin,,,,Economy,296.87,118,Rome,Vienna,19:00,23:00,2:00,7:00
+FL8307,FlyDubai,Berlin,Prague,15:00,20:00,Economy,950.99,97,,,,,,
+FL1883,Pegasus Airlines,Berlin,,,,Economy,1567.01,19,Oslo,Prague,15:30,19:30,22:30,2:30
+FL6311,GlobalJet,Berlin,Budapest,7:00,9:00,Economy,501.57,6,,,,,,
+FL5958,Turkish Airlines,Berlin,,,,Business,915.85,32,Lisbon,Budapest,20:30,22:30,23:30,1:30
+FL6917,EuroWings,Berlin,Dublin,11:30,14:30,First Class,469.14,93,,,,,,
+FL5272,AeroFly,Berlin,,,,Business,1544.75,72,Oslo,Dublin,18:30,21:30,23:30,3:30
+FL2011,GlobalJet,Berlin,Copenhagen,19:30,0:30,Economy,1333.89,16,,,,,,
+FL6250,GlobalJet,Berlin,,,,Economy,155.85,100,Edinburgh,Copenhagen,12:30,17:30,19:30,23:30
+FL7287,Turkish Airlines,Berlin,Stockholm,11:30,13:30,Economy,1411.15,81,,,,,,
+FL8498,JavaAir,Berlin,,,,First Class,1150.28,47,Paris,Stockholm,20:30,23:30,0:30,3:30
+FL3132,GlobalJet,Berlin,Helsinki,10:00,14:00,Economy,1255.9,38,,,,,,
+FL8660,AeroFly,Berlin,,,,Economy,313.99,86,Dublin,Helsinki,17:00,21:00,22:00,1:00
+FL6015,Pegasus Airlines,Berlin,Ankara,13:00,16:00,First Class,1296.45,90,,,,,,
+FL9694,AnadoluJet,Berlin,,,,First Class,1230.91,40,Istanbul,Ankara,20:00,0:00,3:00,4:00
+FL6606,AeroFly,Berlin,Lisbon,17:00,21:00,Economy,1451.62,109,,,,,,
+FL3408,Pegasus Airlines,Berlin,,,,First Class,534.67,83,Rome,Lisbon,6:30,10:30,12:30,14:30
+FL1079,FlyAsia,Berlin,Brussels,19:30,0:30,Economy,1324.11,108,,,,,,
+FL6112,EuroWings,Berlin,,,,Economy,1365.39,33,Stockholm,Brussels,19:30,22:30,0:30,5:30
+FL1687,EuroWings,Berlin,Zurich,15:00,20:00,First Class,797.98,58,,,,,,
+FL7106,FlyDubai,Berlin,,,,Business,1191.15,23,Prague,Zurich,12:30,14:30,15:30,17:30
+FL4936,Comp132Fly,Berlin,Oslo,21:30,1:30,First Class,821.42,18,,,,,,
+FL3251,FlyAsia,Berlin,,,,First Class,1347.6,26,Ankara,Oslo,7:00,9:00,12:00,17:00
+FL2568,JavaAir,Berlin,Athens,7:00,9:00,Economy,1383.53,62,,,,,,
+FL8502,GlobalJet,Berlin,,,,First Class,1252.36,85,Helsinki,Athens,8:00,11:00,13:00,18:00
+FL6271,GlobalJet,Berlin,Edinburgh,12:00,16:00,Business,797.29,72,,,,,,
+FL1027,Turkish Airlines,Berlin,,,,Economy,1335.81,41,Dublin,Edinburgh,7:30,9:30,12:30,14:30
+FL9556,Pegasus Airlines,Berlin,Dubai,6:30,12:30,Economy,677.39,79,,,,,,
+FL4979,Comp132Fly,Berlin,,,,Economy,994.27,50,Zurich,Dubai,16:30,19:30,21:30,4:30
+FL8218,AeroFly,Rome,Istanbul,13:00,14:00,Business,450.24,11,,,,,,
+FL2457,FlyAsia,Rome,,,,Economy,1869.58,87,Berlin,Istanbul,6:00,11:00,14:00,16:00
+FL6441,Pegasus Airlines,Rome,Paris,17:30,20:30,Business,825.41,115,,,,,,
+FL3410,KUFly,Rome,,,,Economy,1744.74,27,Amsterdam,Paris,14:00,16:00,17:00,19:00
+FL9399,GlobalJet,Rome,Berlin,13:00,18:00,Economy,551.81,116,,,,,,
+FL9581,FlyAsia,Rome,,,,Business,1331.99,8,Prague,Berlin,9:00,14:00,16:00,21:00
+FL1454,AnadoluJet,Rome,Amsterdam,15:30,19:30,First Class,430.27,28,,,,,,
+FL4246,EuroWings,Rome,,,,Economy,1306.73,107,Dubai,Amsterdam,15:00,22:00,0:00,6:00
+FL7152,AnadoluJet,Rome,Madrid,6:30,9:30,Economy,772.59,18,,,,,,
+FL9401,Comp132Fly,Rome,,,,First Class,1098.33,40,Ankara,Madrid,21:30,22:30,23:30,4:30
+FL8685,Pegasus Airlines,Rome,Vienna,18:00,20:00,First Class,859.73,110,,,,,,
+FL5662,Pegasus Airlines,Rome,,,,Business,532.89,92,Ankara,Vienna,12:00,13:00,14:00,16:00
+FL3005,JavaAir,Rome,Prague,13:30,15:30,Economy,598.53,115,,,,,,
+FL8621,KUFly,Rome,,,,First Class,1644.22,51,Paris,Prague,19:00,21:00,22:00,1:00
+FL7577,Pegasus Airlines,Rome,Budapest,15:00,19:00,First Class,561.9,104,,,,,,
+FL1584,FlyDubai,Rome,,,,First Class,162.93,111,Helsinki,Budapest,12:00,14:00,16:00,19:00
+FL5456,FlyDubai,Rome,Dublin,20:30,22:30,Business,1394.86,53,,,,,,
+FL4382,JavaAir,Rome,,,,Economy,1329.4,72,Brussels,Dublin,11:00,15:00,16:00,20:00
+FL7374,JavaAir,Rome,Copenhagen,22:30,3:30,Business,281.56,112,,,,,,
+FL2988,FlyAsia,Rome,,,,First Class,1264.72,113,Dubai,Copenhagen,16:30,21:30,22:30,3:30
+FL6232,FlyAsia,Rome,Stockholm,22:30,1:30,First Class,580.06,56,,,,,,
+FL4626,Comp132Fly,Rome,,,,First Class,585.1,4,Copenhagen,Stockholm,13:00,17:00,18:00,23:00
+FL4538,GlobalJet,Rome,Helsinki,6:30,8:30,Business,234.15,106,,,,,,
+FL2330,EuroWings,Rome,,,,Business,1134.5,34,Berlin,Helsinki,20:00,23:00,2:00,5:00
+FL9531,FlyAsia,Rome,Ankara,17:00,18:00,Economy,371.14,60,,,,,,
+FL7054,FlyDubai,Rome,,,,Business,922.54,57,Budapest,Ankara,16:30,18:30,19:30,0:30
+FL1655,AnadoluJet,Rome,Lisbon,7:00,12:00,Economy,484.59,71,,,,,,
+FL4330,Turkish Airlines,Rome,,,,Business,398.5,84,Copenhagen,Lisbon,20:00,0:00,2:00,6:00
+FL5586,JavaAir,Rome,Brussels,19:30,22:30,First Class,558.52,69,,,,,,
+FL9995,KUFly,Rome,,,,Economy,1488.52,72,Athens,Brussels,22:30,23:30,0:30,4:30
+FL6672,KUFly,Rome,Zurich,8:00,10:00,Economy,112.53,107,,,,,,
+FL5275,FlyAsia,Rome,,,,Business,748.1,92,Edinburgh,Zurich,7:00,12:00,14:00,17:00
+FL2860,GlobalJet,Rome,Oslo,13:00,18:00,Economy,847.8,31,,,,,,
+FL4421,Turkish Airlines,Rome,,,,First Class,302.48,50,Vienna,Oslo,19:00,22:00,0:00,4:00
+FL3017,KUFly,Rome,Athens,12:30,13:30,First Class,1254.29,53,,,,,,
+FL6253,FlyAsia,Rome,,,,Economy,1292.5,71,Copenhagen,Athens,16:30,21:30,22:30,3:30
+FL6818,JavaAir,Rome,Edinburgh,22:30,3:30,First Class,994.31,107,,,,,,
+FL9289,Pegasus Airlines,Rome,,,,Economy,1763.67,9,Berlin,Edinburgh,19:30,22:30,23:30,3:30
+FL6844,EuroWings,Rome,Dubai,13:00,18:00,First Class,182.3,97,,,,,,
+FL2405,AnadoluJet,Rome,,,,Economy,1395.32,20,Ankara,Dubai,10:00,12:00,13:00,20:00
+FL4868,Turkish Airlines,Amsterdam,Istanbul,15:00,18:00,Economy,280.29,54,,,,,,
+FL3952,Comp132Fly,Amsterdam,,,,First Class,1825.79,74,Zurich,Istanbul,22:00,3:00,6:00,11:00
+FL9454,AeroFly,Amsterdam,Paris,13:30,17:30,Business,549.11,74,,,,,,
+FL5785,KUFly,Amsterdam,,,,Economy,1180.33,24,Athens,Paris,20:30,1:30,3:30,6:30
+FL5427,AeroFly,Amsterdam,Berlin,17:00,21:00,Economy,922.11,58,,,,,,
+FL7486,FlyDubai,Amsterdam,,,,Business,1618.71,106,Copenhagen,Berlin,22:00,0:00,2:00,7:00
+FL9744,Pegasus Airlines,Amsterdam,Rome,18:00,23:00,First Class,1257.27,19,,,,,,
+FL2022,FlyDubai,Amsterdam,,,,First Class,1857.23,51,Ankara,Rome,11:00,14:00,17:00,18:00
+FL5967,Pegasus Airlines,Amsterdam,Madrid,19:30,0:30,Economy,871.61,25,,,,,,
+FL6940,FlyDubai,Amsterdam,,,,Business,1105.79,36,Dublin,Madrid,21:30,2:30,3:30,7:30
+FL9363,EuroWings,Amsterdam,Vienna,11:30,16:30,First Class,235.44,93,,,,,,
+FL2274,JavaAir,Amsterdam,,,,Business,1392.1,110,Brussels,Vienna,7:00,10:00,13:00,17:00
+FL4474,JavaAir,Amsterdam,Prague,20:30,22:30,Economy,210.98,63,,,,,,
+FL1858,Comp132Fly,Amsterdam,,,,Business,1651.19,51,Lisbon,Prague,9:00,11:00,14:00,17:00
+FL4537,FlyDubai,Amsterdam,Budapest,13:00,17:00,Economy,256.82,63,,,,,,
+FL9593,Comp132Fly,Amsterdam,,,,Economy,1439.41,91,Berlin,Budapest,10:00,13:00,16:00,21:00
+FL2278,Pegasus Airlines,Amsterdam,Dublin,14:30,18:30,Business,554.67,90,,,,,,
+FL5784,AeroFly,Amsterdam,,,,Business,888.59,114,Paris,Dublin,16:30,21:30,22:30,0:30
+FL7537,Turkish Airlines,Amsterdam,Copenhagen,15:30,19:30,First Class,189.63,56,,,,,,
+FL2985,Turkish Airlines,Amsterdam,,,,First Class,483.05,5,Istanbul,Copenhagen,19:00,22:00,0:00,3:00
+FL7258,AeroFly,Amsterdam,Stockholm,9:00,13:00,First Class,678.65,40,,,,,,
+FL2956,Pegasus Airlines,Amsterdam,,,,Business,1989.78,80,Lisbon,Stockholm,17:00,20:00,22:00,1:00
+FL4471,GlobalJet,Amsterdam,Helsinki,16:30,20:30,First Class,116.65,8,,,,,,
+FL6641,Pegasus Airlines,Amsterdam,,,,Economy,1100.98,29,Vienna,Helsinki,22:00,1:00,2:00,5:00
+FL3351,GlobalJet,Amsterdam,Ankara,22:30,0:30,Economy,1281.77,73,,,,,,
+FL9631,JavaAir,Amsterdam,,,,Business,571.37,59,Berlin,Ankara,19:00,0:00,3:00,6:00
+FL2697,Comp132Fly,Amsterdam,Lisbon,13:00,16:00,Economy,615.25,116,,,,,,
+FL4467,AeroFly,Amsterdam,,,,Business,1792.57,89,Brussels,Lisbon,11:00,13:00,15:00,18:00
+FL9705,JavaAir,Amsterdam,Brussels,6:00,9:00,First Class,841.11,48,,,,,,
+FL4532,FlyAsia,Amsterdam,,,,First Class,240.19,109,Istanbul,Brussels,14:30,16:30,17:30,21:30
+FL8247,AeroFly,Amsterdam,Zurich,21:30,23:30,Business,912.86,28,,,,,,
+FL4998,Comp132Fly,Amsterdam,,,,Economy,568.75,100,Ankara,Zurich,19:30,0:30,3:30,5:30
+FL3626,Pegasus Airlines,Amsterdam,Oslo,22:30,2:30,First Class,292.23,12,,,,,,
+FL7398,FlyDubai,Amsterdam,,,,Business,839.64,26,Prague,Oslo,17:30,19:30,20:30,1:30
+FL4963,AeroFly,Amsterdam,Athens,7:30,9:30,First Class,881.83,56,,,,,,
+FL5464,Comp132Fly,Amsterdam,,,,First Class,792.73,108,Budapest,Athens,12:00,16:00,19:00,23:00
+FL8340,AnadoluJet,Amsterdam,Edinburgh,14:30,16:30,First Class,558.84,63,,,,,,
+FL1551,KUFly,Amsterdam,,,,Business,1937.86,86,Istanbul,Edinburgh,15:00,18:00,19:00,23:00
+FL7791,Comp132Fly,Amsterdam,Dubai,14:00,19:00,Economy,1457.7,112,,,,,,
+FL8371,Turkish Airlines,Amsterdam,,,,Business,1185.01,73,Oslo,Dubai,17:00,19:00,22:00,5:00
+FL3084,Comp132Fly,Madrid,Istanbul,10:30,12:30,First Class,354.09,37,,,,,,
+FL3092,Pegasus Airlines,Madrid,,,,First Class,1730.67,72,Copenhagen,Istanbul,11:00,15:00,16:00,20:00
+FL5693,Pegasus Airlines,Madrid,Paris,7:30,9:30,Economy,651.69,113,,,,,,
+FL9946,FlyAsia,Madrid,,,,First Class,1911.59,57,Helsinki,Paris,21:00,2:00,3:00,5:00
+FL8085,AeroFly,Madrid,Berlin,20:30,22:30,Economy,1061.74,97,,,,,,
+FL1962,KUFly,Madrid,,,,Economy,325.85,13,Edinburgh,Berlin,18:30,20:30,23:30,3:30
+FL2475,Turkish Airlines,Madrid,Rome,13:00,17:00,Business,193.76,12,,,,,,
+FL4980,KUFly,Madrid,,,,Business,1464.06,33,Istanbul,Rome,13:00,18:00,19:00,20:00
+FL9968,AnadoluJet,Madrid,Amsterdam,20:00,22:00,First Class,1382.71,102,,,,,,
+FL3882,Turkish Airlines,Madrid,,,,First Class,996.36,72,Paris,Amsterdam,6:00,11:00,13:00,15:00
+FL3958,AeroFly,Madrid,Vienna,9:00,11:00,Economy,810.85,22,,,,,,
+FL8943,Comp132Fly,Madrid,,,,Economy,468.35,101,Ankara,Vienna,12:00,17:00,18:00,23:00
+FL7489,AeroFly,Madrid,Prague,11:30,14:30,Business,707.36,55,,,,,,
+FL1430,JavaAir,Madrid,,,,Business,1341.35,42,Paris,Prague,20:30,23:30,0:30,5:30
+FL9065,JavaAir,Madrid,Budapest,12:00,16:00,Economy,230.15,100,,,,,,
+FL8584,Turkish Airlines,Madrid,,,,Business,1470.42,100,Dubai,Budapest,9:30,14:30,15:30,20:30
+FL9983,AeroFly,Madrid,Dublin,11:00,13:00,First Class,621.76,13,,,,,,
+FL3772,EuroWings,Madrid,,,,First Class,1305.34,95,Istanbul,Dublin,11:30,16:30,17:30,20:30
+FL4001,EuroWings,Madrid,Copenhagen,19:30,23:30,First Class,663.08,105,,,,,,
+FL4557,Turkish Airlines,Madrid,,,,Economy,1627.22,20,Brussels,Copenhagen,10:30,15:30,18:30,23:30
+FL9235,GlobalJet,Madrid,Stockholm,12:30,16:30,Business,1097.3,24,,,,,,
+FL5762,Pegasus Airlines,Madrid,,,,Economy,1937.11,22,Brussels,Stockholm,15:30,19:30,22:30,1:30
+FL3978,FlyDubai,Madrid,Helsinki,10:30,13:30,Business,219.96,8,,,,,,
+FL5962,GlobalJet,Madrid,,,,First Class,403.91,19,Dubai,Helsinki,7:00,14:00,16:00,23:00
+FL4290,Pegasus Airlines,Madrid,Ankara,6:30,8:30,Business,530.35,84,,,,,,
+FL1064,Turkish Airlines,Madrid,,,,Economy,1660.62,78,Edinburgh,Ankara,8:00,13:00,16:00,19:00
+FL2740,AnadoluJet,Madrid,Lisbon,6:30,8:30,Business,955.91,118,,,,,,
+FL9117,KUFly,Madrid,,,,Economy,1983.34,116,Vienna,Lisbon,15:00,20:00,22:00,0:00
+FL8899,Comp132Fly,Madrid,Brussels,21:00,1:00,Economy,1400.92,5,,,,,,
+FL3455,AnadoluJet,Madrid,,,,First Class,393.95,103,Oslo,Brussels,14:00,19:00,22:00,0:00
+FL3617,Turkish Airlines,Madrid,Zurich,8:00,12:00,Business,188.94,27,,,,,,
+FL4624,Turkish Airlines,Madrid,,,,First Class,1526.48,109,Berlin,Zurich,11:30,13:30,14:30,17:30
+FL9456,KUFly,Madrid,Oslo,14:30,18:30,Business,1213.17,44,,,,,,
+FL4438,KUFly,Madrid,,,,First Class,454.92,104,Helsinki,Oslo,13:00,17:00,18:00,23:00
+FL3097,FlyAsia,Madrid,Athens,13:30,17:30,First Class,426.04,91,,,,,,
+FL7220,FlyAsia,Madrid,,,,First Class,286.21,77,Prague,Athens,10:30,15:30,17:30,19:30
+FL1115,AnadoluJet,Madrid,Edinburgh,22:30,0:30,Business,135.05,109,,,,,,
+FL2758,Turkish Airlines,Madrid,,,,Economy,881.07,12,Amsterdam,Edinburgh,14:00,16:00,17:00,21:00
+FL8431,FlyDubai,Madrid,Dubai,14:30,19:30,Business,246.27,8,,,,,,
+FL2891,Turkish Airlines,Madrid,,,,First Class,1588.35,18,Budapest,Dubai,18:30,20:30,21:30,4:30
+FL1973,JavaAir,Vienna,Istanbul,8:00,11:00,First Class,249.54,6,,,,,,
+FL1167,Comp132Fly,Vienna,,,,Economy,704.81,79,Edinburgh,Istanbul,12:30,17:30,20:30,0:30
+FL9614,JavaAir,Vienna,Paris,22:00,3:00,Economy,590.99,118,,,,,,
+FL4045,JavaAir,Vienna,,,,Business,583.36,49,Rome,Paris,19:00,0:00,1:00,6:00
+FL9424,KUFly,Vienna,Berlin,20:30,22:30,First Class,823.99,30,,,,,,
+FL5046,FlyAsia,Vienna,,,,Economy,427.72,93,Athens,Berlin,13:30,18:30,19:30,22:30
+FL3800,GlobalJet,Vienna,Rome,16:30,20:30,Business,469.1,58,,,,,,
+FL6798,FlyDubai,Vienna,,,,First Class,520.23,23,Berlin,Rome,15:00,17:00,19:00,21:00
+FL8453,JavaAir,Vienna,Amsterdam,6:00,11:00,Business,150.55,55,,,,,,
+FL6340,GlobalJet,Vienna,,,,Business,1154.82,38,Athens,Amsterdam,22:00,0:00,2:00,4:00
+FL6777,AeroFly,Vienna,Madrid,10:00,12:00,Economy,1398.57,115,,,,,,
+FL6072,AeroFly,Vienna,,,,Economy,868.13,96,Amsterdam,Madrid,17:30,22:30,0:30,3:30
+FL9944,EuroWings,Vienna,Prague,20:00,1:00,Economy,1461.4,85,,,,,,
+FL6351,Turkish Airlines,Vienna,,,,First Class,384.88,57,Stockholm,Prague,12:00,16:00,19:00,0:00
+FL7508,EuroWings,Vienna,Budapest,13:00,16:00,Business,1000.88,65,,,,,,
+FL9987,AeroFly,Vienna,,,,Business,533.31,81,Amsterdam,Budapest,16:30,20:30,22:30,2:30
+FL1559,Pegasus Airlines,Vienna,Dublin,11:00,15:00,First Class,475.46,70,,,,,,
+FL7000,AnadoluJet,Vienna,,,,First Class,1542.6,109,Athens,Dublin,12:30,14:30,15:30,17:30
+FL4385,AnadoluJet,Vienna,Copenhagen,21:00,1:00,First Class,702.34,4,,,,,,
+FL2252,FlyAsia,Vienna,,,,First Class,448.37,103,Istanbul,Copenhagen,17:30,22:30,0:30,2:30
+FL4752,GlobalJet,Vienna,Stockholm,21:00,1:00,Economy,1008.59,17,,,,,,
+FL5347,FlyDubai,Vienna,,,,Economy,832.5,71,Copenhagen,Stockholm,10:00,12:00,13:00,16:00
+FL1119,Turkish Airlines,Vienna,Helsinki,13:30,15:30,First Class,1011.97,11,,,,,,
+FL2244,GlobalJet,Vienna,,,,First Class,1905.46,119,Budapest,Helsinki,18:30,21:30,22:30,2:30
+FL6894,AeroFly,Vienna,Ankara,17:30,22:30,Business,629.16,74,,,,,,
+FL3056,GlobalJet,Vienna,,,,Business,828.19,35,Amsterdam,Ankara,18:00,20:00,21:00,1:00
+FL5836,Turkish Airlines,Vienna,Lisbon,9:30,14:30,Business,881.83,106,,,,,,
+FL8151,AnadoluJet,Vienna,,,,First Class,1270.5,57,Zurich,Lisbon,9:30,13:30,16:30,21:30
+FL8368,GlobalJet,Vienna,Brussels,6:30,10:30,First Class,421.39,74,,,,,,
+FL8291,KUFly,Vienna,,,,Business,799.51,80,Madrid,Brussels,13:00,18:00,20:00,0:00
+FL9984,GlobalJet,Vienna,Zurich,15:30,18:30,Economy,1142.56,11,,,,,,
+FL8403,Pegasus Airlines,Vienna,,,,First Class,1877.78,67,Paris,Zurich,20:30,1:30,3:30,5:30
+FL4048,AeroFly,Vienna,Oslo,22:00,3:00,Economy,928.96,107,,,,,,
+FL1028,Comp132Fly,Vienna,,,,First Class,1360.09,38,Lisbon,Oslo,8:30,13:30,14:30,18:30
+FL7506,Turkish Airlines,Vienna,Athens,8:00,11:00,Economy,1423.42,51,,,,,,
+FL4208,EuroWings,Vienna,,,,Business,1117.39,81,Brussels,Athens,19:00,0:00,2:00,6:00
+FL7604,Pegasus Airlines,Vienna,Edinburgh,10:30,12:30,Business,1107.45,110,,,,,,
+FL6045,Turkish Airlines,Vienna,,,,Economy,1927.92,72,Paris,Edinburgh,7:00,9:00,12:00,15:00
+FL2763,EuroWings,Vienna,Dubai,18:00,1:00,Economy,873.68,82,,,,,,
+FL3129,KUFly,Vienna,,,,Economy,547.97,45,Edinburgh,Dubai,8:30,12:30,15:30,20:30
+FL8604,AeroFly,Prague,Istanbul,16:00,18:00,First Class,648.35,99,,,,,,
+FL2431,Comp132Fly,Prague,,,,Business,684.88,13,Zurich,Istanbul,8:30,13:30,15:30,20:30
+FL8926,Turkish Airlines,Prague,Paris,19:30,23:30,First Class,271.37,21,,,,,,
+FL3763,GlobalJet,Prague,,,,First Class,1438.54,63,Budapest,Paris,16:30,19:30,21:30,1:30
+FL8486,AeroFly,Prague,Berlin,14:00,17:00,First Class,1027.03,34,,,,,,
+FL1353,JavaAir,Prague,,,,Business,175.07,53,Stockholm,Berlin,21:30,0:30,1:30,3:30
+FL7602,Comp132Fly,Prague,Rome,19:00,0:00,Business,179.95,4,,,,,,
+FL8880,Pegasus Airlines,Prague,,,,Business,305.85,39,Brussels,Rome,13:30,15:30,17:30,22:30
+FL4119,JavaAir,Prague,Amsterdam,14:30,17:30,Business,150.07,57,,,,,,
+FL9488,KUFly,Prague,,,,First Class,1774.72,82,Dubai,Amsterdam,17:00,0:00,2:00,7:00
+FL3229,JavaAir,Prague,Madrid,14:30,19:30,Economy,1287.55,114,,,,,,
+FL5109,Pegasus Airlines,Prague,,,,Economy,532.59,89,Dublin,Madrid,7:00,10:00,13:00,16:00
+FL9733,JavaAir,Prague,Vienna,10:30,12:30,First Class,289.42,104,,,,,,
+FL3568,Comp132Fly,Prague,,,,Business,1937.43,59,Istanbul,Vienna,9:30,12:30,15:30,18:30
+FL5958,EuroWings,Prague,Budapest,20:30,23:30,Business,650.88,59,,,,,,
+FL6365,FlyAsia,Prague,,,,First Class,170.01,7,Stockholm,Budapest,11:30,16:30,17:30,19:30
+FL8072,KUFly,Prague,Dublin,16:00,20:00,Economy,471.45,79,,,,,,
+FL1593,Turkish Airlines,Prague,,,,First Class,923.16,74,Stockholm,Dublin,9:00,12:00,15:00,20:00
+FL2733,FlyDubai,Prague,Copenhagen,7:30,11:30,Business,667.52,45,,,,,,
+FL6023,EuroWings,Prague,,,,First Class,314.22,50,Brussels,Copenhagen,16:00,19:00,20:00,23:00
+FL2004,GlobalJet,Prague,Stockholm,12:00,17:00,Business,729.05,93,,,,,,
+FL8998,AeroFly,Prague,,,,First Class,222.04,92,Amsterdam,Stockholm,9:00,13:00,16:00,19:00
+FL5438,Comp132Fly,Prague,Helsinki,17:00,21:00,Business,1363.31,11,,,,,,
+FL3778,GlobalJet,Prague,,,,First Class,1351.53,33,Oslo,Helsinki,21:00,0:00,2:00,6:00
+FL7058,Turkish Airlines,Prague,Ankara,21:30,1:30,Business,228.82,20,,,,,,
+FL4928,Pegasus Airlines,Prague,,,,First Class,1575.57,39,Edinburgh,Ankara,8:00,12:00,14:00,19:00
+FL4477,GlobalJet,Prague,Lisbon,7:00,10:00,Economy,813.47,4,,,,,,
+FL3398,JavaAir,Prague,,,,Business,537.83,102,Amsterdam,Lisbon,15:30,18:30,21:30,23:30
+FL9780,EuroWings,Prague,Brussels,17:30,22:30,Economy,1493.21,53,,,,,,
+FL8404,KUFly,Prague,,,,First Class,317.29,55,Copenhagen,Brussels,15:00,19:00,22:00,2:00
+FL4905,FlyDubai,Prague,Zurich,14:00,18:00,First Class,1384.56,28,,,,,,
+FL5165,AeroFly,Prague,,,,First Class,641.49,8,Madrid,Zurich,12:30,16:30,19:30,0:30
+FL3315,AnadoluJet,Prague,Oslo,8:00,11:00,First Class,923.91,96,,,,,,
+FL4065,Comp132Fly,Prague,,,,Business,747.93,104,Istanbul,Oslo,10:00,14:00,16:00,21:00
+FL9025,Turkish Airlines,Prague,Athens,17:30,20:30,Business,1002.17,95,,,,,,
+FL3359,FlyAsia,Prague,,,,First Class,1353.47,70,Copenhagen,Athens,18:30,23:30,0:30,4:30
+FL6714,KUFly,Prague,Edinburgh,11:00,13:00,Business,338.3,47,,,,,,
+FL2585,FlyAsia,Prague,,,,Economy,986.71,39,Copenhagen,Edinburgh,15:30,19:30,20:30,1:30
+FL9077,GlobalJet,Prague,Dubai,6:00,13:00,Business,1477.6,100,,,,,,
+FL4917,Turkish Airlines,Prague,,,,Business,830.34,67,Berlin,Dubai,22:30,1:30,2:30,7:30
+FL3969,JavaAir,Budapest,Istanbul,9:00,11:00,First Class,1148.27,46,,,,,,
+FL5376,FlyDubai,Budapest,,,,Business,655.89,5,Madrid,Istanbul,14:00,16:00,18:00,22:00
+FL3321,Comp132Fly,Budapest,Paris,21:00,2:00,Economy,768.71,7,,,,,,
+FL2520,Pegasus Airlines,Budapest,,,,Business,1780.03,92,Zurich,Paris,7:00,12:00,14:00,16:00
+FL3903,Pegasus Airlines,Budapest,Berlin,8:00,12:00,First Class,1192.11,64,,,,,,
+FL3696,JavaAir,Budapest,,,,First Class,444.2,91,Helsinki,Berlin,18:00,22:00,0:00,5:00
+FL1186,AeroFly,Budapest,Rome,20:00,1:00,Economy,477.25,10,,,,,,
+FL5405,Turkish Airlines,Budapest,,,,Economy,1586.15,69,Stockholm,Rome,9:30,13:30,15:30,17:30
+FL4554,AeroFly,Budapest,Amsterdam,19:30,21:30,First Class,814.49,47,,,,,,
+FL8564,Pegasus Airlines,Budapest,,,,Economy,1243.75,117,Dublin,Amsterdam,8:30,12:30,14:30,16:30
+FL6902,JavaAir,Budapest,Madrid,7:00,10:00,Business,822.71,46,,,,,,
+FL5375,AeroFly,Budapest,,,,Economy,1456.16,103,Ankara,Madrid,8:00,10:00,11:00,16:00
+FL4374,AeroFly,Budapest,Vienna,21:30,2:30,Business,281.81,4,,,,,,
+FL4225,JavaAir,Budapest,,,,First Class,667.5,7,Berlin,Vienna,17:00,22:00,23:00,4:00
+FL4968,EuroWings,Budapest,Prague,12:00,14:00,First Class,1029.29,115,,,,,,
+FL7623,FlyDubai,Budapest,,,,Economy,1018.66,114,Lisbon,Prague,21:00,0:00,1:00,5:00
+FL8647,Pegasus Airlines,Budapest,Dublin,7:30,9:30,Economy,505.05,88,,,,,,
+FL4111,AnadoluJet,Budapest,,,,First Class,433.36,105,Rome,Dublin,11:00,14:00,15:00,17:00
+FL9483,AeroFly,Budapest,Copenhagen,21:30,1:30,Business,380.24,49,,,,,,
+FL7027,Turkish Airlines,Budapest,,,,First Class,1090.67,90,Zurich,Copenhagen,21:00,0:00,1:00,5:00
+FL5806,Comp132Fly,Budapest,Stockholm,6:00,11:00,First Class,1100.19,33,,,,,,
+FL8799,AnadoluJet,Budapest,,,,Economy,271.46,101,Brussels,Stockholm,15:30,18:30,19:30,21:30
+FL8289,JavaAir,Budapest,Helsinki,12:30,17:30,Economy,1421.01,88,,,,,,
+FL7400,Comp132Fly,Budapest,,,,Economy,1941.12,10,Brussels,Helsinki,10:00,15:00,16:00,18:00
+FL3483,Comp132Fly,Budapest,Ankara,9:30,12:30,Economy,357.35,14,,,,,,
+FL5029,GlobalJet,Budapest,,,,First Class,224.75,13,Istanbul,Ankara,12:30,15:30,16:30,17:30
+FL6225,AeroFly,Budapest,Lisbon,20:00,0:00,Economy,1389.22,14,,,,,,
+FL4215,KUFly,Budapest,,,,First Class,225.95,28,Helsinki,Lisbon,20:00,0:00,1:00,6:00
+FL1305,Pegasus Airlines,Budapest,Brussels,20:30,1:30,First Class,632.7,24,,,,,,
+FL3677,EuroWings,Budapest,,,,Economy,200.65,14,Edinburgh,Brussels,9:00,12:00,14:00,18:00
+FL1963,EuroWings,Budapest,Zurich,16:30,20:30,Economy,934.73,84,,,,,,
+FL7736,JavaAir,Budapest,,,,Economy,831.22,7,Lisbon,Zurich,18:30,23:30,0:30,4:30
+FL9920,GlobalJet,Budapest,Oslo,7:30,9:30,First Class,833.32,69,,,,,,
+FL4424,EuroWings,Budapest,,,,Business,527.8,64,Vienna,Oslo,6:00,9:00,10:00,15:00
+FL6568,AnadoluJet,Budapest,Athens,9:30,12:30,Economy,304.16,78,,,,,,
+FL2799,KUFly,Budapest,,,,Business,600.16,57,Prague,Athens,16:00,18:00,21:00,0:00
+FL6982,JavaAir,Budapest,Edinburgh,20:00,23:00,Economy,553.75,68,,,,,,
+FL1884,FlyDubai,Budapest,,,,Business,974.22,112,Dublin,Edinburgh,15:00,19:00,20:00,1:00
+FL8668,JavaAir,Budapest,Dubai,6:00,11:00,Business,253.56,59,,,,,,
+FL9413,Comp132Fly,Budapest,,,,Business,765.92,8,Helsinki,Dubai,13:30,15:30,16:30,21:30
+FL8303,Turkish Airlines,Dublin,Istanbul,15:30,18:30,First Class,593.96,10,,,,,,
+FL8483,AnadoluJet,Dublin,,,,Economy,1089.71,12,Edinburgh,Istanbul,20:30,22:30,0:30,5:30
+FL8831,JavaAir,Dublin,Paris,16:00,20:00,Business,289.16,56,,,,,,
+FL6755,GlobalJet,Dublin,,,,Economy,1302.43,10,Istanbul,Paris,19:30,0:30,1:30,6:30
+FL6936,FlyDubai,Dublin,Berlin,12:30,14:30,First Class,1421.65,89,,,,,,
+FL6219,FlyAsia,Dublin,,,,First Class,1116.43,77,Amsterdam,Berlin,18:30,23:30,0:30,5:30
+FL1363,GlobalJet,Dublin,Rome,15:30,20:30,Business,369.37,23,,,,,,
+FL2265,Comp132Fly,Dublin,,,,Business,1703.24,63,Berlin,Rome,18:30,23:30,1:30,3:30
+FL4996,AeroFly,Dublin,Amsterdam,18:00,21:00,Business,1383.97,102,,,,,,
+FL6064,FlyAsia,Dublin,,,,First Class,1435.74,86,Oslo,Amsterdam,13:00,17:00,18:00,21:00
+FL4655,Pegasus Airlines,Dublin,Madrid,17:30,21:30,First Class,1222.84,58,,,,,,
+FL1120,AeroFly,Dublin,,,,Economy,698.02,89,Copenhagen,Madrid,18:00,21:00,22:00,3:00
+FL8787,Pegasus Airlines,Dublin,Vienna,7:00,11:00,Business,345.72,21,,,,,,
+FL5110,FlyAsia,Dublin,,,,Economy,821.2,64,Copenhagen,Vienna,16:30,20:30,21:30,23:30
+FL1929,Turkish Airlines,Dublin,Prague,15:00,19:00,Economy,1456.91,29,,,,,,
+FL3774,Comp132Fly,Dublin,,,,Economy,656.12,18,Budapest,Prague,19:30,0:30,3:30,7:30
+FL4700,FlyAsia,Dublin,Budapest,7:30,12:30,Economy,1083.15,40,,,,,,
+FL1151,Turkish Airlines,Dublin,,,,Economy,1982.6,18,Copenhagen,Budapest,19:30,21:30,22:30,0:30
+FL3491,AeroFly,Dublin,Copenhagen,14:30,18:30,First Class,705.78,66,,,,,,
+FL2313,FlyAsia,Dublin,,,,Business,1544.3,16,Stockholm,Copenhagen,16:30,19:30,20:30,23:30
+FL9023,Turkish Airlines,Dublin,Stockholm,14:30,18:30,Business,1314.44,28,,,,,,
+FL3741,AeroFly,Dublin,,,,Economy,180.54,115,Rome,Stockholm,21:00,1:00,4:00,8:00
+FL2349,Pegasus Airlines,Dublin,Helsinki,13:30,17:30,Business,1047.94,84,,,,,,
+FL3888,AnadoluJet,Dublin,,,,Business,1522.39,33,Edinburgh,Helsinki,6:00,9:00,11:00,16:00
+FL7030,AnadoluJet,Dublin,Ankara,20:00,23:00,Economy,273.7,33,,,,,,
+FL1771,AeroFly,Dublin,,,,Economy,1232.4,27,Edinburgh,Ankara,17:30,19:30,21:30,1:30
+FL4005,Comp132Fly,Dublin,Lisbon,22:30,0:30,Business,371.97,106,,,,,,
+FL3272,JavaAir,Dublin,,,,First Class,708.1,89,Istanbul,Lisbon,19:00,21:00,23:00,2:00
+FL6304,FlyAsia,Dublin,Brussels,14:30,18:30,First Class,1364.77,34,,,,,,
+FL2872,Turkish Airlines,Dublin,,,,Business,702.18,7,Dubai,Brussels,10:30,16:30,17:30,23:30
+FL8137,EuroWings,Dublin,Zurich,6:00,11:00,Business,224.3,76,,,,,,
+FL6971,FlyDubai,Dublin,,,,Business,1208.43,4,Oslo,Zurich,7:30,9:30,11:30,14:30
+FL5473,FlyDubai,Dublin,Oslo,22:30,2:30,Business,848.17,75,,,,,,
+FL2051,AnadoluJet,Dublin,,,,First Class,516.57,55,Lisbon,Oslo,10:00,12:00,15:00,20:00
+FL7736,AnadoluJet,Dublin,Athens,18:00,20:00,Economy,833.83,16,,,,,,
+FL1454,Turkish Airlines,Dublin,,,,First Class,1230.87,41,Copenhagen,Athens,8:30,12:30,13:30,16:30
+FL6509,AnadoluJet,Dublin,Edinburgh,8:30,12:30,First Class,1227.56,31,,,,,,
+FL7320,EuroWings,Dublin,,,,Economy,334.9,79,Vienna,Edinburgh,19:30,23:30,1:30,6:30
+FL8880,AeroFly,Dublin,Dubai,22:00,4:00,Business,1067.6,51,,,,,,
+FL3811,FlyDubai,Dublin,,,,First Class,1716.86,49,Lisbon,Dubai,6:30,9:30,11:30,18:30
+FL3965,JavaAir,Copenhagen,Istanbul,19:00,21:00,First Class,1268.21,12,,,,,,
+FL1537,AnadoluJet,Copenhagen,,,,First Class,555.93,7,Dublin,Istanbul,12:30,15:30,18:30,23:30
+FL1890,Pegasus Airlines,Copenhagen,Paris,21:30,2:30,Economy,1139.01,46,,,,,,
+FL1942,FlyAsia,Copenhagen,,,,First Class,1815.88,25,Brussels,Paris,7:30,11:30,14:30,19:30
+FL1647,KUFly,Copenhagen,Berlin,15:30,20:30,First Class,1458,85,,,,,,
+FL1072,Comp132Fly,Copenhagen,,,,Economy,257.05,54,Brussels,Berlin,20:00,22:00,23:00,1:00
+FL8379,KUFly,Copenhagen,Rome,13:30,18:30,First Class,766.28,38,,,,,,
+FL3212,FlyDubai,Copenhagen,,,,Business,1798.21,99,Stockholm,Rome,18:30,23:30,2:30,4:30
+FL6215,KUFly,Copenhagen,Amsterdam,16:00,18:00,Economy,1164.51,83,,,,,,
+FL2365,Comp132Fly,Copenhagen,,,,Economy,1427.5,118,Zurich,Amsterdam,11:30,16:30,17:30,19:30
+FL1360,FlyDubai,Copenhagen,Madrid,10:30,13:30,Economy,475.64,34,,,,,,
+FL9970,EuroWings,Copenhagen,,,,Business,582.24,46,Amsterdam,Madrid,8:30,10:30,11:30,14:30
+FL5675,AnadoluJet,Copenhagen,Vienna,15:30,18:30,First Class,1129.42,62,,,,,,
+FL8901,EuroWings,Copenhagen,,,,Business,1377.69,70,Rome,Vienna,16:00,20:00,21:00,0:00
+FL9819,Pegasus Airlines,Copenhagen,Prague,13:30,18:30,Business,1235.37,81,,,,,,
+FL3615,FlyDubai,Copenhagen,,,,First Class,161.83,74,Lisbon,Prague,21:00,2:00,5:00,9:00
+FL8696,Turkish Airlines,Copenhagen,Budapest,6:30,8:30,Economy,1114.99,111,,,,,,
+FL5522,Turkish Airlines,Copenhagen,,,,Business,1127.1,16,Oslo,Budapest,17:00,20:00,22:00,3:00
+FL7884,Comp132Fly,Copenhagen,Dublin,9:00,14:00,First Class,242.19,105,,,,,,
+FL5431,JavaAir,Copenhagen,,,,Business,156.74,69,Berlin,Dublin,22:30,0:30,3:30,6:30
+FL1335,Turkish Airlines,Copenhagen,Stockholm,12:30,16:30,First Class,1153.72,22,,,,,,
+FL1088,Pegasus Airlines,Copenhagen,,,,Economy,487.84,46,Helsinki,Stockholm,20:00,23:00,2:00,7:00
+FL7600,KUFly,Copenhagen,Helsinki,17:00,22:00,First Class,396.19,102,,,,,,
+FL6121,Turkish Airlines,Copenhagen,,,,Business,953.48,92,Istanbul,Helsinki,8:30,11:30,12:30,17:30
+FL5150,AnadoluJet,Copenhagen,Ankara,11:30,15:30,Economy,719.42,107,,,,,,
+FL5338,Turkish Airlines,Copenhagen,,,,First Class,1987.01,114,Edinburgh,Ankara,15:30,18:30,21:30,2:30
+FL3180,GlobalJet,Copenhagen,Lisbon,16:30,18:30,Business,684.73,54,,,,,,
+FL9259,JavaAir,Copenhagen,,,,First Class,1736.27,45,Berlin,Lisbon,10:30,14:30,17:30,19:30
+FL8125,FlyDubai,Copenhagen,Brussels,13:00,18:00,Economy,1200.64,53,,,,,,
+FL5774,AnadoluJet,Copenhagen,,,,First Class,1764.3,19,Berlin,Brussels,9:00,14:00,15:00,20:00
+FL5730,Pegasus Airlines,Copenhagen,Zurich,18:00,20:00,Economy,1287.56,118,,,,,,
+FL9654,AnadoluJet,Copenhagen,,,,First Class,695.32,63,Prague,Zurich,11:00,16:00,19:00,22:00
+FL1870,FlyAsia,Copenhagen,Oslo,10:30,12:30,Economy,320.55,102,,,,,,
+FL4212,FlyDubai,Copenhagen,,,,Economy,507.06,87,Vienna,Oslo,8:00,13:00,15:00,18:00
+FL5107,FlyAsia,Copenhagen,Athens,10:00,13:00,First Class,691.92,115,,,,,,
+FL7453,KUFly,Copenhagen,,,,Business,1487.61,76,Madrid,Athens,18:30,23:30,0:30,3:30
+FL8167,GlobalJet,Copenhagen,Edinburgh,15:30,19:30,First Class,910.72,19,,,,,,
+FL7620,KUFly,Copenhagen,,,,Economy,802.76,22,Amsterdam,Edinburgh,12:30,15:30,16:30,18:30
+FL2272,FlyDubai,Copenhagen,Dubai,9:30,14:30,Business,1444.11,77,,,,,,
+FL2801,JavaAir,Copenhagen,,,,First Class,968.24,110,Vienna,Dubai,11:00,15:00,17:00,0:00
+FL7295,GlobalJet,Stockholm,Istanbul,7:30,9:30,Economy,1270.49,54,,,,,,
+FL5419,JavaAir,Stockholm,,,,First Class,286.66,94,Ankara,Istanbul,10:30,14:30,17:30,19:30
+FL6257,Turkish Airlines,Stockholm,Paris,16:30,19:30,Business,1207.14,47,,,,,,
+FL6958,Turkish Airlines,Stockholm,,,,First Class,188.65,90,Athens,Paris,17:00,21:00,0:00,2:00
+FL7661,Turkish Airlines,Stockholm,Berlin,20:00,22:00,Business,1145.21,76,,,,,,
+FL8649,AnadoluJet,Stockholm,,,,Economy,1883.14,58,Dubai,Berlin,15:30,21:30,23:30,5:30
+FL8941,FlyAsia,Stockholm,Rome,21:00,2:00,Business,308.55,107,,,,,,
+FL8980,FlyAsia,Stockholm,,,,Business,486.14,103,Athens,Rome,11:00,14:00,16:00,17:00
+FL2464,FlyAsia,Stockholm,Amsterdam,20:00,23:00,First Class,174.69,119,,,,,,
+FL8109,KUFly,Stockholm,,,,Economy,1996.49,46,Dubai,Amsterdam,10:30,15:30,16:30,21:30
+FL6945,Comp132Fly,Stockholm,Madrid,12:30,14:30,First Class,101.92,71,,,,,,
+FL8138,GlobalJet,Stockholm,,,,Business,314.49,23,Vienna,Madrid,8:00,12:00,13:00,17:00
+FL8145,EuroWings,Stockholm,Vienna,6:30,8:30,First Class,405.8,10,,,,,,
+FL4890,EuroWings,Stockholm,,,,Business,1303.75,41,Paris,Vienna,8:30,10:30,12:30,15:30
+FL6629,FlyAsia,Stockholm,Prague,13:00,16:00,Business,326.99,7,,,,,,
+FL1433,Pegasus Airlines,Stockholm,,,,Economy,1576.3,95,Athens,Prague,10:30,15:30,17:30,19:30
+FL1573,KUFly,Stockholm,Budapest,8:30,13:30,Economy,619.29,32,,,,,,
+FL6432,KUFly,Stockholm,,,,Economy,1669.32,105,Lisbon,Budapest,13:00,15:00,17:00,22:00
+FL2834,AnadoluJet,Stockholm,Dublin,10:00,15:00,Business,1400.33,72,,,,,,
+FL1327,KUFly,Stockholm,,,,Economy,1852.14,119,Helsinki,Dublin,12:00,17:00,18:00,23:00
+FL8540,Turkish Airlines,Stockholm,Copenhagen,8:00,13:00,Business,838.46,77,,,,,,
+FL9698,GlobalJet,Stockholm,,,,Economy,1610.26,66,Dubai,Copenhagen,14:30,19:30,22:30,3:30
+FL8016,JavaAir,Stockholm,Helsinki,13:00,15:00,Economy,835.49,26,,,,,,
+FL4388,AnadoluJet,Stockholm,,,,Business,1147.93,102,Rome,Helsinki,17:00,20:00,23:00,4:00
+FL4576,AnadoluJet,Stockholm,Ankara,12:30,14:30,Business,798.47,16,,,,,,
+FL6223,KUFly,Stockholm,,,,Economy,1218.8,36,Dubai,Ankara,8:30,15:30,16:30,22:30
+FL8345,AnadoluJet,Stockholm,Lisbon,9:00,12:00,Economy,629,47,,,,,,
+FL5235,Pegasus Airlines,Stockholm,,,,First Class,1610.35,14,Brussels,Lisbon,18:00,20:00,23:00,2:00
+FL5182,FlyAsia,Stockholm,Brussels,6:30,9:30,Economy,179.17,8,,,,,,
+FL2012,FlyDubai,Stockholm,,,,First Class,1442.39,68,Zurich,Brussels,22:30,2:30,4:30,6:30
+FL7157,AeroFly,Stockholm,Zurich,6:00,8:00,Economy,1377.4,28,,,,,,
+FL3228,GlobalJet,Stockholm,,,,First Class,1723.35,97,Oslo,Zurich,9:00,12:00,13:00,16:00
+FL4915,AnadoluJet,Stockholm,Oslo,14:00,19:00,First Class,519.32,120,,,,,,
+FL7888,Turkish Airlines,Stockholm,,,,Economy,1148.88,111,Paris,Oslo,9:00,11:00,13:00,18:00
+FL9110,EuroWings,Stockholm,Athens,9:00,14:00,Business,207.8,29,,,,,,
+FL3455,GlobalJet,Stockholm,,,,Economy,1165.7,94,Budapest,Athens,20:00,22:00,23:00,2:00
+FL3005,AeroFly,Stockholm,Edinburgh,12:30,15:30,Business,1204.47,92,,,,,,
+FL7580,GlobalJet,Stockholm,,,,First Class,1279.71,26,Amsterdam,Edinburgh,12:00,16:00,18:00,20:00
+FL7017,FlyDubai,Stockholm,Dubai,10:00,16:00,First Class,588.9,102,,,,,,
+FL1249,GlobalJet,Stockholm,,,,Economy,1276.64,40,Paris,Dubai,17:30,22:30,23:30,6:30
+FL4148,EuroWings,Helsinki,Istanbul,18:30,23:30,Economy,714.09,26,,,,,,
+FL3999,FlyDubai,Helsinki,,,,First Class,824.82,72,Rome,Istanbul,10:30,13:30,16:30,17:30
+FL6519,FlyDubai,Helsinki,Paris,21:30,23:30,Business,1208.95,103,,,,,,
+FL8941,AeroFly,Helsinki,,,,Business,1804.99,46,Lisbon,Paris,13:00,17:00,20:00,0:00
+FL6679,FlyDubai,Helsinki,Berlin,18:00,23:00,First Class,915.07,116,,,,,,
+FL5516,AnadoluJet,Helsinki,,,,First Class,1711.01,32,Madrid,Berlin,21:30,23:30,0:30,2:30
+FL6252,EuroWings,Helsinki,Rome,9:30,14:30,Economy,886.46,97,,,,,,
+FL9318,AnadoluJet,Helsinki,,,,First Class,249.07,88,Edinburgh,Rome,16:00,19:00,22:00,1:00
+FL2974,FlyAsia,Helsinki,Amsterdam,12:00,17:00,Business,247.98,17,,,,,,
+FL3068,Pegasus Airlines,Helsinki,,,,Economy,1447.64,85,Stockholm,Amsterdam,8:30,12:30,14:30,16:30
+FL1008,Turkish Airlines,Helsinki,Madrid,12:00,16:00,First Class,444.32,99,,,,,,
+FL3806,FlyAsia,Helsinki,,,,Economy,1021.13,72,Zurich,Madrid,14:00,19:00,22:00,3:00
+FL9402,GlobalJet,Helsinki,Vienna,7:00,9:00,First Class,1023.71,36,,,,,,
+FL3547,Pegasus Airlines,Helsinki,,,,Economy,1939.7,89,Ankara,Vienna,6:30,9:30,11:30,14:30
+FL1099,GlobalJet,Helsinki,Prague,16:30,19:30,Economy,772.87,87,,,,,,
+FL8416,AnadoluJet,Helsinki,,,,Business,1081.14,92,Amsterdam,Prague,15:30,19:30,20:30,22:30
+FL9112,EuroWings,Helsinki,Budapest,20:30,0:30,First Class,293.28,97,,,,,,
+FL4996,FlyAsia,Helsinki,,,,Economy,1290.61,116,Brussels,Budapest,6:00,11:00,13:00,17:00
+FL4261,AeroFly,Helsinki,Dublin,14:30,16:30,First Class,173.67,14,,,,,,
+FL2652,AnadoluJet,Helsinki,,,,First Class,973.98,81,Amsterdam,Dublin,21:00,23:00,2:00,5:00
+FL5574,AeroFly,Helsinki,Copenhagen,19:30,22:30,First Class,541.12,57,,,,,,
+FL6263,GlobalJet,Helsinki,,,,Economy,1726.78,7,Prague,Copenhagen,11:00,13:00,15:00,18:00
+FL1317,AnadoluJet,Helsinki,Stockholm,13:00,15:00,Economy,1497.56,27,,,,,,
+FL9748,Comp132Fly,Helsinki,,,,First Class,210.6,112,Dubai,Stockholm,19:30,1:30,3:30,8:30
+FL5394,JavaAir,Helsinki,Ankara,18:30,21:30,Economy,481.74,24,,,,,,
+FL4345,Turkish Airlines,Helsinki,,,,First Class,1530.7,52,Prague,Ankara,7:30,9:30,10:30,12:30
+FL4310,KUFly,Helsinki,Lisbon,22:00,3:00,Business,1469.86,46,,,,,,
+FL4756,KUFly,Helsinki,,,,Economy,1931.72,12,Rome,Lisbon,16:00,21:00,0:00,3:00
+FL3426,JavaAir,Helsinki,Brussels,11:00,14:00,First Class,696.04,19,,,,,,
+FL3719,Comp132Fly,Helsinki,,,,Business,395.25,80,Berlin,Brussels,15:00,18:00,20:00,23:00
+FL9483,Turkish Airlines,Helsinki,Zurich,6:30,10:30,Business,228.98,102,,,,,,
+FL1810,GlobalJet,Helsinki,,,,Business,1225.27,9,Lisbon,Zurich,16:00,18:00,20:00,1:00
+FL4934,Turkish Airlines,Helsinki,Oslo,16:30,19:30,Business,147.91,80,,,,,,
+FL1589,EuroWings,Helsinki,,,,First Class,1352.63,4,Athens,Oslo,22:00,3:00,6:00,10:00
+FL4204,KUFly,Helsinki,Athens,19:30,21:30,Business,917.16,42,,,,,,
+FL4856,FlyAsia,Helsinki,,,,Economy,773.87,29,Brussels,Athens,12:00,17:00,20:00,23:00
+FL2413,JavaAir,Helsinki,Edinburgh,17:30,21:30,First Class,563.23,51,,,,,,
+FL6729,FlyDubai,Helsinki,,,,Economy,1925.59,22,Rome,Edinburgh,18:30,23:30,2:30,5:30
+FL7535,FlyDubai,Helsinki,Dubai,14:30,21:30,Business,550.8,104,,,,,,
+FL4128,Turkish Airlines,Helsinki,,,,Business,899.24,109,Zurich,Dubai,7:30,10:30,12:30,18:30
+FL2453,EuroWings,Ankara,Istanbul,22:00,0:00,Business,317.87,16,,,,,,
+FL2607,Pegasus Airlines,Ankara,,,,Business,720.16,115,Helsinki,Istanbul,21:00,23:00,0:00,3:00
+FL3049,Turkish Airlines,Ankara,Paris,22:30,3:30,First Class,416.18,97,,,,,,
+FL4808,Pegasus Airlines,Ankara,,,,First Class,303.41,73,Brussels,Paris,20:00,23:00,2:00,6:00
+FL3289,FlyDubai,Ankara,Berlin,10:00,13:00,Business,701.12,35,,,,,,
+FL2956,FlyDubai,Ankara,,,,First Class,665.25,31,Oslo,Berlin,14:00,16:00,17:00,19:00
+FL8752,Turkish Airlines,Ankara,Rome,17:30,18:30,Business,1146.22,59,,,,,,
+FL6327,FlyAsia,Ankara,,,,Economy,203.94,93,Berlin,Rome,12:30,17:30,18:30,20:30
+FL9061,JavaAir,Ankara,Amsterdam,11:00,16:00,Business,399.73,52,,,,,,
+FL6506,AnadoluJet,Ankara,,,,Business,1642.97,86,Berlin,Amsterdam,12:30,17:30,20:30,0:30
+FL2616,FlyDubai,Ankara,Madrid,13:30,16:30,Business,1298.86,17,,,,,,
+FL7836,AeroFly,Ankara,,,,Economy,889.11,5,Stockholm,Madrid,17:00,20:00,23:00,3:00
+FL5547,KUFly,Ankara,Vienna,17:00,21:00,Economy,823.18,65,,,,,,
+FL2999,FlyDubai,Ankara,,,,First Class,1190.93,45,Helsinki,Vienna,11:00,14:00,15:00,20:00
+FL6134,FlyAsia,Ankara,Prague,9:00,13:00,Business,662.84,83,,,,,,
+FL5994,FlyAsia,Ankara,,,,Business,942.18,98,Oslo,Prague,15:30,19:30,20:30,0:30
+FL5260,GlobalJet,Ankara,Budapest,7:00,9:00,First Class,1404.58,98,,,,,,
+FL4565,Turkish Airlines,Ankara,,,,Economy,688.85,113,Helsinki,Budapest,11:30,14:30,16:30,18:30
+FL3968,FlyDubai,Ankara,Dublin,7:00,11:00,First Class,615.57,97,,,,,,
+FL1772,Turkish Airlines,Ankara,,,,Economy,772.85,80,Helsinki,Dublin,20:30,1:30,3:30,6:30
+FL6065,AeroFly,Ankara,Copenhagen,22:00,2:00,Business,485.32,70,,,,,,
+FL9919,JavaAir,Ankara,,,,Business,1129.63,93,Istanbul,Copenhagen,14:30,15:30,18:30,22:30
+FL7353,KUFly,Ankara,Stockholm,22:00,1:00,Business,253.11,68,,,,,,
+FL7049,EuroWings,Ankara,,,,First Class,647.44,45,Athens,Stockholm,9:00,11:00,13:00,18:00
+FL2367,AnadoluJet,Ankara,Helsinki,17:00,20:00,Business,736.91,7,,,,,,
+FL7204,GlobalJet,Ankara,,,,First Class,256.22,47,Zurich,Helsinki,10:00,15:00,16:00,18:00
+FL3373,Turkish Airlines,Ankara,Lisbon,13:00,17:00,First Class,276.55,59,,,,,,
+FL9348,KUFly,Ankara,,,,Business,328.36,104,Budapest,Lisbon,11:30,16:30,18:30,21:30
+FL8131,Pegasus Airlines,Ankara,Brussels,16:00,21:00,Economy,1143.63,103,,,,,,
+FL4376,AnadoluJet,Ankara,,,,Business,1058.84,73,Athens,Brussels,20:00,21:00,22:00,1:00
+FL1968,FlyAsia,Ankara,Zurich,17:30,22:30,Economy,1455.71,16,,,,,,
+FL5954,AnadoluJet,Ankara,,,,First Class,1246.41,59,Paris,Zurich,19:00,0:00,3:00,5:00
+FL6927,EuroWings,Ankara,Oslo,8:30,10:30,Business,960.29,5,,,,,,
+FL4294,FlyAsia,Ankara,,,,Economy,272.02,20,Istanbul,Oslo,7:00,8:00,11:00,15:00
+FL4525,AnadoluJet,Ankara,Athens,19:00,20:00,Economy,161.72,77,,,,,,
+FL6239,KUFly,Ankara,,,,Business,1575.41,57,Paris,Athens,13:00,15:00,16:00,21:00
+FL9715,Pegasus Airlines,Ankara,Edinburgh,12:30,17:30,Business,227.46,89,,,,,,
+FL1226,FlyAsia,Ankara,,,,Economy,1985.51,84,Zurich,Edinburgh,11:00,13:00,15:00,17:00
+FL6073,JavaAir,Ankara,Dubai,22:00,4:00,Economy,487.61,93,,,,,,
+FL5392,Comp132Fly,Ankara,,,,Economy,1079.27,26,Vienna,Dubai,21:00,1:00,4:00,9:00
+FL3423,KUFly,Lisbon,Istanbul,16:00,21:00,First Class,1217.8,120,,,,,,
+FL4445,Comp132Fly,Lisbon,,,,Economy,1561.4,53,Prague,Istanbul,20:30,0:30,3:30,5:30
+FL8957,Turkish Airlines,Lisbon,Paris,7:00,11:00,First Class,544.47,86,,,,,,
+FL8166,Comp132Fly,Lisbon,,,,Business,1002.69,17,Vienna,Paris,17:30,19:30,20:30,23:30
+FL7629,FlyDubai,Lisbon,Berlin,9:30,13:30,Economy,1300.12,7,,,,,,
+FL4042,EuroWings,Lisbon,,,,First Class,762.52,51,Paris,Berlin,13:00,15:00,17:00,22:00
+FL7692,JavaAir,Lisbon,Rome,15:00,17:00,Business,545.1,81,,,,,,
+FL7086,FlyAsia,Lisbon,,,,Economy,1719.63,73,Oslo,Rome,9:00,14:00,17:00,21:00
+FL3494,AeroFly,Lisbon,Amsterdam,15:30,17:30,Business,1090.28,42,,,,,,
+FL1080,KUFly,Lisbon,,,,Economy,1836.21,85,Copenhagen,Amsterdam,20:30,1:30,3:30,5:30
+FL5163,Pegasus Airlines,Lisbon,Madrid,19:30,0:30,Economy,1344.1,68,,,,,,
+FL7846,Comp132Fly,Lisbon,,,,Economy,1386.36,76,Dublin,Madrid,18:30,21:30,0:30,5:30
+FL4966,AeroFly,Lisbon,Vienna,22:00,1:00,Business,1172.96,102,,,,,,
+FL5928,KUFly,Lisbon,,,,First Class,1894.22,9,Dubai,Vienna,18:00,1:00,2:00,8:00
+FL1655,KUFly,Lisbon,Prague,10:00,15:00,First Class,177.86,83,,,,,,
+FL6676,FlyAsia,Lisbon,,,,Economy,1324.41,34,Brussels,Prague,12:30,14:30,15:30,20:30
+FL8319,KUFly,Lisbon,Budapest,8:30,13:30,Economy,1345.33,33,,,,,,
+FL6179,EuroWings,Lisbon,,,,Business,1049.07,98,Vienna,Budapest,10:00,14:00,15:00,19:00
+FL3203,KUFly,Lisbon,Dublin,9:30,13:30,Economy,1163.82,105,,,,,,
+FL1355,Turkish Airlines,Lisbon,,,,Business,1850.58,10,Prague,Dublin,15:00,19:00,20:00,23:00
+FL3451,KUFly,Lisbon,Copenhagen,6:30,8:30,Business,132.57,10,,,,,,
+FL5223,JavaAir,Lisbon,,,,Business,1699.89,38,Athens,Copenhagen,11:00,14:00,16:00,18:00
+FL5079,Turkish Airlines,Lisbon,Stockholm,11:30,15:30,First Class,1279.85,88,,,,,,
+FL1817,Comp132Fly,Lisbon,,,,First Class,908,102,Copenhagen,Stockholm,22:00,0:00,1:00,6:00
+FL6579,FlyDubai,Lisbon,Helsinki,15:30,18:30,Economy,1143.34,54,,,,,,
+FL5567,FlyDubai,Lisbon,,,,Economy,1461.3,85,Budapest,Helsinki,22:00,1:00,4:00,7:00
+FL3525,GlobalJet,Lisbon,Ankara,22:00,0:00,Business,978.01,76,,,,,,
+FL2631,Turkish Airlines,Lisbon,,,,Economy,616.48,91,Dublin,Ankara,13:30,15:30,17:30,22:30
+FL5502,FlyDubai,Lisbon,Brussels,22:00,0:00,First Class,694.41,45,,,,,,
+FL4962,EuroWings,Lisbon,,,,Business,597.81,106,Madrid,Brussels,13:00,17:00,19:00,0:00
+FL9078,AnadoluJet,Lisbon,Zurich,22:00,2:00,Business,425.31,86,,,,,,
+FL6519,GlobalJet,Lisbon,,,,Economy,195.34,47,Edinburgh,Zurich,11:30,15:30,16:30,20:30
+FL8501,EuroWings,Lisbon,Oslo,9:30,11:30,Business,314.5,117,,,,,,
+FL9878,AeroFly,Lisbon,,,,First Class,1916.1,84,Vienna,Oslo,7:00,10:00,12:00,16:00
+FL8100,Pegasus Airlines,Lisbon,Athens,18:30,21:30,Business,825.66,119,,,,,,
+FL5830,FlyAsia,Lisbon,,,,Economy,1137.49,95,Rome,Athens,13:30,17:30,19:30,20:30
+FL2572,JavaAir,Lisbon,Edinburgh,8:30,12:30,First Class,1093.84,102,,,,,,
+FL7095,EuroWings,Lisbon,,,,Business,688.45,24,Dubai,Edinburgh,10:00,15:00,16:00,21:00
+FL9526,AnadoluJet,Lisbon,Dubai,10:30,16:30,First Class,660.71,47,,,,,,
+FL2976,AeroFly,Lisbon,,,,Economy,1902.14,7,Stockholm,Dubai,12:00,14:00,16:00,22:00
+FL1065,KUFly,Brussels,Istanbul,9:00,13:00,First Class,148.15,10,,,,,,
+FL1134,EuroWings,Brussels,,,,Business,431.17,25,Madrid,Istanbul,12:30,15:30,17:30,19:30
+FL2213,AnadoluJet,Brussels,Paris,15:00,20:00,Business,1088.93,46,,,,,,
+FL9084,AeroFly,Brussels,,,,Economy,1641.66,78,Zurich,Paris,22:30,3:30,5:30,8:30
+FL4163,Pegasus Airlines,Brussels,Berlin,16:30,20:30,Economy,370.8,82,,,,,,
+FL6742,AnadoluJet,Brussels,,,,First Class,1008.59,65,Oslo,Berlin,13:00,18:00,21:00,23:00
+FL2771,Comp132Fly,Brussels,Rome,9:30,12:30,Economy,1032.47,46,,,,,,
+FL3398,Pegasus Airlines,Brussels,,,,Business,368.84,44,Madrid,Rome,11:30,14:30,17:30,21:30
+FL7077,FlyAsia,Brussels,Amsterdam,10:30,13:30,Business,305.99,90,,,,,,
+FL2227,EuroWings,Brussels,,,,Business,1934.55,20,Edinburgh,Amsterdam,16:30,20:30,23:30,3:30
+FL7096,Turkish Airlines,Brussels,Madrid,19:30,22:30,Economy,272.02,8,,,,,,
+FL6163,FlyAsia,Brussels,,,,First Class,274.71,42,Lisbon,Madrid,7:30,12:30,13:30,16:30
+FL7665,GlobalJet,Brussels,Vienna,6:00,11:00,Economy,390.24,75,,,,,,
+FL8055,EuroWings,Brussels,,,,Economy,1944.95,104,Ankara,Vienna,13:30,18:30,21:30,23:30
+FL9845,Turkish Airlines,Brussels,Prague,14:00,16:00,Economy,1066.67,81,,,,,,
+FL2214,GlobalJet,Brussels,,,,Business,549.19,10,Edinburgh,Prague,14:00,18:00,21:00,2:00
+FL7335,EuroWings,Brussels,Budapest,16:00,20:00,First Class,1108.02,55,,,,,,
+FL7418,FlyAsia,Brussels,,,,Business,666.35,113,Copenhagen,Budapest,18:00,21:00,22:00,2:00
+FL7428,JavaAir,Brussels,Dublin,16:00,18:00,First Class,705.67,54,,,,,,
+FL9141,JavaAir,Brussels,,,,First Class,1416.95,61,Edinburgh,Dublin,14:30,19:30,22:30,1:30
+FL2294,EuroWings,Brussels,Copenhagen,14:30,17:30,Business,1340.71,38,,,,,,
+FL8096,Comp132Fly,Brussels,,,,Business,778.87,30,Lisbon,Copenhagen,21:30,2:30,5:30,7:30
+FL7975,JavaAir,Brussels,Stockholm,12:30,14:30,Economy,577.15,14,,,,,,
+FL5112,Pegasus Airlines,Brussels,,,,Business,1720.11,6,Zurich,Stockholm,16:30,19:30,21:30,0:30
+FL5729,JavaAir,Brussels,Helsinki,15:00,17:00,Economy,902.53,31,,,,,,
+FL6024,AeroFly,Brussels,,,,First Class,592.84,52,Edinburgh,Helsinki,17:30,22:30,1:30,4:30
+FL7349,Comp132Fly,Brussels,Ankara,13:30,16:30,Economy,123.38,53,,,,,,
+FL5063,GlobalJet,Brussels,,,,Economy,1188.74,12,Dublin,Ankara,8:30,13:30,15:30,17:30
+FL3145,Pegasus Airlines,Brussels,Lisbon,16:30,18:30,Business,1324.92,85,,,,,,
+FL3483,EuroWings,Brussels,,,,Economy,1016.23,107,Edinburgh,Lisbon,18:30,23:30,0:30,4:30
+FL5332,Turkish Airlines,Brussels,Zurich,13:30,18:30,First Class,1063.29,110,,,,,,
+FL5323,EuroWings,Brussels,,,,Economy,1363.79,31,Vienna,Zurich,8:30,11:30,14:30,18:30
+FL6422,KUFly,Brussels,Oslo,19:00,21:00,Business,1211.4,59,,,,,,
+FL2383,Comp132Fly,Brussels,,,,Economy,757.95,94,Rome,Oslo,9:30,12:30,14:30,17:30
+FL3414,AeroFly,Brussels,Athens,21:30,0:30,Business,1253.89,87,,,,,,
+FL7245,FlyDubai,Brussels,,,,First Class,193.27,90,Madrid,Athens,19:30,0:30,3:30,5:30
+FL5135,AnadoluJet,Brussels,Edinburgh,21:30,2:30,Economy,1259.25,20,,,,,,
+FL9185,FlyDubai,Brussels,,,,Economy,802.19,25,Helsinki,Edinburgh,18:00,21:00,23:00,3:00
+FL1174,Turkish Airlines,Brussels,Dubai,11:30,16:30,First Class,1476.39,120,,,,,,
+FL6489,GlobalJet,Brussels,,,,Economy,1871.62,38,Madrid,Dubai,11:30,15:30,16:30,23:30
+FL1724,AeroFly,Zurich,Istanbul,20:30,0:30,Economy,1295.44,46,,,,,,
+FL3950,Pegasus Airlines,Zurich,,,,Business,880.36,61,Copenhagen,Istanbul,7:00,10:00,11:00,14:00
+FL2863,GlobalJet,Zurich,Paris,7:00,12:00,Economy,474.81,36,,,,,,
+FL2421,AnadoluJet,Zurich,,,,First Class,362.02,97,Budapest,Paris,13:30,15:30,17:30,21:30
+FL5395,KUFly,Zurich,Berlin,19:00,0:00,Economy,488.25,28,,,,,,
+FL8925,JavaAir,Zurich,,,,Economy,347.22,26,Vienna,Berlin,22:00,3:00,5:00,8:00
+FL2136,Turkish Airlines,Zurich,Rome,22:30,2:30,Economy,608.65,7,,,,,,
+FL2380,GlobalJet,Zurich,,,,Economy,1488.25,4,Amsterdam,Rome,19:30,21:30,0:30,4:30
+FL5111,Comp132Fly,Zurich,Amsterdam,8:00,10:00,Business,110.18,95,,,,,,
+FL8703,GlobalJet,Zurich,,,,Business,1587.11,91,Stockholm,Amsterdam,20:00,1:00,2:00,4:00
+FL3704,Pegasus Airlines,Zurich,Madrid,14:30,18:30,Business,342.8,42,,,,,,
+FL5507,Turkish Airlines,Zurich,,,,First Class,980.78,28,Amsterdam,Madrid,22:30,2:30,3:30,7:30
+FL6055,AeroFly,Zurich,Vienna,13:30,15:30,Business,1125.06,95,,,,,,
+FL7587,AeroFly,Zurich,,,,First Class,488.68,116,Edinburgh,Vienna,8:00,11:00,13:00,15:00
+FL3978,KUFly,Zurich,Prague,7:00,10:00,Business,607.78,120,,,,,,
+FL4891,Turkish Airlines,Zurich,,,,First Class,591.14,13,Oslo,Prague,20:30,0:30,2:30,5:30
+FL4420,AeroFly,Zurich,Budapest,15:00,17:00,Business,1205.12,67,,,,,,
+FL8178,AnadoluJet,Zurich,,,,First Class,1800.39,72,Stockholm,Budapest,18:30,20:30,23:30,3:30
+FL7521,Comp132Fly,Zurich,Dublin,20:30,23:30,First Class,1134.44,30,,,,,,
+FL9335,EuroWings,Zurich,,,,Economy,254.27,53,Rome,Dublin,11:30,15:30,18:30,20:30
+FL2711,Turkish Airlines,Zurich,Copenhagen,17:30,22:30,Business,1478.84,108,,,,,,
+FL1986,JavaAir,Zurich,,,,First Class,1351.15,13,Oslo,Copenhagen,13:30,15:30,17:30,19:30
+FL5173,EuroWings,Zurich,Stockholm,6:30,11:30,Economy,219.93,81,,,,,,
+FL7887,AeroFly,Zurich,,,,Business,869.96,100,Helsinki,Stockholm,12:30,15:30,18:30,23:30
+FL2467,AeroFly,Zurich,Helsinki,16:30,20:30,Economy,207.86,53,,,,,,
+FL3106,EuroWings,Zurich,,,,Business,221.96,50,Athens,Helsinki,9:30,12:30,13:30,16:30
+FL3370,AeroFly,Zurich,Ankara,21:00,2:00,Business,375.02,77,,,,,,
+FL1014,GlobalJet,Zurich,,,,Business,419.64,95,Madrid,Ankara,15:00,20:00,21:00,0:00
+FL5226,FlyAsia,Zurich,Lisbon,6:30,8:30,Business,1391.6,41,,,,,,
+FL9652,GlobalJet,Zurich,,,,Economy,475.57,65,Budapest,Lisbon,11:30,15:30,16:30,19:30
+FL3031,FlyDubai,Zurich,Brussels,13:30,16:30,Business,1006.7,45,,,,,,
+FL3553,JavaAir,Zurich,,,,First Class,755.2,14,Dubai,Brussels,16:30,22:30,23:30,5:30
+FL5697,FlyDubai,Zurich,Oslo,22:30,1:30,Economy,677.44,79,,,,,,
+FL9038,JavaAir,Zurich,,,,Economy,1623.36,51,Brussels,Oslo,8:00,13:00,16:00,20:00
+FL4175,Comp132Fly,Zurich,Athens,8:30,12:30,Economy,333.22,34,,,,,,
+FL7938,Pegasus Airlines,Zurich,,,,Business,376.69,8,Copenhagen,Athens,11:30,16:30,17:30,20:30
+FL4415,GlobalJet,Zurich,Edinburgh,7:30,10:30,Economy,1458.89,43,,,,,,
+FL5660,Comp132Fly,Zurich,,,,Business,150.22,22,Athens,Edinburgh,19:00,22:00,1:00,5:00
+FL7823,KUFly,Zurich,Dubai,6:30,13:30,First Class,523.08,114,,,,,,
+FL6949,Comp132Fly,Zurich,,,,Business,1778.01,115,Dublin,Dubai,22:30,2:30,5:30,10:30
+FL8184,FlyAsia,Oslo,Istanbul,11:30,14:30,Business,1403.51,19,,,,,,
+FL4128,JavaAir,Oslo,,,,Business,1509.92,112,Copenhagen,Istanbul,19:00,0:00,3:00,5:00
+FL1876,JavaAir,Oslo,Paris,7:00,9:00,First Class,1427.76,70,,,,,,
+FL8763,AnadoluJet,Oslo,,,,First Class,354.72,51,Dublin,Paris,20:30,22:30,0:30,5:30
+FL6161,Comp132Fly,Oslo,Berlin,13:00,16:00,Economy,1411.97,13,,,,,,
+FL3928,FlyAsia,Oslo,,,,Economy,1908.18,60,Ankara,Berlin,18:30,20:30,22:30,3:30
+FL5749,AeroFly,Oslo,Rome,22:30,2:30,First Class,478.64,61,,,,,,
+FL8691,KUFly,Oslo,,,,Business,869.75,110,Dubai,Rome,6:30,12:30,13:30,18:30
+FL7429,Pegasus Airlines,Oslo,Amsterdam,19:00,23:00,Economy,1244.95,30,,,,,,
+FL4569,KUFly,Oslo,,,,Business,1721.62,33,Vienna,Amsterdam,15:30,18:30,21:30,0:30
+FL9219,AnadoluJet,Oslo,Madrid,15:00,19:00,Business,1330.31,91,,,,,,
+FL8797,Comp132Fly,Oslo,,,,Business,574.89,75,Ankara,Madrid,6:30,9:30,12:30,14:30
+FL3547,GlobalJet,Oslo,Vienna,16:30,20:30,First Class,938.71,116,,,,,,
+FL7252,AeroFly,Oslo,,,,Business,223.83,41,Berlin,Vienna,6:00,10:00,13:00,16:00
+FL5142,GlobalJet,Oslo,Prague,15:30,17:30,Business,745.16,28,,,,,,
+FL2619,AeroFly,Oslo,,,,Business,1161.05,8,Copenhagen,Prague,19:00,0:00,2:00,7:00
+FL5899,FlyAsia,Oslo,Budapest,8:30,12:30,Business,576.8,94,,,,,,
+FL5698,Comp132Fly,Oslo,,,,Economy,1723.23,84,Helsinki,Budapest,22:30,3:30,6:30,11:30
+FL1966,AnadoluJet,Oslo,Dublin,10:00,13:00,Economy,801.97,113,,,,,,
+FL3739,JavaAir,Oslo,,,,Economy,257.34,98,Brussels,Dublin,10:00,14:00,16:00,21:00
+FL3865,JavaAir,Oslo,Copenhagen,17:30,20:30,Economy,340.63,85,,,,,,
+FL9115,Pegasus Airlines,Oslo,,,,Economy,158,10,Prague,Copenhagen,21:30,1:30,3:30,5:30
+FL4420,AnadoluJet,Oslo,Stockholm,22:30,1:30,First Class,448.03,94,,,,,,
+FL6182,AnadoluJet,Oslo,,,,Economy,301.18,110,Zurich,Stockholm,19:30,0:30,1:30,5:30
+FL9619,Pegasus Airlines,Oslo,Helsinki,16:30,21:30,Economy,473.91,96,,,,,,
+FL1814,Pegasus Airlines,Oslo,,,,Business,811.9,117,Istanbul,Helsinki,13:00,15:00,16:00,19:00
+FL8043,EuroWings,Oslo,Ankara,16:00,21:00,Economy,1477.08,30,,,,,,
+FL6971,FlyAsia,Oslo,,,,Economy,371.7,24,Lisbon,Ankara,13:00,17:00,19:00,21:00
+FL3076,FlyDubai,Oslo,Lisbon,16:30,19:30,First Class,221.47,71,,,,,,
+FL3084,AnadoluJet,Oslo,,,,Business,1252.42,83,Paris,Lisbon,11:00,16:00,19:00,22:00
+FL5311,Pegasus Airlines,Oslo,Brussels,12:00,16:00,Business,497.98,39,,,,,,
+FL9577,Turkish Airlines,Oslo,,,,Business,389.77,108,Madrid,Brussels,12:30,16:30,17:30,20:30
+FL5856,AeroFly,Oslo,Zurich,19:00,23:00,Business,1203.58,43,,,,,,
+FL1745,AnadoluJet,Oslo,,,,Business,691.15,59,Amsterdam,Zurich,9:00,11:00,14:00,16:00
+FL7154,Pegasus Airlines,Oslo,Athens,10:30,13:30,First Class,1356.8,67,,,,,,
+FL4314,Turkish Airlines,Oslo,,,,First Class,1282.37,73,Brussels,Athens,16:00,19:00,21:00,1:00
+FL2837,KUFly,Oslo,Edinburgh,15:00,17:00,Business,1172.56,76,,,,,,
+FL2168,AeroFly,Oslo,,,,Economy,1421.33,45,Athens,Edinburgh,15:00,20:00,23:00,4:00
+FL3181,EuroWings,Oslo,Dubai,15:00,22:00,Economy,1193.94,67,,,,,,
+FL8624,GlobalJet,Oslo,,,,Business,1865.82,72,Stockholm,Dubai,10:30,12:30,15:30,22:30
+FL6676,Comp132Fly,Athens,Istanbul,12:00,14:00,Economy,307.64,65,,,,,,
+FL4579,FlyDubai,Athens,,,,Business,1628.06,16,Helsinki,Istanbul,7:30,10:30,12:30,16:30
+FL4196,AeroFly,Athens,Paris,9:30,14:30,Business,642.59,38,,,,,,
+FL7025,EuroWings,Athens,,,,First Class,1478.36,56,Dublin,Paris,12:00,16:00,18:00,21:00
+FL3612,GlobalJet,Athens,Berlin,11:00,16:00,Economy,1487.78,9,,,,,,
+FL7800,FlyDubai,Athens,,,,Economy,757.41,74,Copenhagen,Berlin,19:00,22:00,1:00,4:00
+FL4664,Turkish Airlines,Athens,Rome,11:30,12:30,Economy,693.17,4,,,,,,
+FL2918,AeroFly,Athens,,,,First Class,1301.11,71,Copenhagen,Rome,21:00,1:00,4:00,7:00
+FL3940,EuroWings,Athens,Amsterdam,17:00,21:00,Business,1292.86,98,,,,,,
+FL1446,EuroWings,Athens,,,,Economy,1940.68,71,Ankara,Amsterdam,7:30,9:30,10:30,15:30
+FL4494,Comp132Fly,Athens,Madrid,20:00,23:00,Economy,227.45,61,,,,,,
+FL1384,JavaAir,Athens,,,,First Class,1049.26,88,Paris,Madrid,9:00,11:00,12:00,16:00
+FL5055,GlobalJet,Athens,Vienna,12:30,16:30,First Class,545.58,89,,,,,,
+FL2468,JavaAir,Athens,,,,Business,292.48,9,Paris,Vienna,19:00,0:00,1:00,4:00
+FL2734,AeroFly,Athens,Prague,19:00,0:00,Economy,684.72,119,,,,,,
+FL1267,Pegasus Airlines,Athens,,,,Economy,1220.04,117,Lisbon,Prague,21:30,1:30,2:30,7:30
+FL3339,JavaAir,Athens,Budapest,6:30,9:30,Business,520.61,80,,,,,,
+FL7144,Comp132Fly,Athens,,,,Economy,1912.04,63,Paris,Budapest,6:30,9:30,11:30,16:30
+FL9596,KUFly,Athens,Dublin,6:30,10:30,Economy,161.62,119,,,,,,
+FL7085,GlobalJet,Athens,,,,Economy,852.91,81,Rome,Dublin,15:00,17:00,18:00,21:00
+FL1613,KUFly,Athens,Copenhagen,8:00,13:00,Economy,1433.89,68,,,,,,
+FL4018,Comp132Fly,Athens,,,,First Class,1538.11,110,Dublin,Copenhagen,22:00,0:00,3:00,8:00
+FL2692,FlyDubai,Athens,Stockholm,20:30,22:30,Economy,1008.8,46,,,,,,
+FL7148,Pegasus Airlines,Athens,,,,Business,1977.8,15,Madrid,Stockholm,12:30,15:30,17:30,20:30
+FL9579,Pegasus Airlines,Athens,Helsinki,7:30,10:30,First Class,412.61,49,,,,,,
+FL9168,JavaAir,Athens,,,,Business,673.44,97,Amsterdam,Helsinki,6:30,11:30,12:30,17:30
+FL3944,AeroFly,Athens,Ankara,9:00,11:00,Business,1144.82,47,,,,,,
+FL1266,Turkish Airlines,Athens,,,,Economy,1201.05,113,Stockholm,Ankara,6:30,8:30,11:30,13:30
+FL8673,Comp132Fly,Athens,Lisbon,22:30,2:30,First Class,466.78,60,,,,,,
+FL8163,KUFly,Athens,,,,First Class,998.05,47,Istanbul,Lisbon,12:00,13:00,15:00,19:00
+FL1147,AnadoluJet,Athens,Brussels,12:00,17:00,First Class,364.14,71,,,,,,
+FL2915,FlyDubai,Athens,,,,Business,406.03,111,Lisbon,Brussels,10:30,14:30,17:30,21:30
+FL1919,FlyAsia,Athens,Zurich,8:00,12:00,Economy,688.73,49,,,,,,
+FL1195,AnadoluJet,Athens,,,,First Class,173,15,Amsterdam,Zurich,12:00,14:00,15:00,17:00
+FL3506,JavaAir,Athens,Oslo,14:00,16:00,First Class,826.77,49,,,,,,
+FL7687,Comp132Fly,Athens,,,,Economy,878.7,101,Paris,Oslo,18:30,22:30,1:30,4:30
+FL8543,FlyDubai,Athens,Edinburgh,9:00,14:00,Business,442.51,116,,,,,,
+FL8479,AnadoluJet,Athens,,,,Economy,970.38,60,Copenhagen,Edinburgh,8:00,13:00,16:00,19:00
+FL7305,Turkish Airlines,Athens,Dubai,20:00,2:00,Business,752.78,81,,,,,,
+FL1033,GlobalJet,Athens,,,,First Class,1659.1,27,Prague,Dubai,13:00,17:00,18:00,1:00
+FL4266,EuroWings,Edinburgh,Istanbul,22:00,2:00,First Class,345.95,23,,,,,,
+FL4909,Comp132Fly,Edinburgh,,,,First Class,1241.35,59,Zurich,Istanbul,21:30,1:30,4:30,9:30
+FL1656,Turkish Airlines,Edinburgh,Paris,18:00,20:00,Business,564.37,31,,,,,,
+FL5078,Pegasus Airlines,Edinburgh,,,,Business,1268.41,70,Helsinki,Paris,17:30,19:30,22:30,3:30
+FL6745,AnadoluJet,Edinburgh,Berlin,11:30,16:30,Business,638.15,106,,,,,,
+FL2915,AeroFly,Edinburgh,,,,Economy,201.53,75,Madrid,Berlin,15:00,18:00,21:00,2:00
+FL8621,FlyDubai,Edinburgh,Rome,15:00,20:00,Business,1105.8,100,,,,,,
+FL2762,Comp132Fly,Edinburgh,,,,First Class,998.73,95,Budapest,Rome,18:00,20:00,21:00,23:00
+FL7911,AnadoluJet,Edinburgh,Amsterdam,22:30,3:30,Economy,1081.75,115,,,,,,
+FL3941,KUFly,Edinburgh,,,,First Class,1751.12,15,Helsinki,Amsterdam,21:00,23:00,0:00,2:00
+FL4925,GlobalJet,Edinburgh,Madrid,14:00,17:00,Economy,189.54,66,,,,,,
+FL9504,Turkish Airlines,Edinburgh,,,,First Class,971.34,25,Budapest,Madrid,12:00,14:00,17:00,20:00
+FL7393,EuroWings,Edinburgh,Vienna,22:00,0:00,Economy,151.37,28,,,,,,
+FL5750,AeroFly,Edinburgh,,,,Business,644.18,109,Ankara,Vienna,11:30,13:30,16:30,21:30
+FL7991,Comp132Fly,Edinburgh,Prague,20:30,0:30,Business,1216.61,12,,,,,,
+FL5524,JavaAir,Edinburgh,,,,First Class,1826.29,88,Amsterdam,Prague,17:00,22:00,23:00,4:00
+FL9679,Turkish Airlines,Edinburgh,Budapest,21:00,1:00,First Class,594.01,60,,,,,,
+FL1775,Pegasus Airlines,Edinburgh,,,,First Class,1705.1,63,Madrid,Budapest,10:00,14:00,15:00,18:00
+FL6991,Turkish Airlines,Edinburgh,Dublin,12:00,14:00,Business,602.97,46,,,,,,
+FL8171,AeroFly,Edinburgh,,,,First Class,725.56,29,Berlin,Dublin,8:30,13:30,16:30,19:30
+FL7721,AnadoluJet,Edinburgh,Copenhagen,12:00,14:00,First Class,1317.45,35,,,,,,
+FL3778,AnadoluJet,Edinburgh,,,,Economy,1742.81,103,Oslo,Copenhagen,8:00,10:00,12:00,17:00
+FL2086,AeroFly,Edinburgh,Stockholm,11:00,14:00,Business,453.38,14,,,,,,
+FL8917,Pegasus Airlines,Edinburgh,,,,Business,1781.16,21,Helsinki,Stockholm,14:00,19:00,22:00,1:00
+FL6243,EuroWings,Edinburgh,Helsinki,8:30,11:30,Economy,671.28,39,,,,,,
+FL6389,FlyAsia,Edinburgh,,,,Economy,1249.78,58,Vienna,Helsinki,7:00,11:00,14:00,18:00
+FL5268,AnadoluJet,Edinburgh,Ankara,12:00,15:00,First Class,958.61,26,,,,,,
+FL4163,GlobalJet,Edinburgh,,,,Economy,1858.77,44,Lisbon,Ankara,6:00,8:00,11:00,14:00
+FL1821,Turkish Airlines,Edinburgh,Lisbon,8:00,13:00,Business,877.13,113,,,,,,
+FL3012,FlyDubai,Edinburgh,,,,First Class,867.62,92,Budapest,Lisbon,15:30,17:30,19:30,0:30
+FL7615,GlobalJet,Edinburgh,Brussels,13:00,15:00,Economy,675.76,19,,,,,,
+FL2051,EuroWings,Edinburgh,,,,Economy,1969.38,26,Stockholm,Brussels,17:00,19:00,20:00,22:00
+FL9508,AeroFly,Edinburgh,Zurich,22:30,0:30,Business,1350.6,38,,,,,,
+FL9615,Turkish Airlines,Edinburgh,,,,First Class,1481.66,118,Oslo,Zurich,7:30,11:30,12:30,14:30
+FL2108,GlobalJet,Edinburgh,Oslo,19:30,23:30,Economy,1278.5,62,,,,,,
+FL7586,Comp132Fly,Edinburgh,,,,Business,1843.56,44,Amsterdam,Oslo,15:30,17:30,19:30,22:30
+FL1377,Turkish Airlines,Edinburgh,Athens,15:00,17:00,First Class,492.42,117,,,,,,
+FL4696,FlyAsia,Edinburgh,,,,First Class,1052.13,70,Vienna,Athens,6:30,9:30,10:30,13:30
+FL3534,Pegasus Airlines,Edinburgh,Dubai,8:30,14:30,Business,1491.38,94,,,,,,
+FL4934,GlobalJet,Edinburgh,,,,Economy,1416.25,101,Helsinki,Dubai,12:00,15:00,17:00,0:00
+FL7762,KUFly,Dubai,Istanbul,10:00,17:00,Economy,1469.64,39,,,,,,
+FL6229,Pegasus Airlines,Dubai,,,,Business,175.31,55,Brussels,Istanbul,18:30,1:30,3:30,6:30
+FL4973,AnadoluJet,Dubai,Paris,19:30,1:30,First Class,982.05,35,,,,,,
+FL1279,FlyAsia,Dubai,,,,Business,1310.97,51,Ankara,Paris,16:00,22:00,0:00,5:00
+FL9689,FlyDubai,Dubai,Berlin,22:00,3:00,First Class,1332.22,96,,,,,,
+FL3515,Comp132Fly,Dubai,,,,First Class,1025.84,80,Stockholm,Berlin,19:00,0:00,1:00,6:00
+FL3316,EuroWings,Dubai,Rome,20:30,1:30,Business,293.58,66,,,,,,
+FL1098,KUFly,Dubai,,,,Business,614.8,67,Amsterdam,Rome,16:00,21:00,22:00,2:00
+FL2139,Pegasus Airlines,Dubai,Amsterdam,9:00,16:00,Economy,421.27,66,,,,,,
+FL1518,FlyAsia,Dubai,,,,Business,576.26,98,Vienna,Amsterdam,15:00,22:00,1:00,5:00
+FL1335,KUFly,Dubai,Madrid,16:00,23:00,First Class,853.51,79,,,,,,
+FL3411,Comp132Fly,Dubai,,,,Business,466.9,58,Vienna,Madrid,10:30,17:30,20:30,1:30
+FL5676,AeroFly,Dubai,Vienna,12:00,19:00,First Class,251.12,31,,,,,,
+FL6263,Turkish Airlines,Dubai,,,,Business,1216.82,113,Rome,Vienna,20:30,3:30,6:30,10:30
+FL9135,KUFly,Dubai,Prague,7:00,13:00,Business,832.07,78,,,,,,
+FL5445,AnadoluJet,Dubai,,,,Business,1759.42,41,Istanbul,Prague,12:30,18:30,21:30,23:30
+FL8626,Pegasus Airlines,Dubai,Budapest,7:00,14:00,Economy,1297.64,16,,,,,,
+FL6439,AnadoluJet,Dubai,,,,First Class,1101.27,67,Amsterdam,Budapest,19:00,0:00,1:00,5:00
+FL8055,AnadoluJet,Dubai,Dublin,13:30,19:30,Economy,820.18,53,,,,,,
+FL1238,KUFly,Dubai,,,,First Class,1817.37,102,Stockholm,Dublin,16:00,23:00,0:00,4:00
+FL9948,KUFly,Dubai,Copenhagen,16:30,21:30,Economy,1014.97,78,,,,,,
+FL1259,AeroFly,Dubai,,,,First Class,1335.44,14,Lisbon,Copenhagen,18:00,0:00,3:00,7:00
+FL5771,AeroFly,Dubai,Stockholm,8:30,15:30,First Class,835.39,29,,,,,,
+FL7821,Comp132Fly,Dubai,,,,First Class,534.54,21,Prague,Stockholm,16:00,23:00,0:00,2:00
+FL8179,Turkish Airlines,Dubai,Helsinki,16:00,23:00,Business,642.84,29,,,,,,
+FL8815,AnadoluJet,Dubai,,,,First Class,978.55,58,Budapest,Helsinki,15:00,22:00,1:00,3:00
+FL7409,JavaAir,Dubai,Ankara,13:00,20:00,Business,845.27,87,,,,,,
+FL1200,AeroFly,Dubai,,,,Economy,150.31,7,Lisbon,Ankara,18:30,0:30,3:30,8:30
+FL1523,EuroWings,Dubai,Lisbon,10:00,17:00,Business,284.45,116,,,,,,
+FL4753,EuroWings,Dubai,,,,Business,309.88,103,Athens,Lisbon,8:30,15:30,16:30,19:30
+FL9154,GlobalJet,Dubai,Brussels,22:30,3:30,First Class,1295.51,11,,,,,,
+FL2961,AeroFly,Dubai,,,,Economy,893.69,95,Edinburgh,Brussels,18:00,0:00,1:00,5:00
+FL1078,GlobalJet,Dubai,Zurich,17:30,0:30,Business,1294.28,19,,,,,,
+FL3062,FlyDubai,Dubai,,,,First Class,1975.3,114,Stockholm,Zurich,16:00,21:00,22:00,0:00
+FL5191,KUFly,Dubai,Oslo,14:00,19:00,Business,983.41,56,,,,,,
+FL9626,Turkish Airlines,Dubai,,,,Economy,1766.81,78,Lisbon,Oslo,12:00,17:00,19:00,23:00
+FL6103,AeroFly,Dubai,Athens,21:00,2:00,Economy,1201.84,52,,,,,,
+FL8588,Pegasus Airlines,Dubai,,,,Business,918.13,85,Dublin,Athens,22:00,4:00,5:00,10:00
+FL5477,FlyDubai,Dubai,Edinburgh,12:30,19:30,Business,912.98,71,,,,,,
+FL2113,Turkish Airlines,Dubai,,,,Economy,715.92,58,Budapest,Edinburgh,19:00,0:00,2:00,4:00

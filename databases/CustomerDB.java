@@ -17,6 +17,17 @@ public class CustomerDB {
     uniqueID = customerDB.size();
 
     }
+public static Customer retrieveCustomer(String id){
+        if(customerDB.size()>0){
+            return customerDB.get(id);
+                }
+    else{
+        loadCustomers();
+        return customerDB.get(id);
+
+        }
+}
+
 
 
 
@@ -46,7 +57,7 @@ public class CustomerDB {
     private static void saveToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Constants.DB_PATH))) {
             for (String username : customerDB.keySet()) {
-                writer.write(username + ":" + customerDB.get(username).getPassword() + ":" + customerDB.get(username).getId());
+                writer.write(username + ":" + customerDB.get(username).getPassword() + ":" + customerDB.get(username).getID());
                 writer.newLine();
             }
         } catch (IOException e) {

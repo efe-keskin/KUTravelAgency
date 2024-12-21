@@ -1,0 +1,659 @@
+Hotel Name,City,Room Type,Available Rooms,Price per Night ($),Distance to Airport (km)
+Marriott,Istanbul,Standard,8,451,22.38
+Marriott,Istanbul,Deluxe,14,203.3,22.38
+Marriott,Istanbul,Suite,7,394.1,22.38
+Marriott,Paris,Standard,16,124.81,18.03
+Marriott,Paris,Deluxe,15,264.33,18.03
+Marriott,Paris,Suite,12,498.7,18.03
+Marriott,Berlin,Standard,16,195.85,30.15
+Marriott,Berlin,Deluxe,12,408.7,30.15
+Marriott,Berlin,Suite,12,421.36,30.15
+Marriott,Rome,Standard,10,206.03,33.11
+Marriott,Rome,Deluxe,12,460.43,33.11
+Marriott,Rome,Suite,16,145.58,33.11
+Marriott,Amsterdam,Standard,8,345.94,36.74
+Marriott,Amsterdam,Deluxe,8,174.15,36.74
+Marriott,Amsterdam,Suite,6,300.8,36.74
+Marriott,Madrid,Standard,13,470.84,9.56
+Marriott,Madrid,Deluxe,13,471.51,9.56
+Marriott,Madrid,Suite,8,184.34,9.56
+Marriott,Vienna,Standard,20,302.37,10.49
+Marriott,Vienna,Deluxe,17,274.61,10.49
+Marriott,Vienna,Suite,20,433.67,10.49
+Marriott,Prague,Standard,15,484.32,26.71
+Marriott,Prague,Deluxe,16,482.95,26.71
+Marriott,Prague,Suite,12,389.19,26.71
+Marriott,Budapest,Standard,8,111.58,30.52
+Marriott,Budapest,Deluxe,15,455.25,30.52
+Marriott,Budapest,Suite,14,187.48,30.52
+Marriott,Dublin,Standard,19,109.94,18.29
+Marriott,Dublin,Deluxe,6,122.17,18.29
+Marriott,Dublin,Suite,9,491.7,18.29
+Marriott,Copenhagen,Standard,7,321.78,2.27
+Marriott,Copenhagen,Deluxe,6,120.36,2.27
+Marriott,Copenhagen,Suite,6,246.11,2.27
+Marriott,Stockholm,Standard,11,379.37,31.41
+Marriott,Stockholm,Deluxe,7,131.29,31.41
+Marriott,Stockholm,Suite,5,139.44,31.41
+Marriott,Helsinki,Standard,9,372.71,3.49
+Marriott,Helsinki,Deluxe,13,351.54,3.49
+Marriott,Helsinki,Suite,9,438.35,3.49
+Marriott,Ankara,Standard,20,326.99,27.57
+Marriott,Ankara,Deluxe,13,432.52,27.57
+Marriott,Ankara,Suite,19,311.77,27.57
+Marriott,Lisbon,Standard,11,419.16,29.73
+Marriott,Lisbon,Deluxe,17,420.56,29.73
+Marriott,Lisbon,Suite,17,134.22,29.73
+Marriott,Brussels,Standard,8,379.27,10.01
+Marriott,Brussels,Deluxe,16,205.01,10.01
+Marriott,Brussels,Suite,14,167.48,10.01
+Marriott,Zurich,Standard,16,409.99,5.12
+Marriott,Zurich,Deluxe,6,290.93,5.12
+Marriott,Zurich,Suite,11,378.78,5.12
+Marriott,Oslo,Standard,18,264.86,2.34
+Marriott,Oslo,Deluxe,6,180.13,2.34
+Marriott,Oslo,Suite,6,354.49,2.34
+Marriott,Athens,Standard,19,458.64,12.12
+Marriott,Athens,Deluxe,12,333.95,12.12
+Marriott,Athens,Suite,20,407.06,12.12
+Marriott,Edinburgh,Standard,19,131.82,48.22
+Marriott,Edinburgh,Deluxe,9,260.98,48.22
+Marriott,Edinburgh,Suite,16,485.86,48.22
+Marriott,Dubai,Standard,6,461.91,11.07
+Marriott,Dubai,Deluxe,14,216.04,11.07
+Marriott,Dubai,Suite,10,267.14,11.07
+Hilton,Istanbul,Standard,11,203.74,42.88
+Hilton,Istanbul,Deluxe,9,427.85,42.88
+Hilton,Istanbul,Suite,7,265.96,42.88
+Hilton,Paris,Standard,11,203.84,41.55
+Hilton,Paris,Deluxe,8,126.03,41.55
+Hilton,Paris,Suite,6,435.34,41.55
+Hilton,Berlin,Standard,10,325.43,41.68
+Hilton,Berlin,Deluxe,20,231.72,41.68
+Hilton,Berlin,Suite,6,478.16,41.68
+Hilton,Rome,Standard,11,102.32,48.06
+Hilton,Rome,Deluxe,7,270.47,48.06
+Hilton,Rome,Suite,20,386.93,48.06
+Hilton,Amsterdam,Standard,17,430.57,22.67
+Hilton,Amsterdam,Deluxe,14,452.07,22.67
+Hilton,Amsterdam,Suite,19,177.56,22.67
+Hilton,Madrid,Standard,10,426.2,27.47
+Hilton,Madrid,Deluxe,7,402.76,27.47
+Hilton,Madrid,Suite,12,141.1,27.47
+Hilton,Vienna,Standard,19,142.37,29.68
+Hilton,Vienna,Deluxe,19,229.1,29.68
+Hilton,Vienna,Suite,10,483.77,29.68
+Hilton,Prague,Standard,5,371.37,40.82
+Hilton,Prague,Deluxe,14,299.5,40.82
+Hilton,Prague,Suite,19,231.6,40.82
+Hilton,Budapest,Standard,13,119.46,48.24
+Hilton,Budapest,Deluxe,7,365.97,48.24
+Hilton,Budapest,Suite,15,365.63,48.24
+Hilton,Dublin,Standard,15,113.87,47.36
+Hilton,Dublin,Deluxe,20,433.27,47.36
+Hilton,Dublin,Suite,11,468.34,47.36
+Hilton,Copenhagen,Standard,5,118.25,34.99
+Hilton,Copenhagen,Deluxe,5,263.64,34.99
+Hilton,Copenhagen,Suite,7,464.37,34.99
+Hilton,Stockholm,Standard,11,121.91,7.05
+Hilton,Stockholm,Deluxe,6,281.46,7.05
+Hilton,Stockholm,Suite,6,189.4,7.05
+Hilton,Helsinki,Standard,18,443.61,32.3
+Hilton,Helsinki,Deluxe,9,353.25,32.3
+Hilton,Helsinki,Suite,11,176.35,32.3
+Hilton,Ankara,Standard,20,185.49,5.23
+Hilton,Ankara,Deluxe,8,362.08,5.23
+Hilton,Ankara,Suite,11,206.63,5.23
+Hilton,Lisbon,Standard,15,361.46,26.19
+Hilton,Lisbon,Deluxe,8,186.37,26.19
+Hilton,Lisbon,Suite,20,244.88,26.19
+Hilton,Brussels,Standard,16,209.48,45.4
+Hilton,Brussels,Deluxe,8,244.54,45.4
+Hilton,Brussels,Suite,7,342.09,45.4
+Hilton,Zurich,Standard,18,126.24,4.76
+Hilton,Zurich,Deluxe,9,168.41,4.76
+Hilton,Zurich,Suite,9,390.16,4.76
+Hilton,Oslo,Standard,16,229.1,20.27
+Hilton,Oslo,Deluxe,18,294.07,20.27
+Hilton,Oslo,Suite,12,325.6,20.27
+Hilton,Athens,Standard,8,171.16,40.24
+Hilton,Athens,Deluxe,8,322,40.24
+Hilton,Athens,Suite,10,258.27,40.24
+Hilton,Edinburgh,Standard,8,291.15,32.59
+Hilton,Edinburgh,Deluxe,17,335.25,32.59
+Hilton,Edinburgh,Suite,18,156.7,32.59
+Hilton,Dubai,Standard,6,484.91,22.95
+Hilton,Dubai,Deluxe,7,312.02,22.95
+Hilton,Dubai,Suite,7,258.02,22.95
+ibis Inn,Istanbul,Standard,5,367.27,37.6
+ibis Inn,Istanbul,Deluxe,13,363.97,37.6
+ibis Inn,Istanbul,Suite,20,402.48,37.6
+ibis Inn,Paris,Standard,17,188.06,41.93
+ibis Inn,Paris,Deluxe,6,387.09,41.93
+ibis Inn,Paris,Suite,8,228.49,41.93
+ibis Inn,Berlin,Standard,5,429.03,45.6
+ibis Inn,Berlin,Deluxe,5,414.69,45.6
+ibis Inn,Berlin,Suite,18,227.19,45.6
+ibis Inn,Rome,Standard,15,293.81,26.77
+ibis Inn,Rome,Deluxe,17,212.11,26.77
+ibis Inn,Rome,Suite,9,198.97,26.77
+ibis Inn,Amsterdam,Standard,7,129.35,22.17
+ibis Inn,Amsterdam,Deluxe,6,263.46,22.17
+ibis Inn,Amsterdam,Suite,14,180.57,22.17
+ibis Inn,Madrid,Standard,19,136.08,11
+ibis Inn,Madrid,Deluxe,14,261.95,11
+ibis Inn,Madrid,Suite,13,371.32,11
+ibis Inn,Vienna,Standard,7,262.39,43.1
+ibis Inn,Vienna,Deluxe,18,217.41,43.1
+ibis Inn,Vienna,Suite,6,406.88,43.1
+ibis Inn,Prague,Standard,15,494.26,44.21
+ibis Inn,Prague,Deluxe,12,257.21,44.21
+ibis Inn,Prague,Suite,6,223.05,44.21
+ibis Inn,Budapest,Standard,10,455.89,37.1
+ibis Inn,Budapest,Deluxe,6,419.98,37.1
+ibis Inn,Budapest,Suite,17,116.17,37.1
+ibis Inn,Dublin,Standard,10,289.82,40.39
+ibis Inn,Dublin,Deluxe,7,250.13,40.39
+ibis Inn,Dublin,Suite,15,113.63,40.39
+ibis Inn,Copenhagen,Standard,18,307.15,31.19
+ibis Inn,Copenhagen,Deluxe,17,365.85,31.19
+ibis Inn,Copenhagen,Suite,12,478.14,31.19
+ibis Inn,Stockholm,Standard,17,105.37,16.57
+ibis Inn,Stockholm,Deluxe,10,129.3,16.57
+ibis Inn,Stockholm,Suite,11,236,16.57
+ibis Inn,Helsinki,Standard,12,252.33,43.9
+ibis Inn,Helsinki,Deluxe,13,219.65,43.9
+ibis Inn,Helsinki,Suite,15,235.82,43.9
+ibis Inn,Ankara,Standard,10,445.88,41.05
+ibis Inn,Ankara,Deluxe,16,410.13,41.05
+ibis Inn,Ankara,Suite,15,373.29,41.05
+ibis Inn,Lisbon,Standard,11,107.68,41.14
+ibis Inn,Lisbon,Deluxe,9,381.96,41.14
+ibis Inn,Lisbon,Suite,13,213.27,41.14
+ibis Inn,Brussels,Standard,11,445,24.89
+ibis Inn,Brussels,Deluxe,6,313.65,24.89
+ibis Inn,Brussels,Suite,7,142.79,24.89
+ibis Inn,Zurich,Standard,14,115.21,31.47
+ibis Inn,Zurich,Deluxe,19,125.87,31.47
+ibis Inn,Zurich,Suite,12,283.88,31.47
+ibis Inn,Oslo,Standard,14,171.87,15.75
+ibis Inn,Oslo,Deluxe,6,478.37,15.75
+ibis Inn,Oslo,Suite,11,231.56,15.75
+ibis Inn,Athens,Standard,19,451.62,14.75
+ibis Inn,Athens,Deluxe,8,292.28,14.75
+ibis Inn,Athens,Suite,17,460.21,14.75
+ibis Inn,Edinburgh,Standard,13,374.2,44.14
+ibis Inn,Edinburgh,Deluxe,7,428.77,44.14
+ibis Inn,Edinburgh,Suite,15,144.25,44.14
+ibis Inn,Dubai,Standard,13,280.72,6.43
+ibis Inn,Dubai,Deluxe,19,382.57,6.43
+ibis Inn,Dubai,Suite,9,240.6,6.43
+Sheraton,Istanbul,Standard,14,327.43,8.69
+Sheraton,Istanbul,Deluxe,17,197.02,8.69
+Sheraton,Istanbul,Suite,6,129.19,8.69
+Sheraton,Paris,Standard,11,194.42,20.85
+Sheraton,Paris,Deluxe,14,385.84,20.85
+Sheraton,Paris,Suite,17,127.59,20.85
+Sheraton,Berlin,Standard,17,498.08,43.07
+Sheraton,Berlin,Deluxe,15,365.4,43.07
+Sheraton,Berlin,Suite,11,128.71,43.07
+Sheraton,Rome,Standard,17,425.41,2.1
+Sheraton,Rome,Deluxe,14,234.96,2.1
+Sheraton,Rome,Suite,12,107.83,2.1
+Sheraton,Amsterdam,Standard,6,398.96,41.72
+Sheraton,Amsterdam,Deluxe,16,362,41.72
+Sheraton,Amsterdam,Suite,7,337.94,41.72
+Sheraton,Madrid,Standard,8,384.39,17.41
+Sheraton,Madrid,Deluxe,20,230.66,17.41
+Sheraton,Madrid,Suite,11,294.78,17.41
+Sheraton,Vienna,Standard,16,347.02,38.21
+Sheraton,Vienna,Deluxe,13,391.9,38.21
+Sheraton,Vienna,Suite,10,141.27,38.21
+Sheraton,Prague,Standard,18,288.96,3.27
+Sheraton,Prague,Deluxe,6,355.75,3.27
+Sheraton,Prague,Suite,12,419.84,3.27
+Sheraton,Budapest,Standard,6,348.36,27.89
+Sheraton,Budapest,Deluxe,17,154.29,27.89
+Sheraton,Budapest,Suite,15,234.37,27.89
+Sheraton,Dublin,Standard,8,334.97,49.31
+Sheraton,Dublin,Deluxe,9,395.46,49.31
+Sheraton,Dublin,Suite,10,153.21,49.31
+Sheraton,Copenhagen,Standard,8,193.2,32.86
+Sheraton,Copenhagen,Deluxe,18,259.41,32.86
+Sheraton,Copenhagen,Suite,8,426.99,32.86
+Sheraton,Stockholm,Standard,20,469.16,33.97
+Sheraton,Stockholm,Deluxe,13,305.21,33.97
+Sheraton,Stockholm,Suite,20,433.07,33.97
+Sheraton,Helsinki,Standard,5,345.6,21.61
+Sheraton,Helsinki,Deluxe,7,474.18,21.61
+Sheraton,Helsinki,Suite,9,380.91,21.61
+Sheraton,Ankara,Standard,15,439.3,17.56
+Sheraton,Ankara,Deluxe,13,107.16,17.56
+Sheraton,Ankara,Suite,7,339.02,17.56
+Sheraton,Lisbon,Standard,8,239.57,13.95
+Sheraton,Lisbon,Deluxe,12,417.87,13.95
+Sheraton,Lisbon,Suite,19,436.36,13.95
+Sheraton,Brussels,Standard,9,145.08,29.89
+Sheraton,Brussels,Deluxe,5,473.21,29.89
+Sheraton,Brussels,Suite,16,473.49,29.89
+Sheraton,Zurich,Standard,20,464.27,32.75
+Sheraton,Zurich,Deluxe,19,189.07,32.75
+Sheraton,Zurich,Suite,17,138.13,32.75
+Sheraton,Oslo,Standard,10,453.84,40.68
+Sheraton,Oslo,Deluxe,10,202.57,40.68
+Sheraton,Oslo,Suite,17,226.4,40.68
+Sheraton,Athens,Standard,5,185.41,44.38
+Sheraton,Athens,Deluxe,11,395.39,44.38
+Sheraton,Athens,Suite,12,382.69,44.38
+Sheraton,Edinburgh,Standard,18,309.03,34.06
+Sheraton,Edinburgh,Deluxe,10,358.1,34.06
+Sheraton,Edinburgh,Suite,12,229.32,34.06
+Sheraton,Dubai,Standard,9,411.14,8.86
+Sheraton,Dubai,Deluxe,14,184.05,8.86
+Sheraton,Dubai,Suite,13,356.27,8.86
+InterContinental,Istanbul,Standard,13,122.48,27.25
+InterContinental,Istanbul,Deluxe,15,301.31,27.25
+InterContinental,Istanbul,Suite,11,372.44,27.25
+InterContinental,Paris,Standard,19,454.6,3.22
+InterContinental,Paris,Deluxe,14,219.33,3.22
+InterContinental,Paris,Suite,11,494.12,3.22
+InterContinental,Berlin,Standard,9,345.27,15.32
+InterContinental,Berlin,Deluxe,6,447.31,15.32
+InterContinental,Berlin,Suite,18,227.38,15.32
+InterContinental,Rome,Standard,20,468.41,31.65
+InterContinental,Rome,Deluxe,14,242.95,31.65
+InterContinental,Rome,Suite,17,486.34,31.65
+InterContinental,Amsterdam,Standard,15,286.22,37.41
+InterContinental,Amsterdam,Deluxe,10,110.51,37.41
+InterContinental,Amsterdam,Suite,8,438.01,37.41
+InterContinental,Madrid,Standard,9,215.44,6.28
+InterContinental,Madrid,Deluxe,19,111.92,6.28
+InterContinental,Madrid,Suite,14,351.51,6.28
+InterContinental,Vienna,Standard,11,296.19,38.45
+InterContinental,Vienna,Deluxe,15,138.38,38.45
+InterContinental,Vienna,Suite,10,224.74,38.45
+InterContinental,Prague,Standard,11,434.47,5.14
+InterContinental,Prague,Deluxe,18,405.35,5.14
+InterContinental,Prague,Suite,10,406.94,5.14
+InterContinental,Budapest,Standard,16,283.5,47.37
+InterContinental,Budapest,Deluxe,18,236.96,47.37
+InterContinental,Budapest,Suite,10,299.71,47.37
+InterContinental,Dublin,Standard,18,200.01,44.2
+InterContinental,Dublin,Deluxe,15,160.36,44.2
+InterContinental,Dublin,Suite,19,454.62,44.2
+InterContinental,Copenhagen,Standard,7,134.55,5.24
+InterContinental,Copenhagen,Deluxe,14,353.07,5.24
+InterContinental,Copenhagen,Suite,7,438.4,5.24
+InterContinental,Stockholm,Standard,5,155.67,31.84
+InterContinental,Stockholm,Deluxe,19,434.72,31.84
+InterContinental,Stockholm,Suite,14,493.69,31.84
+InterContinental,Helsinki,Standard,14,471.83,34.64
+InterContinental,Helsinki,Deluxe,6,413.37,34.64
+InterContinental,Helsinki,Suite,12,103.53,34.64
+InterContinental,Ankara,Standard,14,192.23,18.62
+InterContinental,Ankara,Deluxe,16,417.26,18.62
+InterContinental,Ankara,Suite,17,476.78,18.62
+InterContinental,Lisbon,Standard,16,364.2,17.18
+InterContinental,Lisbon,Deluxe,12,227.51,17.18
+InterContinental,Lisbon,Suite,9,117.8,17.18
+InterContinental,Brussels,Standard,18,230.46,12.48
+InterContinental,Brussels,Deluxe,17,291.98,12.48
+InterContinental,Brussels,Suite,16,393.07,12.48
+InterContinental,Zurich,Standard,15,264.93,27.82
+InterContinental,Zurich,Deluxe,18,331.09,27.82
+InterContinental,Zurich,Suite,20,264.01,27.82
+InterContinental,Oslo,Standard,19,440.63,41.57
+InterContinental,Oslo,Deluxe,20,305.61,41.57
+InterContinental,Oslo,Suite,11,473.55,41.57
+InterContinental,Athens,Standard,17,244.39,1.16
+InterContinental,Athens,Deluxe,18,409.39,1.16
+InterContinental,Athens,Suite,10,484.72,1.16
+InterContinental,Edinburgh,Standard,20,366.1,11.01
+InterContinental,Edinburgh,Deluxe,14,131.18,11.01
+InterContinental,Edinburgh,Suite,7,439.07,11.01
+InterContinental,Dubai,Standard,16,363.11,26.82
+InterContinental,Dubai,Deluxe,18,487.75,26.82
+InterContinental,Dubai,Suite,19,222.83,26.82
+Radisson Blue,Istanbul,Standard,15,337.05,48.52
+Radisson Blue,Istanbul,Deluxe,19,264.77,48.52
+Radisson Blue,Istanbul,Suite,11,212.43,48.52
+Radisson Blue,Paris,Standard,15,193.31,37.23
+Radisson Blue,Paris,Deluxe,15,357.69,37.23
+Radisson Blue,Paris,Suite,7,181.77,37.23
+Radisson Blue,Berlin,Standard,10,260.4,18.8
+Radisson Blue,Berlin,Deluxe,15,302.66,18.8
+Radisson Blue,Berlin,Suite,7,412.59,18.8
+Radisson Blue,Rome,Standard,19,158.39,15.19
+Radisson Blue,Rome,Deluxe,13,283.06,15.19
+Radisson Blue,Rome,Suite,8,273.09,15.19
+Radisson Blue,Amsterdam,Standard,17,497.71,13.22
+Radisson Blue,Amsterdam,Deluxe,5,244.15,13.22
+Radisson Blue,Amsterdam,Suite,20,344.37,13.22
+Radisson Blue,Madrid,Standard,7,387.13,44.07
+Radisson Blue,Madrid,Deluxe,13,216.02,44.07
+Radisson Blue,Madrid,Suite,11,252.24,44.07
+Radisson Blue,Vienna,Standard,20,101.12,7.05
+Radisson Blue,Vienna,Deluxe,15,125.87,7.05
+Radisson Blue,Vienna,Suite,18,489.58,7.05
+Radisson Blue,Prague,Standard,18,374.17,9.31
+Radisson Blue,Prague,Deluxe,17,252.02,9.31
+Radisson Blue,Prague,Suite,12,325.46,9.31
+Radisson Blue,Budapest,Standard,17,403.04,38.45
+Radisson Blue,Budapest,Deluxe,19,375.55,38.45
+Radisson Blue,Budapest,Suite,8,289.9,38.45
+Radisson Blue,Dublin,Standard,8,389.58,5.97
+Radisson Blue,Dublin,Deluxe,18,267.08,5.97
+Radisson Blue,Dublin,Suite,5,144.88,5.97
+Radisson Blue,Copenhagen,Standard,10,234.38,36.32
+Radisson Blue,Copenhagen,Deluxe,6,290.48,36.32
+Radisson Blue,Copenhagen,Suite,17,327.47,36.32
+Radisson Blue,Stockholm,Standard,14,306.86,20.38
+Radisson Blue,Stockholm,Deluxe,6,386.96,20.38
+Radisson Blue,Stockholm,Suite,19,224.34,20.38
+Radisson Blue,Helsinki,Standard,10,242.78,49.78
+Radisson Blue,Helsinki,Deluxe,19,294.31,49.78
+Radisson Blue,Helsinki,Suite,11,451.05,49.78
+Radisson Blue,Ankara,Standard,14,142.97,16.15
+Radisson Blue,Ankara,Deluxe,12,180.09,16.15
+Radisson Blue,Ankara,Suite,6,170.8,16.15
+Radisson Blue,Lisbon,Standard,19,343.34,4.66
+Radisson Blue,Lisbon,Deluxe,15,201.57,4.66
+Radisson Blue,Lisbon,Suite,16,124.66,4.66
+Radisson Blue,Brussels,Standard,15,370.28,33.54
+Radisson Blue,Brussels,Deluxe,16,146.31,33.54
+Radisson Blue,Brussels,Suite,18,233.9,33.54
+Radisson Blue,Zurich,Standard,13,106.99,30.07
+Radisson Blue,Zurich,Deluxe,17,261.8,30.07
+Radisson Blue,Zurich,Suite,14,177.38,30.07
+Radisson Blue,Oslo,Standard,5,221.83,30.13
+Radisson Blue,Oslo,Deluxe,8,379.67,30.13
+Radisson Blue,Oslo,Suite,20,467.7,30.13
+Radisson Blue,Athens,Standard,9,335.25,27.7
+Radisson Blue,Athens,Deluxe,7,475.04,27.7
+Radisson Blue,Athens,Suite,5,152.24,27.7
+Radisson Blue,Edinburgh,Standard,14,330.32,37.25
+Radisson Blue,Edinburgh,Deluxe,14,290.85,37.25
+Radisson Blue,Edinburgh,Suite,11,335.93,37.25
+Radisson Blue,Dubai,Standard,16,287.98,44.72
+Radisson Blue,Dubai,Deluxe,6,450.17,44.72
+Radisson Blue,Dubai,Suite,6,144.69,44.72
+Four Seasons,Istanbul,Standard,19,167.58,13.04
+Four Seasons,Istanbul,Deluxe,12,194.73,13.04
+Four Seasons,Istanbul,Suite,8,328.64,13.04
+Four Seasons,Paris,Standard,19,110.71,49.66
+Four Seasons,Paris,Deluxe,18,435.97,49.66
+Four Seasons,Paris,Suite,13,451.42,49.66
+Four Seasons,Berlin,Standard,11,318.04,37.6
+Four Seasons,Berlin,Deluxe,18,399.02,37.6
+Four Seasons,Berlin,Suite,16,225.86,37.6
+Four Seasons,Rome,Standard,6,462.68,7.27
+Four Seasons,Rome,Deluxe,6,446.37,7.27
+Four Seasons,Rome,Suite,16,381.26,7.27
+Four Seasons,Amsterdam,Standard,19,250.9,9.49
+Four Seasons,Amsterdam,Deluxe,10,308.4,9.49
+Four Seasons,Amsterdam,Suite,18,190.3,9.49
+Four Seasons,Madrid,Standard,19,310.67,45.81
+Four Seasons,Madrid,Deluxe,20,213.66,45.81
+Four Seasons,Madrid,Suite,5,486.53,45.81
+Four Seasons,Vienna,Standard,18,286.6,21.45
+Four Seasons,Vienna,Deluxe,10,433.42,21.45
+Four Seasons,Vienna,Suite,18,221.53,21.45
+Four Seasons,Prague,Standard,19,225.28,28.66
+Four Seasons,Prague,Deluxe,17,111.8,28.66
+Four Seasons,Prague,Suite,12,431.79,28.66
+Four Seasons,Budapest,Standard,12,218.66,14.46
+Four Seasons,Budapest,Deluxe,10,453.66,14.46
+Four Seasons,Budapest,Suite,6,352.11,14.46
+Four Seasons,Dublin,Standard,8,255.95,35.87
+Four Seasons,Dublin,Deluxe,7,368.69,35.87
+Four Seasons,Dublin,Suite,11,281.02,35.87
+Four Seasons,Copenhagen,Standard,18,378.9,30.31
+Four Seasons,Copenhagen,Deluxe,7,380.95,30.31
+Four Seasons,Copenhagen,Suite,6,128.78,30.31
+Four Seasons,Stockholm,Standard,12,418.66,20.94
+Four Seasons,Stockholm,Deluxe,10,339.51,20.94
+Four Seasons,Stockholm,Suite,5,171.4,20.94
+Four Seasons,Helsinki,Standard,7,242.93,49.03
+Four Seasons,Helsinki,Deluxe,13,272.41,49.03
+Four Seasons,Helsinki,Suite,5,481.14,49.03
+Four Seasons,Ankara,Standard,8,114.48,5.96
+Four Seasons,Ankara,Deluxe,5,128,5.96
+Four Seasons,Ankara,Suite,18,362.28,5.96
+Four Seasons,Lisbon,Standard,11,216.33,49.69
+Four Seasons,Lisbon,Deluxe,10,223.75,49.69
+Four Seasons,Lisbon,Suite,11,351.62,49.69
+Four Seasons,Brussels,Standard,13,336.26,37.33
+Four Seasons,Brussels,Deluxe,15,376.02,37.33
+Four Seasons,Brussels,Suite,11,127.38,37.33
+Four Seasons,Zurich,Standard,20,358.16,8.54
+Four Seasons,Zurich,Deluxe,15,337.23,8.54
+Four Seasons,Zurich,Suite,19,464.89,8.54
+Four Seasons,Oslo,Standard,20,490.57,14.96
+Four Seasons,Oslo,Deluxe,15,371.7,14.96
+Four Seasons,Oslo,Suite,9,362.6,14.96
+Four Seasons,Athens,Standard,13,260.06,46.84
+Four Seasons,Athens,Deluxe,13,437.01,46.84
+Four Seasons,Athens,Suite,6,113.29,46.84
+Four Seasons,Edinburgh,Standard,14,224.64,41.04
+Four Seasons,Edinburgh,Deluxe,8,416.04,41.04
+Four Seasons,Edinburgh,Suite,14,251.37,41.04
+Four Seasons,Dubai,Standard,19,481.48,26.15
+Four Seasons,Dubai,Deluxe,15,113.32,26.15
+Four Seasons,Dubai,Suite,10,463.73,26.15
+Double Tree by Hilton,Istanbul,Standard,15,476.82,15.37
+Double Tree by Hilton,Istanbul,Deluxe,5,451.09,15.37
+Double Tree by Hilton,Istanbul,Suite,19,409.34,15.37
+Double Tree by Hilton,Paris,Standard,12,224.71,23.11
+Double Tree by Hilton,Paris,Deluxe,6,483.2,23.11
+Double Tree by Hilton,Paris,Suite,12,122.25,23.11
+Double Tree by Hilton,Berlin,Standard,19,283.7,46.91
+Double Tree by Hilton,Berlin,Deluxe,18,364.15,46.91
+Double Tree by Hilton,Berlin,Suite,19,100.94,46.91
+Double Tree by Hilton,Rome,Standard,10,236.27,6.98
+Double Tree by Hilton,Rome,Deluxe,12,126.72,6.98
+Double Tree by Hilton,Rome,Suite,15,295.56,6.98
+Double Tree by Hilton,Amsterdam,Standard,20,271.65,17.96
+Double Tree by Hilton,Amsterdam,Deluxe,8,294.43,17.96
+Double Tree by Hilton,Amsterdam,Suite,5,119.52,17.96
+Double Tree by Hilton,Madrid,Standard,14,414.49,13.11
+Double Tree by Hilton,Madrid,Deluxe,20,295.17,13.11
+Double Tree by Hilton,Madrid,Suite,18,253.66,13.11
+Double Tree by Hilton,Vienna,Standard,14,469.11,42.05
+Double Tree by Hilton,Vienna,Deluxe,18,475.08,42.05
+Double Tree by Hilton,Vienna,Suite,8,269.63,42.05
+Double Tree by Hilton,Prague,Standard,6,139.27,8.54
+Double Tree by Hilton,Prague,Deluxe,16,320.6,8.54
+Double Tree by Hilton,Prague,Suite,6,459.45,8.54
+Double Tree by Hilton,Budapest,Standard,14,415.32,28.11
+Double Tree by Hilton,Budapest,Deluxe,11,407.23,28.11
+Double Tree by Hilton,Budapest,Suite,17,350.07,28.11
+Double Tree by Hilton,Dublin,Standard,7,253.25,31.66
+Double Tree by Hilton,Dublin,Deluxe,13,416.95,31.66
+Double Tree by Hilton,Dublin,Suite,11,382.03,31.66
+Double Tree by Hilton,Copenhagen,Standard,13,422.39,32.58
+Double Tree by Hilton,Copenhagen,Deluxe,15,345.86,32.58
+Double Tree by Hilton,Copenhagen,Suite,17,330.36,32.58
+Double Tree by Hilton,Stockholm,Standard,13,259.97,47.57
+Double Tree by Hilton,Stockholm,Deluxe,6,396.86,47.57
+Double Tree by Hilton,Stockholm,Suite,17,330.1,47.57
+Double Tree by Hilton,Helsinki,Standard,7,125.47,29.6
+Double Tree by Hilton,Helsinki,Deluxe,15,257.99,29.6
+Double Tree by Hilton,Helsinki,Suite,9,375.18,29.6
+Double Tree by Hilton,Ankara,Standard,14,163.7,23.77
+Double Tree by Hilton,Ankara,Deluxe,6,491.73,23.77
+Double Tree by Hilton,Ankara,Suite,20,353.69,23.77
+Double Tree by Hilton,Lisbon,Standard,12,176.26,18.69
+Double Tree by Hilton,Lisbon,Deluxe,15,243.7,18.69
+Double Tree by Hilton,Lisbon,Suite,19,312.11,18.69
+Double Tree by Hilton,Brussels,Standard,8,272.04,37.81
+Double Tree by Hilton,Brussels,Deluxe,8,282.19,37.81
+Double Tree by Hilton,Brussels,Suite,15,272.04,37.81
+Double Tree by Hilton,Zurich,Standard,14,393.25,26.37
+Double Tree by Hilton,Zurich,Deluxe,15,195.92,26.37
+Double Tree by Hilton,Zurich,Suite,20,274.87,26.37
+Double Tree by Hilton,Oslo,Standard,10,298.98,25.99
+Double Tree by Hilton,Oslo,Deluxe,14,346.8,25.99
+Double Tree by Hilton,Oslo,Suite,8,107.47,25.99
+Double Tree by Hilton,Athens,Standard,10,307.02,44.12
+Double Tree by Hilton,Athens,Deluxe,12,418.95,44.12
+Double Tree by Hilton,Athens,Suite,7,182.27,44.12
+Double Tree by Hilton,Edinburgh,Standard,18,322.47,11.51
+Double Tree by Hilton,Edinburgh,Deluxe,16,497.49,11.51
+Double Tree by Hilton,Edinburgh,Suite,5,163.89,11.51
+Double Tree by Hilton,Dubai,Standard,8,193.38,30.71
+Double Tree by Hilton,Dubai,Deluxe,16,164.12,30.71
+Double Tree by Hilton,Dubai,Suite,8,328.8,30.71
+Atlantis,Istanbul,Standard,7,348.61,7.24
+Atlantis,Istanbul,Deluxe,7,264.68,7.24
+Atlantis,Istanbul,Suite,10,112.26,7.24
+Atlantis,Paris,Standard,16,409.07,40.02
+Atlantis,Paris,Deluxe,13,195.12,40.02
+Atlantis,Paris,Suite,16,398.23,40.02
+Atlantis,Berlin,Standard,9,386.82,28.97
+Atlantis,Berlin,Deluxe,7,273.11,28.97
+Atlantis,Berlin,Suite,17,172.99,28.97
+Atlantis,Rome,Standard,6,239.43,16.74
+Atlantis,Rome,Deluxe,10,329.3,16.74
+Atlantis,Rome,Suite,9,364.99,16.74
+Atlantis,Amsterdam,Standard,8,484.68,8.45
+Atlantis,Amsterdam,Deluxe,19,127.85,8.45
+Atlantis,Amsterdam,Suite,12,153.27,8.45
+Atlantis,Madrid,Standard,14,101.73,35.65
+Atlantis,Madrid,Deluxe,17,166.03,35.65
+Atlantis,Madrid,Suite,7,305.96,35.65
+Atlantis,Vienna,Standard,13,189.57,12.53
+Atlantis,Vienna,Deluxe,17,225.02,12.53
+Atlantis,Vienna,Suite,17,485.93,12.53
+Atlantis,Prague,Standard,13,283.16,7.88
+Atlantis,Prague,Deluxe,6,224.28,7.88
+Atlantis,Prague,Suite,13,142.96,7.88
+Atlantis,Budapest,Standard,8,336.12,24.31
+Atlantis,Budapest,Deluxe,5,307.76,24.31
+Atlantis,Budapest,Suite,18,393.21,24.31
+Atlantis,Dublin,Standard,19,358.91,28.09
+Atlantis,Dublin,Deluxe,9,337.66,28.09
+Atlantis,Dublin,Suite,9,279.65,28.09
+Atlantis,Copenhagen,Standard,18,435.1,22.78
+Atlantis,Copenhagen,Deluxe,5,294.72,22.78
+Atlantis,Copenhagen,Suite,19,247.46,22.78
+Atlantis,Stockholm,Standard,11,430.38,2.23
+Atlantis,Stockholm,Deluxe,15,224.77,2.23
+Atlantis,Stockholm,Suite,7,449.05,2.23
+Atlantis,Helsinki,Standard,17,468.64,42.53
+Atlantis,Helsinki,Deluxe,11,455.47,42.53
+Atlantis,Helsinki,Suite,6,325.5,42.53
+Atlantis,Ankara,Standard,17,432.55,4.57
+Atlantis,Ankara,Deluxe,20,421.16,4.57
+Atlantis,Ankara,Suite,15,427.73,4.57
+Atlantis,Lisbon,Standard,6,261.09,22.27
+Atlantis,Lisbon,Deluxe,5,249.83,22.27
+Atlantis,Lisbon,Suite,5,429.83,22.27
+Atlantis,Brussels,Standard,5,297.98,44.9
+Atlantis,Brussels,Deluxe,19,496.82,44.9
+Atlantis,Brussels,Suite,5,265.24,44.9
+Atlantis,Zurich,Standard,9,202.78,32.83
+Atlantis,Zurich,Deluxe,8,268.59,32.83
+Atlantis,Zurich,Suite,11,352.91,32.83
+Atlantis,Oslo,Standard,5,343.7,2.45
+Atlantis,Oslo,Deluxe,6,457.73,2.45
+Atlantis,Oslo,Suite,13,180.55,2.45
+Atlantis,Athens,Standard,19,366.62,9.71
+Atlantis,Athens,Deluxe,9,203,9.71
+Atlantis,Athens,Suite,7,405.03,9.71
+Atlantis,Edinburgh,Standard,8,137.94,45.85
+Atlantis,Edinburgh,Deluxe,7,222.17,45.85
+Atlantis,Edinburgh,Suite,9,462.72,45.85
+Atlantis,Dubai,Standard,16,221.74,7.13
+Atlantis,Dubai,Deluxe,5,125.53,7.13
+Atlantis,Dubai,Suite,13,299.57,7.13
+Holiday Inn,Istanbul,Standard,5,271.94,32.52
+Holiday Inn,Istanbul,Deluxe,10,155.66,32.52
+Holiday Inn,Istanbul,Suite,8,281.06,32.52
+Holiday Inn,Paris,Standard,16,416.89,3.1
+Holiday Inn,Paris,Deluxe,18,421.21,3.1
+Holiday Inn,Paris,Suite,7,450.23,3.1
+Holiday Inn,Berlin,Standard,18,177.23,17.42
+Holiday Inn,Berlin,Deluxe,14,312.78,17.42
+Holiday Inn,Berlin,Suite,17,235.35,17.42
+Holiday Inn,Rome,Standard,11,313.99,47.98
+Holiday Inn,Rome,Deluxe,8,454.09,47.98
+Holiday Inn,Rome,Suite,15,324.87,47.98
+Holiday Inn,Amsterdam,Standard,9,447.2,36.79
+Holiday Inn,Amsterdam,Deluxe,10,395.82,36.79
+Holiday Inn,Amsterdam,Suite,16,135.26,36.79
+Holiday Inn,Madrid,Standard,11,259.87,5.92
+Holiday Inn,Madrid,Deluxe,18,260.48,5.92
+Holiday Inn,Madrid,Suite,18,391.02,5.92
+Holiday Inn,Vienna,Standard,5,385.61,4.47
+Holiday Inn,Vienna,Deluxe,13,148.32,4.47
+Holiday Inn,Vienna,Suite,15,125.9,4.47
+Holiday Inn,Prague,Standard,20,493.3,20.97
+Holiday Inn,Prague,Deluxe,14,303.8,20.97
+Holiday Inn,Prague,Suite,13,231.43,20.97
+Holiday Inn,Budapest,Standard,11,189.05,20.43
+Holiday Inn,Budapest,Deluxe,19,429.19,20.43
+Holiday Inn,Budapest,Suite,7,293.62,20.43
+Holiday Inn,Dublin,Standard,17,494.65,48.78
+Holiday Inn,Dublin,Deluxe,13,299.45,48.78
+Holiday Inn,Dublin,Suite,12,386.18,48.78
+Holiday Inn,Copenhagen,Standard,16,329.47,36.7
+Holiday Inn,Copenhagen,Deluxe,10,231.71,36.7
+Holiday Inn,Copenhagen,Suite,14,388.93,36.7
+Holiday Inn,Stockholm,Standard,8,419.86,14.89
+Holiday Inn,Stockholm,Deluxe,8,137.01,14.89
+Holiday Inn,Stockholm,Suite,13,207.57,14.89
+Holiday Inn,Helsinki,Standard,16,184.08,14.56
+Holiday Inn,Helsinki,Deluxe,8,339.49,14.56
+Holiday Inn,Helsinki,Suite,16,318.33,14.56
+Holiday Inn,Ankara,Standard,8,358.57,4.17
+Holiday Inn,Ankara,Deluxe,9,140.84,4.17
+Holiday Inn,Ankara,Suite,20,441.99,4.17
+Holiday Inn,Lisbon,Standard,13,395.93,48.11
+Holiday Inn,Lisbon,Deluxe,7,405.5,48.11
+Holiday Inn,Lisbon,Suite,15,121.64,48.11
+Holiday Inn,Brussels,Standard,17,364.92,31.12
+Holiday Inn,Brussels,Deluxe,14,108.13,31.12
+Holiday Inn,Brussels,Suite,14,150.81,31.12
+Holiday Inn,Zurich,Standard,9,307.93,35.05
+Holiday Inn,Zurich,Deluxe,18,404.61,35.05
+Holiday Inn,Zurich,Suite,9,336.46,35.05
+Holiday Inn,Oslo,Standard,17,220.67,8.5
+Holiday Inn,Oslo,Deluxe,10,297.18,8.5
+Holiday Inn,Oslo,Suite,18,345.43,8.5
+Holiday Inn,Athens,Standard,5,390.04,33.64
+Holiday Inn,Athens,Deluxe,8,480.32,33.64
+Holiday Inn,Athens,Suite,9,200.34,33.64
+Holiday Inn,Edinburgh,Standard,7,183.14,26.89
+Holiday Inn,Edinburgh,Deluxe,18,174.4,26.89
+Holiday Inn,Edinburgh,Suite,11,312.36,26.89
+Holiday Inn,Dubai,Standard,15,423.1,27.14
+Holiday Inn,Dubai,Deluxe,16,387.69,27.14
+Holiday Inn,Dubai,Suite,6,466.73,27.14
+SunnySide Hostel,Prague,Deluxe,6,276.58,32.17
+SunnySide Hostel,Zurich,Deluxe,10,214.34,75.28
+SunnySide Hostel,Istanbul,Standard,6,230.27,30.08
+SunnySide Hostel,Stockholm,Deluxe,2,256.07,43.9
+Elite Palace,Berlin,Standard,8,218.58,56.8
+Elite Palace,Zurich,Deluxe,5,193,67.18
+Elite Palace,Helsinki,Standard,6,71.2,44.24
+Elite Palace,Lisbon,Standard,4,255.92,34.12
+Elite Palace,Brussels,Deluxe,9,269.9,67.42
+Paradise Stays,Athens,Standard,6,132.8,44.1
+Paradise Stays,Copenhagen,Standard,4,74.34,22.47
+Paradise Stays,Rome,Deluxe,8,132.74,32.75
+Paradise Stays,Dubai,Standard,8,145.43,35.98
+Paradise Stays,Helsinki,Standard,7,128.33,62.17
+Paradise Stays,Madrid,Standard,8,266.79,59.3
+Backpacker Haven,Stockholm,Deluxe,5,179.73,71.11
+Backpacker Haven,Brussels,Deluxe,1,257.76,62.1
+Backpacker Haven,Zurich,Standard,2,75.41,35.6
+Backpacker Haven,Zurich,Standard,8,281.21,51.02
+Backpacker Haven,Istanbul,Deluxe,6,268.44,65.02
+Sleep Inn,Edinburgh,Deluxe,5,173.26,24.24
+Sleep Inn,Ankara,Deluxe,2,142.86,63.28
+Sleep Inn,Dublin,Standard,7,132.72,38.91
+Sleep Inn,Brussels,Standard,3,123.8,42.41
+Sleep Inn,Lisbon,Standard,4,198.55,29.56
+Warm Nest,Zurich,Standard,4,89.5,68.99
+Warm Nest,Rome,Deluxe,2,158.7,29.87
+Warm Nest,Rome,Standard,6,66.22,39.61

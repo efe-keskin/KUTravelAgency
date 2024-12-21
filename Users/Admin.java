@@ -13,6 +13,11 @@ public class Admin implements User{
         return username;
     }
 
+    @Override
+    public int getID() {
+        return 0;
+    }
+
     public String getPassword() {
         return password;
     }
