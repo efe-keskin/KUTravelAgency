@@ -23,9 +23,9 @@ public class ReservationsManagers {
                 String line = scanner.nextLine();
                 String[] lineSep = (line.split(","));
                 int id = Integer.parseInt(line.split(",")[0]); // 0 is assumed the reservation id
-                Customer cust = CustomerDB.retrieveCustomer((lineSep[4]));//4 is assumed the customer id
-                Reservation res = new Reservation(id, new Package(Integer.parseInt(lineSep[1]), //1 is assumed hotel id
-                        Integer.parseInt(lineSep[2]),Integer.parseInt(lineSep[3])),cust );//2 is assumed flight id, 3 is assumed taxi id
+                Package p = PackageManager.retrievePackage(Integer.parseInt(lineSep[1]));
+                Customer cust = CustomerDB.retrieveCustomer((lineSep[2]));//2 is assumed the customer id, 1 is assumed package id
+                Reservation res = new Reservation(id,p,cust);
                 reservationsDict.put(id, res);
             }
             scanner.close();
@@ -61,9 +61,7 @@ public class ReservationsManagers {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/reservations.txt"))) {
             for (int id : reservationsDict.keySet()) {
                 Reservation res = reservationsDict.get(id);
-                writer.write(id + "," +res.getRelatedPackage()+ ","
-                        +res.getCustomer().getID()+"," +res.getRelatedPackage().getId()
-                        +","+res);
+                writer.write(id + "," +res.getRelatedPackage().getId()+","+res.getCustomer().getID()+"," +res);
                 writer.newLine();
             }
         } catch (IOException e) {
