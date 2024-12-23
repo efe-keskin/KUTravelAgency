@@ -83,19 +83,19 @@ private void addGuiComponent(){
                 if (App.user instanceof Customer) { // Check if the user is a Customer
                     Customer customer = (Customer) App.user; // Downcast to Customer
                     try {
-                        String[][] data = new String[customer.getTravelHistory().size()][customer.getTravelHistory().get(0).getPresentableDatalist().size()];
-                        for (int i = 0; i < customer.getTravelHistory().size(); i++) {
-                            for (int j = 0; j < customer.getTravelHistory().get(i).getPresentableDatalist().size(); j++) {
-                                data[i][j] = customer.getTravelHistory().get(i).getPresentableDatalist().get(j);
-                            }
-                        }
-                        // Column Names
-                        String[] columnNames = {"ID", "Departure Date", "Arrival Date", "Reservation Type",
-                                "Total Cost", "Status", "Flight ID", "Airline", "Departure City", "Arrival City",
-                                "Taxi Type", "Taxi City", "Hotel Name", "Hotel City", "Room Type"};
-                        JTable j = new JTable(data, columnNames);
-                        j.setBounds(30, 40, 200, 300);
-                        getContentPane().add(j);
+//                        String[][] data = new String[customer.getTravelHistory().size()][customer.getTravelHistory().get(0).getPresentableDatalist().size()];
+//                        for (int i = 0; i < customer.getTravelHistory().size(); i++) {
+//                            for (int j = 0; j < customer.getTravelHistory().get(i).getPresentableDatalist().size(); j++) {
+//                                data[i][j] = customer.getTravelHistory().get(i).getPresentableDatalist().get(j);
+//                            }
+//                        }
+//                        // Column Names
+//                        String[] columnNames = {"ID", "Departure Date", "Arrival Date", "Reservation Type",
+//                                "Total Cost", "Status", "Flight ID", "Airline", "Departure City", "Arrival City",
+//                                "Taxi Type", "Taxi City", "Hotel Name", "Hotel City", "Room Type"};
+//                        JTable j = new JTable(data, columnNames);
+//                        j.setBounds(30, 40, 200, 300);
+//                        getContentPane().add(j);
                     }catch (IndexOutOfBoundsException a){
                         JDialog errorDialog = new JDialog();
                         errorDialog.setTitle("Travel History not Found");

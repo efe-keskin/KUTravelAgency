@@ -21,13 +21,15 @@ public class Hotel extends Product{
     private HashMap<LocalDate,Integer> availableDates;
 
 
-    public Hotel(String name,String city,String roomType, int availableCount, int pricePerNight, int distanceToAirport) {
+    public Hotel(String name,String city,String roomType, int availableCount, int pricePerNight, int distanceToAirport,int id) {
         super(availableCount);
         this.name = name;
         this.city = city;
         this.roomType = roomType;
         this.pricePerNight = pricePerNight;
         this.distanceToAirport = distanceToAirport;
+        this.availableDates = new HashMap<>();
+        this.id = id;
 
     }
     public static Hotel retrieveHotel(int id){
@@ -105,6 +107,37 @@ public class Hotel extends Product{
             e.printStackTrace();
         }
     }
+    public void book(LocalDate date) {
+        try {
+            // 1) Ensure availableDates is loaded
+            if (availableDates == null || availableDates.isEmpty()) {
+                hotelAvailabilityParser();
+            }
+
+            // 2) Check if the date exists in the dictionary
+            if (availableDates.containsKey(date)) {
+                int currentCap = availableDates.get(date);
+                // 3) Check if there's at least 1 available room
+                if (currentCap > 0) {
+                    availableDates.put(date, currentCap - 1);
+                } else {
+                    // No rooms left, just return or handle accordingly
+                    System.out.println("No more available rooms on " + date);
+                    return;
+                }
+            } else {
+                // 4) If this date doesn't exist, add a default capacity and deduct 1
+                int defaultCapacity = getAvailableCount(); // can be any default capacity you want
+                availableDates.put(date, defaultCapacity - 1);
+            }
+
+            // 5) Update the file to reflect the new availability
+            updateFile();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
@@ -136,4 +169,8 @@ public class Hotel extends Product{
     public int getDistanceToAirport() {
         return distanceToAirport;
     }
+    public int getId(){
+        return id;
+    }
+
 }

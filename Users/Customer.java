@@ -20,9 +20,6 @@ public class Customer implements User{
 
 
 
-    public void makeReservation(){
-
-    }
 public void addReservation(Reservation reservation){
         travelHistory.add(reservation);
 }

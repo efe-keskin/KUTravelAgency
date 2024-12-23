@@ -26,6 +26,8 @@ public class Reservation {
         this.customer = customer;
 
         //dates will calculated based on package data
+        dateEnd = pck.getDateEnd();
+        dateStart = pck.getDateStart();
 
     }
 
@@ -54,4 +56,27 @@ public class Reservation {
         return customer;
     }
 
+    public LocalDate getDateEnd() {
+        return dateEnd;
+    }
+
+    public LocalDate getDateStart() {
+        return dateStart;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setDateStart(LocalDate dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
+    }
 }

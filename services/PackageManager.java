@@ -3,7 +3,6 @@ package services;
 import Users.Customer;
 import Users.User;
 import databases.CustomerDB;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,22 +31,21 @@ private static int newID;
         }
 
     }
-    public static Package retrievePackage(int id) {
-        ReservationsManagers.reservationsDictGenerator();
-        Package ret = null;
-        for(int i : ReservationsManagers.reservationsDict.keySet()){
-            if(i==id){
-                ret = ReservationsManagers.reservationsDict.get(i).getRelatedPackage();
-                return ret;
-            }
+    public static Package retrievePackage(int packageId) {
+        // Make sure packageDict is initialized
+        if (packageDict == null) {
+            packageDict = new HashMap<>();
+            packageDictGenerator();  // loads from packages.txt
         }
-        return null;
+
+        // Retrieve the package from the dictionary
+        return packageDict.get(packageId);
     }
     public static void idGenerator() {
         if (packageDict == null) {
             packageDictGenerator();
         } else {
-            int lastID = 0;
+            int lastID = 400000;
             for (int id : packageDict.keySet()) {
                 lastID = id;
             }
@@ -55,25 +53,25 @@ private static int newID;
         }
     }
 
-    public static void makePackage(String type,int flightID,int taxiID,LocalDate dateStart,LocalDate dateEnd){
+    public static void makePackage(String type,int hotelID,int flightID,int taxiID,LocalDate dateStart,LocalDate dateEnd){
         idGenerator();
-        Package newPack = new Package(type,newID,flightID,taxiID,dateStart,dateEnd);
+        Package newPack = new Package(type,hotelID,flightID,taxiID,dateStart,dateEnd);
         packageDict.put(newID,newPack);
         updatePackagesFile();
 
     }
 
     private static void updatePackagesFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/reservations.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/packages.txt"))) {
             for (int id : packageDict.keySet()) {
                 Package pck = packageDict.get(id);
-                writer.write(id + "," +pck.getType()+","+pck.getHotel().getID()+"," +pck.getFlight().getID()+
-                        ","+pck.getTaxi().getID()+","+ pck.getTotalCost()+","+pck.getDateStart().format(formatter)+
+                writer.write(id + "," +pck.getType()+","+pck.getHotel().getId()+"," +pck.getFlight().getId()+
+                        ","+pck.getTaxi().getId()+","+ pck.getTotalCost()+","+pck.getDateStart().format(formatter)+
                         ","+pck.getDateEnd().format(formatter));
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error updating reservations file: " + e.getMessage());
+            System.out.println("Error updating packages file: " + e.getMessage());
         }
     }
 }

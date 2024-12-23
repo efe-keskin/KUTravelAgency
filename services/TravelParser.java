@@ -35,7 +35,7 @@ private static HashMap<Integer, Taxi> taxisDict;
                     int pricePerNight = Integer.parseInt(dataArray[4]);
                     int distanceToAirport = Integer.parseInt(dataArray[5]);
 
-                    Hotel hotel = new Hotel(name, city, roomType, availableCount, pricePerNight, distanceToAirport);
+                    Hotel hotel = new Hotel(name, city, roomType, availableCount, pricePerNight, distanceToAirport,uniqueId);
                     hotelDict.put(uniqueId, hotel);
 
                     uniqueId++; // Increment the unique ID for the next hotel
@@ -81,7 +81,6 @@ private static HashMap<Integer, Taxi> taxisDict;
                         String leg2ArrivalTime = dataArray[14];
 
                         Flight flight = new Flight(
-                                flightID,
                                 airline,
                                 departureCity,
                                 stopoverCity,
@@ -92,7 +91,7 @@ private static HashMap<Integer, Taxi> taxisDict;
                                 leg2ArrivalTime,
                                 availableSeats,
                                 ticketClass,
-                                price
+                                price, uniqueId
                         );
                         flightDict.put(uniqueId, flight);
                     } else {
@@ -102,7 +101,6 @@ private static HashMap<Integer, Taxi> taxisDict;
                         String arrivalTime = dataArray[5];
 
                         Flight flight = new Flight(
-                                flightID,
                                 airline,
                                 departureCity,
                                 arrivalCity,
@@ -110,7 +108,7 @@ private static HashMap<Integer, Taxi> taxisDict;
                                 departureTime,
                                 arrivalTime,
                                 ticketClass,
-                                price
+                                price,uniqueId
                         );
                         flightDict.put(uniqueId, flight);
                     }
@@ -146,7 +144,7 @@ private static HashMap<Integer, Taxi> taxisDict;
                     double baseFare = Double.parseDouble(dataArray[3]);
                     double perKmRate = Double.parseDouble(dataArray[4]);
 
-                    Taxi taxi = new Taxi(city, taxiType, availableTaxis, baseFare, perKmRate);
+                    Taxi taxi = new Taxi(city, taxiType, availableTaxis, baseFare, perKmRate,uniqueId);
                     taxiDict.put(uniqueId, taxi);
 
                     uniqueId++; // Increment the unique ID for the next taxi
