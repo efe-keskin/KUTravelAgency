@@ -1,5 +1,7 @@
 package products;
 
+import services.TravelParser;
+
 import java.util.HashMap;
 
 public class Taxi extends Product {
@@ -7,7 +9,7 @@ public class Taxi extends Product {
     private String taxiType;
     private double baseFare;
     private double perKmRate;
-    public static HashMap<Integer,Taxi> taxisDict;
+
 
     public Taxi( String city, String taxiType,int availableCount, double baseFare, double perKmRate) {
         super(availableCount);
@@ -17,7 +19,7 @@ public class Taxi extends Product {
         this.perKmRate = perKmRate;
     }
     public static Taxi retrieveTaxi(int id){
-        return taxisDict.get(id);
+        return TravelParser.getTaxisDict().get(id);
 
 
     }

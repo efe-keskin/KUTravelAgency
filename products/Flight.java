@@ -1,7 +1,10 @@
 package products;
+import services.TravelParser;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+
 
 public class Flight extends Product{
     private String flightID;
@@ -18,7 +21,7 @@ public class Flight extends Product{
     private LocalTime leg1ArrivalTime;
     private LocalTime leg2DepartureTime;
     private LocalTime leg2ArrivalTime;
-    public static HashMap<Integer,Flight> flightsDict;
+
     // Constructor for direct flights
     public Flight(String flightID, String airline, String departureCity, String arrivalCity,
                   int availableCount, String departureTime, String arrivalTime, String ticketClass, int price) {
@@ -72,8 +75,13 @@ public class Flight extends Product{
         this.arrivalTime = this.leg2ArrivalTime;
     }
     public static Flight retrieveFlight(int id){
-        return flightsDict.get(id);
+        return TravelParser.getFlightsDict().get(id);
     }
+
+
+
+
+
     @Override
     public String toString() {
 

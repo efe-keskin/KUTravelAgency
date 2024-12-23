@@ -1,6 +1,7 @@
 package services;
 
 import Users.Customer;
+import Users.User;
 import databases.CustomerDB;
 
 import java.io.*;
@@ -12,6 +13,7 @@ import java.util.Scanner;
 public class PackageManager {
 protected static HashMap<Integer,Package> packageDict;
 private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+private static int newID;
     public static void packageDictGenerator() {
         try {
             File file = new File("services/packages.txt");
@@ -41,6 +43,26 @@ private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M
         }
         return null;
     }
+    public static void idGenerator() {
+        if (packageDict == null) {
+            packageDictGenerator();
+        } else {
+            int lastID = 0;
+            for (int id : packageDict.keySet()) {
+                lastID = id;
+            }
+            newID = lastID + 1;
+        }
+    }
+
+    public static void makePackage(String type,int flightID,int taxiID,LocalDate dateStart,LocalDate dateEnd){
+        idGenerator();
+        Package newPack = new Package(type,newID,flightID,taxiID,dateStart,dateEnd);
+        packageDict.put(newID,newPack);
+        updatePackagesFile();
+
+    }
+
     private static void updatePackagesFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/reservations.txt"))) {
             for (int id : packageDict.keySet()) {
