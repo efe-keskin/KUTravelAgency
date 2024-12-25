@@ -22,7 +22,9 @@ private static HashMap<Integer, Taxi> taxisDict;
         try {
             File file = new File("datasets/FinalKU_Travel_Agency_Dataset_Hotels.csv");
             Scanner myReader = new Scanner(file);
-
+            if (myReader.hasNextLine()) {
+                myReader.nextLine();
+            }
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] dataArray = data.split(",");
@@ -32,8 +34,8 @@ private static HashMap<Integer, Taxi> taxisDict;
                     String city = dataArray[1];
                     String roomType = dataArray[2];
                     int availableCount = Integer.parseInt(dataArray[3]);
-                    int pricePerNight = Integer.parseInt(dataArray[4]);
-                    int distanceToAirport = Integer.parseInt(dataArray[5]);
+                    double pricePerNight = Double.parseDouble(dataArray[4]);
+                    double distanceToAirport = Double.parseDouble(dataArray[5]);
 
                     Hotel hotel = new Hotel(name, city, roomType, availableCount, pricePerNight, distanceToAirport,uniqueId);
                     hotelDict.put(uniqueId, hotel);
@@ -58,7 +60,9 @@ private static HashMap<Integer, Taxi> taxisDict;
         try {
             File file = new File("datasets/FinalKU_Travel_Agency_Dataset_Flights.csv");
             Scanner myReader = new Scanner(file);
-
+            if (myReader.hasNextLine()) {
+                myReader.nextLine();
+            }
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] dataArray = data.split(",");
@@ -68,7 +72,7 @@ private static HashMap<Integer, Taxi> taxisDict;
                     String airline = dataArray[1];
                     String departureCity = dataArray[2];
                     String ticketClass = dataArray[6];
-                    int price = Integer.parseInt(dataArray[7]);
+                    double price = Double.parseDouble(dataArray[7]);
                     int availableSeats = Integer.parseInt(dataArray[8]);
 
                     if (dataArray[3].isEmpty()) {
@@ -132,7 +136,9 @@ private static HashMap<Integer, Taxi> taxisDict;
         try {
             File file = new File("datasets/FinalKU_Travel_Agency_Dataset_Taxis.csv");
             Scanner myReader = new Scanner(file);
-
+            if (myReader.hasNextLine()) {
+                myReader.nextLine();
+            }
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] dataArray = data.split(",");

@@ -7,6 +7,7 @@ import java.io.Reader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -16,12 +17,12 @@ public class Hotel extends Product{
     private String name;
     private String city;
     private String roomType;
-    private int pricePerNight;
-    private int distanceToAirport;
+    private double pricePerNight;
+    private double distanceToAirport;
     private HashMap<LocalDate,Integer> availableDates;
 
 
-    public Hotel(String name,String city,String roomType, int availableCount, int pricePerNight, int distanceToAirport,int id) {
+    public Hotel(String name,String city,String roomType, int availableCount, double pricePerNight, double distanceToAirport,int id) {
         super(availableCount);
         this.name = name;
         this.city = city;
@@ -55,6 +56,22 @@ public class Hotel extends Product{
         }
         reader.close();
     }
+    public static ArrayList<Hotel> selectByCity(String city) {
+        TravelParser.parseHotels();
+        // Create a list to store all matching hotels
+        ArrayList<Hotel> hotelsInCity = new ArrayList<>();
+
+        // Iterate through all hotels in the TravelParser's dictionary
+        for (Hotel hotel : TravelParser.getHotelsDict().values()) {
+            // Compare city names, ignoring case to make the search more robust
+            if (hotel.getCity().equalsIgnoreCase(city)) {
+                hotelsInCity.add(hotel);
+            }
+        }
+
+        return hotelsInCity;
+    }
+
     public void updateFile() throws FileNotFoundException {
         // 1) Read all lines from the original file
         File file = new File("products/hotelavailability.txt");
@@ -138,6 +155,38 @@ public class Hotel extends Product{
             e.printStackTrace();
         }
     }
+    public static ArrayList<Hotel> availableRoomsListMaker(LocalDate dateStart,
+                                                  LocalDate dateEnd,
+                                                  ArrayList<Hotel> hotelList)
+    {
+        ArrayList<Hotel> newHotelList = new ArrayList<>();
+
+        // If dateEnd is before dateStart, just return an empty list
+        if (dateEnd.isBefore(dateStart)) {
+            return newHotelList;
+        }
+
+        // Check each hotel in the provided list
+        for (Hotel hotel : hotelList) {
+            boolean allDatesAvailable = true;
+
+            // Loop from dateStart to dateEnd (inclusive)
+            for (LocalDate d = dateStart; !d.isAfter(dateEnd); d = d.plusDays(1)) {
+                // If the hotel has 0 or fewer rooms for any date in the range, it fails
+                if (hotel.getAvailabilityForDate(d) <= 0) {
+                    allDatesAvailable = false;
+                    break; // No need to check further dates for this hotel
+                }
+            }
+
+            // If the hotel had >0 availability on every date in the range, add it to the list
+            if (allDatesAvailable) {
+                newHotelList.add(hotel);
+            }
+        }
+
+        return newHotelList;
+    }
 
 
 
@@ -162,15 +211,25 @@ public class Hotel extends Product{
         return roomType;
     }
 
-    public int getPricePerNight() {
+    public double getPricePerNight() {
         return pricePerNight;
     }
 
-    public int getDistanceToAirport() {
+    public double getDistanceToAirport() {
         return distanceToAirport;
     }
     public int getId(){
         return id;
     }
+    public int getAvailabilityForDate(LocalDate date) {
+        if (availableDates == null || availableDates.isEmpty()) {
+            try {
+                hotelAvailabilityParser();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
+        return availableDates.getOrDefault(date, this.getAvailableCount());
+    }
 }

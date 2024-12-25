@@ -16,7 +16,7 @@ private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPatt
     //Sells the packages and keeps track in packages txt
     //Stores the customer info and package info in transactions txt
     //Makes reservations and adds them in the users
-    public static void packageSeller(Package pck, Customer cst){
+    public static void packageSeller(Package pck, Customer cst) throws FileNotFoundException {
         Hotel hotel = pck.getHotel();
         LocalDate dateStart = pck.getDateStart();
         LocalDate hotelStartDate = pck.getHotelStart();
@@ -37,7 +37,7 @@ private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPatt
     }
 public static void paymentMaker(Reservation res,Customer cst) throws IOException {
 
-    BufferedWriter writer = new BufferedWriter(new FileWriter("services/packages.txt"));
+    BufferedWriter writer = new BufferedWriter(new FileWriter("services/transactions.txt"));
     LocalDate now = LocalDate.now();
     String date = now.format(DATE_FORMATTER);
 

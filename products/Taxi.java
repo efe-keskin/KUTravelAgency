@@ -71,6 +71,25 @@ public class Taxi extends Product {
         }
         reader.close();
     }
+    public static ArrayList<Taxi> availableCarsListMaker(LocalDate dateStart,
+                                                         ArrayList<Taxi> taxiList) {
+        ArrayList<Taxi> newTaxiList = new ArrayList<>();
+
+        // Check each Taxi in the provided list
+        for (Taxi taxi : taxiList) {
+            // Check availability only for the start date
+            if (taxi.getAvailabilityForDate(dateStart) > 0) {
+                newTaxiList.add(taxi);
+            }
+        }
+
+        return newTaxiList;
+    }
+
+    public double taxiPriceCalculator(Hotel hotel) {
+        // baseFare + (airportDistance * perKmRate)
+        return this.baseFare + (hotel.getDistanceToAirport() * this.perKmRate);
+    }
 
     /**
      * 3) Rewrites 'taxiavailability.txt' to reflect the updated availability
@@ -173,7 +192,6 @@ public class Taxi extends Product {
         }
     }
 
-    // -- Getters & Setters & toString -- //
 
     public String getCity() {
         return city;
@@ -198,5 +216,32 @@ public class Taxi extends Product {
 
     public int getId() {
         return id;
+    }
+    public static ArrayList<Taxi> selectByCity(String city) {
+        // Create a list to store all matching taxis
+        ArrayList<Taxi> taxisInCity = new ArrayList<>();
+
+        // Iterate through all taxis in the TravelParser's dictionary
+        for (Taxi taxi : TravelParser.getTaxisDict().values()) {
+            // Compare city names, ignoring case to make the search more robust
+            if (taxi.getCity().equalsIgnoreCase(city)) {
+                taxisInCity.add(taxi);
+            }
+        }
+
+        return taxisInCity;
+    }
+    public int getAvailabilityForDate(LocalDate date) {
+        // Ensure the availability data is loaded
+        if (availableDates == null || availableDates.isEmpty()) {
+            try {
+                taxiAvailabilityParser();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Return capacity if present; otherwise the default
+        return availableDates.getOrDefault(date, getAvailableCount());
     }
 }

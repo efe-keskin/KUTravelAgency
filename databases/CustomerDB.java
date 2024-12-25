@@ -11,10 +11,10 @@ import java.util.HashMap;
 public class CustomerDB {
 
     private static HashMap<String, Customer> customerDB = new HashMap<>();
-    private static int uniqueID;
+    private static int uniqueID=600000;
     static {
         loadCustomers();
-    uniqueID = customerDB.size();
+    uniqueID += customerDB.size();
 
     }
 public static Customer retrieveCustomer(String id){

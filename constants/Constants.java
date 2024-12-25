@@ -7,7 +7,9 @@ public class Constants {
     public static final String LOGIN_IMAGE_PATH = "profile2.png";
     public static final String ADMIN_DB_PATH = "databases/admindb.txt";
     public static final String DB_PATH = "databases/customerdb.txt";
+
     //frame config
+
     public static final Dimension LOGINFRAME_SIZE = new Dimension(540,760);
     public static final Dimension MENUFRAME_SIZE = new Dimension(1000,760);
     public static final Dimension TEXTFIELD_SIZE = new Dimension((int) (LOGINFRAME_SIZE.width * 0.80),50);

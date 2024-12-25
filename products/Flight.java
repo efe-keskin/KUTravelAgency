@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -19,7 +21,7 @@ public class Flight extends Product {
     private LocalTime departureTime;
     private LocalTime arrivalTime;
     private String ticketClass;
-    private int price;
+    private double price;
     private String stopoverCity;
     private String finalArrivalCity;
     private LocalTime leg1DepartureTime;
@@ -36,10 +38,10 @@ public class Flight extends Product {
     // Constructor for direct flights
     public Flight(String airline, String departureCity, String arrivalCity,
                   int availableCount, String departureTime, String arrivalTime,
-                  String ticketClass, int price, int id) {
+                  String ticketClass, double price, int id) {
         super(availableCount);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
 
         this.airline = airline;
         this.departureCity = departureCity;
@@ -68,10 +70,10 @@ public class Flight extends Product {
     public Flight( String airline, String departureCity, String stopoverCity,
                   String finalArrivalCity, String leg1DepartureTime, String leg1ArrivalTime,
                   String leg2DepartureTime, String leg2ArrivalTime, int availableCount,
-                  String ticketClass, int price,int id) {
+                  String ticketClass, double price,int id) {
         super(availableCount);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
 
         this.flightID = String.valueOf(id);
         this.airline = airline;
@@ -107,6 +109,21 @@ public class Flight extends Product {
      */
     public static Flight retrieveFlight(int id) {
         return TravelParser.getFlightsDict().get(id);
+    }
+
+    public static ArrayList<Flight> selectByCity(String city,String depCity) {
+        // Create a list to store all matching flights
+        ArrayList<Flight> flightsInCity = new ArrayList<>();
+
+        // Iterate through all flights in the TravelParser's dictionary
+        for (Flight flight : TravelParser.getFlightsDict().values()) {
+            // Compare city names, ignoring case to make the search more robust
+            if (flight.getArrivalCity().equalsIgnoreCase(city)&&flight.getDepartureCity().equalsIgnoreCase(depCity)) {
+                flightsInCity.add(flight);
+            }
+        }
+
+        return flightsInCity;
     }
 
     /**
@@ -227,7 +244,7 @@ public class Flight extends Product {
                 }
             } else {
                 // 3) If date not present, add a default capacity & decrement
-                int defaultCapacity = 5;  // choose a default
+                int defaultCapacity = getAvailableCount();  // choose a default
                 availableDates.put(date, defaultCapacity - 1);
             }
 
@@ -239,7 +256,7 @@ public class Flight extends Product {
         }
     }
 
-    // ------------------ GETTERS / SETTERS / toString ------------------
+
 
     @Override
     public String toString() {
@@ -274,7 +291,7 @@ public class Flight extends Product {
         return ticketClass;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -314,5 +331,60 @@ public class Flight extends Product {
      */
     public int getId() {
         return Integer.parseInt(flightID);
+    }
+    public int getAvailabilityForDate(LocalDate date) {
+        // Ensure the availability data is loaded
+        if (availableDates == null || availableDates.isEmpty()) {
+            try {
+                flightAvailabilityParser();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Return capacity if present; otherwise the default
+        return availableDates.getOrDefault(date, getAvailableCount());
+    }
+    public static ArrayList<Flight> availableSeatsListMaker(LocalDate dateStart,ArrayList<Flight> arrayList){
+        ArrayList<Flight> newFlightsList = new ArrayList<Flight>();
+        for(Flight flight : arrayList) {
+            if (flight.isDayChange()) {
+                if(flight.getAvailabilityForDate(dateStart.minusDays(1))>0){
+                    newFlightsList.add(flight);
+                }
+            }
+            else{
+                if(flight.getAvailabilityForDate(dateStart)>0){
+                    newFlightsList.add(flight);
+                }
+            }
+        }
+        return newFlightsList;
+    }
+
+
+    public String getDuration() {
+        // 1) Create a LocalDateTime for the departure (arbitrary date, e.g. Jan 1, 2000).
+        LocalDateTime departureDateTime = LocalDateTime.of(
+                LocalDate.of(2000, 1, 1),
+                this.departureTime
+        );
+
+        // 2) Create a LocalDateTime for the arrival.
+        //    If the flight crosses midnight (dayChange == true), shift arrival to Jan 2, 2000.
+        LocalDateTime arrivalDateTime = this.dayChange
+                ? LocalDateTime.of(LocalDate.of(2000, 1, 2), this.arrivalTime)
+                : LocalDateTime.of(LocalDate.of(2000, 1, 1), this.arrivalTime);
+
+        // 3) Calculate the Duration
+        Duration duration = Duration.between(departureDateTime, arrivalDateTime);
+
+        // 4) Convert the Duration to hours/minutes
+        long totalMinutes = duration.toMinutes();
+        long hours = totalMinutes / 60;
+        long minutes = totalMinutes % 60;
+
+        // 5) Return a simple string format: e.g. "2h 45m"
+        return hours + "h " + minutes + "m";
     }
 }

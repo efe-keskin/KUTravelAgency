@@ -29,6 +29,7 @@ public class Package {
         this.flight = Flight.retrieveFlight(flightID);
         this.taxi = Taxi.retrieveTaxi(taxiID);
         this.dateStart = dateStart;
+        this.type = type;
 
         // Adjust the start date for the hotel if the flight causes a day change
         if (flight.isDayChange()) {
@@ -47,7 +48,7 @@ public class Package {
         }
 
         // Multiply the number of days by the hotel's price per night
-        this.totalCost = (int) (hotel.getPricePerNight() * daysInHotel);
+        this.totalCost = (int) (hotel.getPricePerNight() * daysInHotel +flight.getPrice() + (taxi.getBaseFare() + (taxi.getPerKmRate()*hotel.getDistanceToAirport())  ) );
     }
 
 
@@ -96,5 +97,9 @@ public class Package {
 
     public long getDaysInHotel() {
         return daysInHotel;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

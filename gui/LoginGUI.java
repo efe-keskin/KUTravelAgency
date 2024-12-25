@@ -27,7 +27,6 @@ public class LoginGUI extends JFrame implements ActionListener {
         setResizable(false);
         setLayout(null);
         getContentPane().setBackground(Constants.PRIMARY_COLOR);
-
         addGuiComponent();
     }
     private void addGuiComponent(){
@@ -147,7 +146,7 @@ public class LoginGUI extends JFrame implements ActionListener {
                     App.user = AdminDB.getAdmin(username);
                     resultLabel.setText("Admin Login Successful!");
                     dispose();
-                    new MenuGUI().setVisible(true);
+                    new AdminGUI().setVisible(true);
                 } else {
                     // display an incorrect username dialog
                     resultLabel.setText("Invalid Username");
