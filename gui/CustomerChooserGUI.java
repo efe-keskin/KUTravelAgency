@@ -111,14 +111,13 @@ public class CustomerChooserGUI extends JFrame {
             String password = cst.getPassword();
             Integer id = cst.getID();
 
-            // If search is empty or username matches search
+
             if (searchUsername.isEmpty() || username.toLowerCase().contains(searchUsername.toLowerCase())) {
                 Object[] rowData = new Object[4];
                 rowData[0] = String.valueOf(id);
                 rowData[1] = username;
                 rowData[2] = password;
 
-                // Create select button
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
                 JButton selectButton = new JButton("Select");
                 selectButton.setFont(font);

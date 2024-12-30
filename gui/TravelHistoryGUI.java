@@ -1,6 +1,7 @@
 package gui;
 
 import Users.Customer;
+import core.App;
 import services.Reservation;
 
 import javax.swing.*;
@@ -18,10 +19,11 @@ public class TravelHistoryGUI extends JFrame {
     DateTimeFormatter formatterDate = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter formatterTime = java.time.format.DateTimeFormatter.ofPattern("H:mm");
     DateTimeFormatter formatterDateTime = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
+    private static final Font font = new Font("Arial", Font.PLAIN, 14);
     public TravelHistoryGUI(Customer customer) throws FileNotFoundException {
         setTitle("Travel History #" + customer.getID());
         travelHistory = customer.getTravelHistory();
-        setSize(1000,1000);
+        setSize(1400,800);
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("Reservation ID");
         dtm.addColumn("From City");
@@ -40,7 +42,24 @@ public class TravelHistoryGUI extends JFrame {
         historyPanel = new JPanel(new BorderLayout());
         historyScrollPane = new JScrollPane(historyTable);
         historyPanel.add(historyScrollPane,BorderLayout.CENTER);
-        this.add(historyPanel);
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton backButton = new JButton("Back");
+        backButton.setFont(font);
+        buttonPanel.add(backButton);
+        backButton.addActionListener(e -> {
+            dispose();
+            if (App.isAdmin) {
+                new AdminGUI().setVisible(true);
+            } else {
+                new CustomerUI().setVisible(true);
+            }
+        });
+
+        mainPanel.add(historyPanel, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        this.add(mainPanel);
 
         for(Reservation reservation : travelHistory) {
             String[] row = new String[12];

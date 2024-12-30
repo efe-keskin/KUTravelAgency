@@ -32,11 +32,13 @@ public class CustomerUI extends JFrame{
 
             // Button action for "Make a Custom Travel"
             makeACustomTravelButton.addActionListener(e -> {
+                dispose();
                 new PackageMakerGUI().setVisible(true);
             });
         bookTravelPackagesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 new TravelSelectorGUI().setVisible(true);
             }
         });
@@ -44,6 +46,7 @@ public class CustomerUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    dispose();
                     new TravelHistoryGUI((Customer)App.user).setVisible(true);
                 } catch (FileNotFoundException ex) {
                     throw new RuntimeException(ex);
@@ -54,6 +57,7 @@ public class CustomerUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    dispose();
                     new MyTransactionsGUI((Customer) App.user).setVisible(true);
                 } catch (FileNotFoundException ex) {
                     throw new RuntimeException(ex);
@@ -63,6 +67,7 @@ public class CustomerUI extends JFrame{
         editReservationsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 new EditReservationsUI().setVisible(true);
             }
         });

@@ -41,6 +41,7 @@ public class AdminGUI extends JFrame {
         createEditDeletePackagesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 new PackageMakerGUI().setVisible(true);
             }
         });
@@ -63,6 +64,7 @@ public class AdminGUI extends JFrame {
         reservationsManagementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 new AdminReservationsGUI().setVisible(true);
             }
         });
