@@ -1,50 +1,84 @@
 package services;
 
 import Users.Customer;
-import Users.User;
 import products.Flight;
 import products.Hotel;
 import products.Taxi;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class Vendor {
-private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    //Sells the packages and keeps track in packages txt
-    //Stores the customer info and package info in transactions txt
-    //Makes reservations and adds them in the users
-    public static void packageSeller(Package pck, Customer cst) throws FileNotFoundException {
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    public static void packageSeller(Package pck, Customer cst, LocalDateTime taxiTime,
+                                     LocalDate hotelStartDate, LocalDate dateStart, LocalDate dateEnd) throws IOException {
+        // Book hotel
         Hotel hotel = pck.getHotel();
-        LocalDate dateStart = pck.getDateStart();
-        LocalDate hotelStartDate = pck.getHotelStart();
-        LocalDate dateEnd = pck.getDateEnd();
-        for (LocalDate date = hotelStartDate; !date.isAfter(dateEnd); date = date.plusDays(1))
-        {
+        for (LocalDate date = hotelStartDate; !date.isAfter(dateEnd); date = date.plusDays(1)) {
             hotel.book(date);
         }
+
+        // Book flight
         Flight flight = pck.getFlight();
         flight.book(dateStart);
+
+        // Book taxi
         Taxi taxi = pck.getTaxi();
-        if(!flight.isDayChange()){
-            taxi.book(dateStart);
+        // Calculate travel duration based on hotel distance
+        double distanceKm = hotel.getDistanceToAirport();
+        int travelTimeMinutes = (int) Math.ceil((distanceKm / 60.0) * 60);
+        LocalDateTime taxiArrivalTime = taxiTime.plusMinutes(travelTimeMinutes);
+
+        // Book taxi for each 2-minute interval of the journey
+        LocalDateTime bookingTime = taxiTime;
+        while (!bookingTime.isAfter(taxiArrivalTime)) {
+            taxi.book(bookingTime);
+            bookingTime = bookingTime.plusMinutes(2);
         }
-        else{taxi.book(dateStart.plusDays(1));}
-        ReservationsManagers.makeReservation(pck, cst);
 
+        // Create reservation and process payment
+        Reservation newRes = ReservationsManagers.makeReservation(pck, cst);
+        createTransaction(newRes, cst);
     }
-public static void paymentMaker(Reservation res,Customer cst) throws IOException {
 
-    BufferedWriter writer = new BufferedWriter(new FileWriter("services/transactions.txt"));
-    LocalDate now = LocalDate.now();
-    String date = now.format(DATE_FORMATTER);
+    private static void createTransaction(Reservation res, Customer cst) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/transactions.txt", true))) {
+            LocalDate now = LocalDate.now();
+            String date = now.format(DATE_FORMATTER);
 
-    writer.write(String.join(",",date,String.valueOf(res.getRelatedPackage().getTotalCost()),
-            String.valueOf(res.getId()),String.valueOf(cst.getID())));
-}
+            writer.write(String.format("%s,%s,%s,%s,%s\n",
+                    date,
+                    res.getRelatedPackage().getDiscountedPrice(),
+                    res.getId(),
+                    cst.getID(),
+                    "Purchase"
 
+            ));
+        }
+    }
+    static void moneyReturn(int resID, int amount){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/transactions.txt", true))) {
+            LocalDate now = LocalDate.now();
+            String date = now.format(DATE_FORMATTER);
+            Reservation res = ReservationsManagers.getReservation(resID);
+            Customer cst = res.getCustomer();
 
+            writer.write(String.format("%s,%s,%s,%s,%s\n",
+                    date,
+                    amount,
+                    res.getId(),
+                    cst.getID(),
+                    "Refund"
 
+            ));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

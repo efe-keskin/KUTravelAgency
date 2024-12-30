@@ -3,9 +3,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import Users.Customer;
 import core.App;
 import products.Hotel;
 import products.Flight;
@@ -16,13 +18,14 @@ import services.PackageManager;
 public class PackageMakerGUI extends JFrame {
     private JPanel mainPanel;
     private CardLayout cardLayout;
-    private JTextField sourceCity;
-    private JTextField destinationCity;
+    private JComboBox sourceCity;
+    private JComboBox destinationCity;
     private JTable resultsTable;
     private LocalDate startDate;
     private LocalDate endDate;
     private Hotel selectedHotel;
     private Flight selectedFlight;
+    private LocalDateTime taxiTime;
     DateTimeFormatter formatterDate = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter formatterTime = java.time.format.DateTimeFormatter.ofPattern("H:mm");
     public PackageMakerGUI() {
@@ -44,6 +47,12 @@ public class PackageMakerGUI extends JFrame {
  * This method
  * **/
     private void createInitialPanel() {
+        String[] cityNames = {
+                "Istanbul", "Paris", "Berlin", "Rome", "Amsterdam", "Madrid",
+                "Vienna", "Prague", "Budapest", "Dublin", "Copenhagen", "Stockholm",
+                "Helsinki", "Ankara", "Lisbon", "Brussels", "Zurich", "Oslo",
+                "Athens", "Edinburgh", "Dubai"
+        };
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -53,14 +62,14 @@ public class PackageMakerGUI extends JFrame {
         gbc.gridx = 0; gbc.gridy = 0;
         panel.add(new JLabel("Source City:"), gbc);
         gbc.gridx = 1;
-        sourceCity = new JTextField(20);
+        sourceCity = new JComboBox<>(cityNames);
         panel.add(sourceCity, gbc);
 
         // Destination City
         gbc.gridx = 0; gbc.gridy = 1;
         panel.add(new JLabel("Destination City:"), gbc);
         gbc.gridx = 1;
-        destinationCity = new JTextField(20);
+        destinationCity = new JComboBox<>(cityNames);
         panel.add(destinationCity, gbc);
 
         // Date Selection
@@ -84,8 +93,8 @@ public class PackageMakerGUI extends JFrame {
             try {
                 startDate = LocalDate.parse(startDateField.getText());
                 endDate = LocalDate.parse(endDateField.getText());
-                searchHotels(destinationCity.getText());
-                cardLayout.show(mainPanel, "hotelSelection");
+                searchHotels((String) destinationCity.getSelectedItem());
+             //   cardLayout.show(mainPanel, "hotelSelection");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this,
                         "Please enter valid dates in YYYY-MM-DD format",
@@ -94,6 +103,14 @@ public class PackageMakerGUI extends JFrame {
             }
         });
         panel.add(searchButton, gbc);
+        // Back Button
+        gbc.gridx = 0; gbc.gridy = 5;
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> {
+            if(App.isAdmin){dispose(); new AdminGUI().setVisible(true);}
+            else{dispose(); new CustomerUI().setVisible(true);}
+        });
+        panel.add(backButton, gbc);
 
         mainPanel.add(panel, "initial");
     }
@@ -113,8 +130,8 @@ public class PackageMakerGUI extends JFrame {
             if (selectedRow >= 0) {
                 int hotelId = (int) resultsTable.getValueAt(selectedRow, 0);
                 selectedHotel = currentHotels.get(selectedRow);
-                searchFlights(sourceCity.getText(), destinationCity.getText());
-                cardLayout.show(mainPanel, "flightSelection");
+                searchFlights((String)sourceCity.getSelectedItem(), (String) destinationCity.getSelectedItem());
+             //   cardLayout.show(mainPanel, "flightSelection");
             }
         });
         buttonPanel.add(selectButton);
@@ -146,10 +163,39 @@ public class PackageMakerGUI extends JFrame {
         mainPanel.add(panel, "taxiSelection");
     }
 
-    private void searchTaxis(String city) {
+    void searchTaxis(String city, LocalDateTime taxiPickupDateTime) {
         ArrayList<Taxi> taxisInCity = Taxi.selectByCity(city);
-        currentTaxis = Taxi.availableCarsListMaker(startDate, taxisInCity);
+        double distanceKm = selectedHotel.getDistanceToAirport();
+        int travelTimeMinutes = (int) Math.ceil((distanceKm / 60.0) * 60);
 
+        LocalDateTime taxiArrivalTime = taxiPickupDateTime.plusMinutes(travelTimeMinutes);
+        taxiTime = taxiPickupDateTime;
+        System.out.println(taxiTime);
+
+        currentTaxis = new ArrayList<>();
+        for (Taxi taxi : taxisInCity) {
+            boolean hasAvailability = true;
+            LocalDateTime checkTime = taxiPickupDateTime;
+
+            while (!checkTime.isAfter(taxiArrivalTime)) {
+                if (taxi.getAvailabilityForDateTime(checkTime) <= 0) {
+                    hasAvailability = false;
+                    break;
+                }
+                checkTime = checkTime.plusMinutes(2);
+            }
+
+            if (hasAvailability) {
+                currentTaxis.add(taxi);
+            }
+        }
+        if (currentTaxis.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "No available taxis found in " + city + " at " + taxiPickupDateTime.format(formatterTime),
+                    "No Results",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -162,6 +208,7 @@ public class PackageMakerGUI extends JFrame {
         model.addColumn("Base Fare($)");
         model.addColumn("Per Km Rate($/km)");
         model.addColumn("Total Price($)");
+        model.addColumn("Journey Time(min)");
 
         for (Taxi taxi : currentTaxis) {
             model.addRow(new Object[]{
@@ -169,13 +216,17 @@ public class PackageMakerGUI extends JFrame {
                     taxi.getTaxiType(),
                     taxi.getBaseFare(),
                     taxi.getPerKmRate(),
-                    taxi.taxiPriceCalculator(selectedHotel)
+                    taxi.taxiPriceCalculator(selectedHotel),
+                    travelTimeMinutes
             });
         }
 
-        ((JTable)((JScrollPane)((JPanel)mainPanel.getComponent(3))
-                .getComponent(0)).getViewport().getView()).setModel(model);
+        JTable taxiTable = (JTable)((JScrollPane)((JPanel)mainPanel.getComponent(3))
+                .getComponent(0)).getViewport().getView();
+        taxiTable.setModel(model);
+        cardLayout.show(mainPanel, "taxiSelection");
     }
+
     private ArrayList<Flight> currentFlights;
     private ArrayList<Taxi> currentTaxis;
     private Taxi selectedTaxi;
@@ -192,10 +243,26 @@ public class PackageMakerGUI extends JFrame {
             int selectedRow = flightTable.getSelectedRow();
             if (selectedRow >= 0) {
                 selectedFlight = currentFlights.get(selectedRow);
-                searchTaxis(destinationCity.getText());
-                cardLayout.show(mainPanel, "taxiSelection");
+
+                // Suppose the flight arrives the same day or next day:
+                // If flight.isDayChange() is true, arrival is the next day
+                LocalDate arrivalDate = selectedFlight.isDayChange()
+                        ? startDate.plusDays(1)
+                        : startDate;
+
+                // Merge arrival date + flight arrival time into LocalDateTime
+                LocalDateTime flightArrivalDateTime = LocalDateTime.of(
+                        arrivalDate,
+                        selectedFlight.getArrivalTime()
+                );
+
+                // Now we call searchTaxis with city and the flight arrival dateTime
+                searchTaxis((String) destinationCity.getSelectedItem(), flightArrivalDateTime);
+
+             //   cardLayout.show(mainPanel, "taxiSelection");
             }
         });
+
         buttonPanel.add(selectButton);
         panel.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -204,10 +271,17 @@ public class PackageMakerGUI extends JFrame {
 
     private ArrayList<Hotel> currentHotels; // Add this as class field
 
-    private void searchHotels(String city) {
+    void searchHotels(String city) {
         ArrayList<Hotel> hotelsInCity = Hotel.selectByCity(city);
         currentHotels = Hotel.availableRoomsListMaker(startDate, endDate, hotelsInCity);
 
+        if (currentHotels.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "No available hotels found in " + city + " for selected dates",
+                    "No Results",
+                    JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -233,12 +307,22 @@ public class PackageMakerGUI extends JFrame {
 
         resultsTable.setModel(model);
         resultsTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        cardLayout.show(mainPanel, "hotelSelection");
     }
 
-    private void searchFlights(String source, String destination) {
+    void searchFlights(String source, String destination) {
         ArrayList<Flight> flights = Flight.selectByCity(destination, source);
         currentFlights = Flight.availableSeatsListMaker(startDate, flights);
 
+        if (currentFlights.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "No available flights found from " + source + " to " + destination,
+                    "No Results",
+                    JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            new PackageMakerGUI().setVisible(true);
+            return;
+        }
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -247,6 +331,7 @@ public class PackageMakerGUI extends JFrame {
         };
 
         model.addColumn("Flight ID");
+        model.addColumn("Airline");
         model.addColumn("Price($)");
         model.addColumn("Duration");
         model.addColumn("Departure Date");
@@ -256,6 +341,7 @@ public class PackageMakerGUI extends JFrame {
         for (Flight flight : currentFlights) {
             model.addRow(new Object[]{
                     flight.getId(),
+                    flight.getAirline(),
                     flight.getPrice(),
                     flight.getDuration(),
                     flight.isDayChange() ? startDate.minusDays(1).format(formatterDate) : startDate.format(formatterDate),
@@ -266,6 +352,7 @@ public class PackageMakerGUI extends JFrame {
 
         ((JTable)((JScrollPane)((JPanel)mainPanel.getComponent(2))
                 .getComponent(0)).getViewport().getView()).setModel(model);
+        cardLayout.show(mainPanel, "flightSelection");
     }
 
     public static void main(String[] args) {
@@ -282,13 +369,19 @@ public class PackageMakerGUI extends JFrame {
                     selectedFlight.getId(),
                     selectedTaxi.getId(),
                     startDate,
-                    endDate
+                    endDate,
+                    taxiTime
             );
-
+            travelPackage.setTaxiTime(taxiTime);
             JOptionPane.showMessageDialog(this,
                     "Package created successfully!\nTotal Cost: $" + travelPackage.getTotalCost(),
                     "Success",
                     JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            if(App.isAdmin){
+                new AdminGUI().setVisible(true);
+            }
+            else{new PaymentGUI((Customer) App.user,travelPackage).setVisible(true);}
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this,
                     "Error creating package: " + e.getMessage(),

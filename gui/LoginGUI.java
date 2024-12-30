@@ -2,7 +2,6 @@ package gui;
 
 import constants.Constants;
 import core.App;
-import resources.CustomTools;
 import custom.PasswordFieldCustom;
 import custom.TextFieldCustom;
 import databases.AdminDB;
@@ -30,11 +29,6 @@ public class LoginGUI extends JFrame implements ActionListener {
         addGuiComponent();
     }
     private void addGuiComponent(){
-        JLabel loginImage = CustomTools.loadImage(Constants.LOGIN_IMAGE_PATH);
-        loginImage.setBounds((Constants.LOGINFRAME_SIZE.width - loginImage.getPreferredSize().width)/2,
-                25, Constants.LOGIN_IMAGE_SIZE.width, Constants.LOGIN_IMAGE_SIZE.height
-        );
-
         // username field
         usernameField = new TextFieldCustom("Enter Username",30);
 
@@ -42,7 +36,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         usernameField.setForeground(Color.WHITE);
         usernameField.setBounds(
                 50,
-                loginImage.getY()+315,
+                315,
                 Constants.TEXTFIELD_SIZE.width, Constants.TEXTFIELD_SIZE.height
         );
         // password field
@@ -93,7 +87,7 @@ public class LoginGUI extends JFrame implements ActionListener {
             }
         });
         // add to frame
-        getContentPane().add(loginImage);
+
         getContentPane().add(usernameField);
         getContentPane().add(passwordField);
         getContentPane().add(loginButton);
@@ -114,48 +108,52 @@ public class LoginGUI extends JFrame implements ActionListener {
             JLabel resultLabel = new JLabel();
             resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
             resultDialog.add(resultLabel);
-            resultDialog.getContentPane().setBackground(Constants.PRIMARY_COLOR);
+            resultDialog.getContentPane().setBackground(Constants.BUTTON_COLOR);
             resultLabel.setForeground(Constants.SECONDARY_COLOR);
 
             // retrieve entered credentials
             String username = usernameField.getText();
             String password = passwordField.getText();
 
-            // validate credentials in databases.CustomerDB
-            if (CustomerDB.getCustomerPass(username) != null) {
-                // checks password
-                String validPass = CustomerDB.getCustomerPass(username);
-                if (password.equals(validPass)) {
-                    //display a success dialog
+            // Check if username exists in CustomerDB
+            String customerPass = CustomerDB.getCustomerPass(username);
+            // Check if username exists in AdminDB
+            String adminPass = AdminDB.getAdminPass(username);
+
+            if (customerPass != null) {
+                // username exists in CustomerDB
+                if (password.equals(customerPass)) {
+                    // Customer password is correct
                     resultLabel.setText("Login Successful!");
-                    App.loggedIn= true;
+                    App.loggedIn = true;
                     App.user = CustomerDB.getCustomer(username);
                     dispose();
-                    new MenuGUI().setVisible(true);
+                    new CustomerUI().setVisible(true);
                 } else {
-                    // display an incorrect password dialog
-                    resultLabel.setText("Invalid Password");
+                    // Customer password is incorrect
+                    resultLabel.setText("Invalid Password!");
                 }
-            } else if (AdminDB.getAdminPass(username) != null) {
-                // checks password
-                String validPass = AdminDB.getAdminPass(username);
-                if (password.equals(validPass)) {
-                    //display a success dialog
-                    App.loggedIn= true;
+            } else if (adminPass != null) {
+                // username exists in AdminDB
+                if (password.equals(adminPass)) {
+                    // Admin password is correct
+                    App.loggedIn = true;
                     App.isAdmin = true;
                     App.user = AdminDB.getAdmin(username);
                     resultLabel.setText("Admin Login Successful!");
                     dispose();
                     new AdminGUI().setVisible(true);
                 } else {
-                    // display an incorrect username dialog
-                    resultLabel.setText("Invalid Username");
-
+                    // Admin password is incorrect
+                    resultLabel.setText("Invalid Password!");
                 }
+            } else {
+                // username does not exist in either DB
+                resultLabel.setText("Invalid Username!");
             }
-                resultDialog.setVisible(true);
 
-
-            }
+            resultDialog.setVisible(true);
         }
     }
+
+}

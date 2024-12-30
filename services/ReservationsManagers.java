@@ -1,14 +1,19 @@
 package services;
 
 import Users.Customer;
-import Users.User;
+import core.App;
 import databases.CustomerDB; // or wherever your user lookup code is
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.Format;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import products.*;
 
 /**
  * ReservationsManager handles creating, reading, updating, and saving
@@ -72,27 +77,16 @@ public class ReservationsManagers {
                 int id = Integer.parseInt(parts[0]);
                 int packageId = Integer.parseInt(parts[1]);
                 boolean status = parts[2].equalsIgnoreCase("confirmed");
-
-                LocalDate dateStart = parts[3].isEmpty()
-                        ? null
-                        : LocalDate.parse(parts[3], DATE_FORMATTER);
-
-                LocalDate dateEnd = parts[4].isEmpty()
-                        ? null
-                        : LocalDate.parse(parts[4], DATE_FORMATTER);
-
                 String userId = parts[5];
 
                 // Retrieve actual Package and User objects
                 Package pck = PackageManager.retrievePackage(packageId);
-                User user = CustomerDB.retrieveCustomer(userId);
+                Customer user = CustomerDB.retrieveCustomer(userId);
 
                 // Build the Reservation
                 Reservation res = new Reservation(id, pck, user);
                 res.setStatus(status);
-                // If your Reservation has date setters:
-                // res.setDateStart(dateStart);
-                // res.setDateEnd(dateEnd);
+
 
                 reservations.put(id, res);
 
@@ -112,10 +106,6 @@ public class ReservationsManagers {
      */
     public static void saveReservations() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            /*
-             For each reservation, we'll write out:
-             ID,PACKAGE_ID,(confirmed|cancelled),DATE_START,DATE_END,USER_ID
-            */
             for (Reservation res : reservations.values()) {
                 int id = res.getId();
                 int packageId = (res.getRelatedPackage() != null)
@@ -133,7 +123,7 @@ public class ReservationsManagers {
 
                 String userId = (res.getCustomer() != null)
                         ? String.valueOf(res.getCustomer().getID())
-                        : "";
+                        : "customer is null";
 
                 writer.write(String.join(",",
                         String.valueOf(id),
@@ -161,22 +151,19 @@ public class ReservationsManagers {
      * @throws FileNotFoundException if the file is not found when loading
      */
     public static Reservation makeReservation(Package pck, Customer user) throws FileNotFoundException {
-        // If we've never loaded reservations, ensure we do so
-        if (reservations.isEmpty()) {
-            loadReservations();
-        }
+        CustomerDB.loadCustomers(); // Ensure customers are loaded
+        loadReservations();
 
         int id = generateId();
         Reservation newRes = new Reservation(id, pck, user);
         newRes.setStatus(true);
-        newRes.setDateStart(pck.getDateStart());
-        newRes.setDateEnd(pck.getDateEnd());
         reservations.put(id, newRes);
 
-        saveReservations(); // Immediately persist changes
+        saveReservations();
         user.loadTravelHistory();
         return newRes;
     }
+
 
     /**
      * Fetch a reservation by ID (if it exists).
@@ -185,34 +172,102 @@ public class ReservationsManagers {
      * @return the Reservation object or null if not found
      */
     public static Reservation getReservation(int id) {
+        loadReservations();
         return reservations.get(id);
     }
 
-    /**
-     * Cancel a reservation by ID (sets status to false/cancelled).
-     *
-     * @param id       the reservation ID to cancel
-     * @param customer the customer requesting cancellation
-     * @return true if successfully cancelled, false if the reservation does not exist
-     * @throws FileNotFoundException if the reservations file is not found
-     */
-    public static boolean cancelReservation(int id, Customer customer) throws FileNotFoundException {
+
+    public static void ReservationCancellation (int id, String keyword) throws FileNotFoundException {
+        loadReservations();
         Reservation res = reservations.get(id);
         if (res != null) {
+            Package pck = res.getRelatedPackage();
+            Hotel hotel = pck.getHotel();
+            for (LocalDate date = pck.getHotelStart(); !date.isAfter(pck.getDateEnd()); date = date.plusDays(1)) {
+                hotel.cancelBook(date);
+            }
+
+            Flight flight = pck.getFlight();
+            flight.cancelBook(!flight.isDayChange()?pck.getDateStart():pck.getDateStart().minusDays(1));
+
+            Taxi taxi = pck.getTaxi();
+
+            double distanceKm = hotel.getDistanceToAirport();
+            int travelTimeMinutes = (int) Math.ceil((distanceKm / 60.0) * 60);
+            LocalDateTime taxiArrivalTime = pck.getTaxiTime().plusMinutes(travelTimeMinutes);
+
+            LocalDateTime bookingTime = pck.getTaxiTime();
+            while (!bookingTime.isAfter(taxiArrivalTime)) {
+                taxi.cancelBook(bookingTime);
+                bookingTime = bookingTime.plusMinutes(2);
+            }
             res.setStatus(false);
             saveReservations();
+            Customer customer = reservations.get(id).getCustomer();
             customer.loadTravelHistory();
-            return true;
+            int amount = pck.getDiscountedPrice();
+            if(keyword.equals("immediate")) {
+               amount = pck.getDiscountedPrice();
+            }
+            else if(keyword.equals("far")){
+                amount = pck.getDiscountedPrice();
+            }
+            else if (keyword.equals("inter")) {
+                amount = (int) (pck.getDiscountedPrice()*0.85);
+            }
+            else if (keyword.equals("close")){
+                amount = (int) (pck.getDiscountedPrice()*0.70);
+            }
+
+
+            Vendor.moneyReturn(res.getId(), amount);
+
+
+
+
         }
-        return false;
+        else{System.out.println("Reservation couldn't be found");}
+
+
     }
 
-    /**
-     * Retrieve all reservations currently loaded in memory.
-     *
-     * @return a collection of all Reservation objects
-     */
+
+
+
+    public static String cancellationInitiator(Reservation res) throws FileNotFoundException {
+        LocalTime departureTime =  res.getRelatedPackage().getFlight().getDepartureTime();
+        LocalDate departureDate = !res.getRelatedPackage().getFlight().isDayChange() ? res.getDateStart():res.getDateStart().minusDays(1);
+        LocalDateTime departureDateTime = LocalDateTime.of(departureDate,departureTime);
+        LocalDateTime now = LocalDateTime.now();
+        long hoursBetween = ChronoUnit.HOURS.between(now,departureDateTime);
+        System.out.println("Departure DateTime: " + departureDateTime);
+        System.out.println("Current DateTime: " + now);
+        System.out.println(hoursBetween);
+        if(App.isAdmin){
+            ReservationCancellation(res.getId(),"immediate");
+            return "immediate";
+        }
+        else if (
+                hoursBetween>72 //more than 72h before departure
+
+        ) {
+            ReservationCancellation(res.getId(),"far");
+            return "far";
+
+        } else if (
+                hoursBetween>=48//48-72h
+        ) {
+            ReservationCancellation(res.getId(),"inter");
+            return "inter";
+        } else {
+            ReservationCancellation(res.getId(),"close");
+            return "close";
+        }
+
+
+    }
     public static Collection<Reservation> getAllReservations() {
+        loadReservations();
         return reservations.values();
     }
 

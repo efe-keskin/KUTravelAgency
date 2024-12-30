@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -17,8 +17,12 @@ public class Taxi extends Product {
     private double baseFare;
     private double perKmRate;
 
-    // 1) A map for storing dates and availability (similar to hotels)
-    private HashMap<LocalDate, Integer> availableDates;
+    /**
+     *  We now store availability for specific date-times (instead of just dates).
+     *  Key: LocalDateTime
+     *  Value: capacity (int)
+     */
+    private HashMap<LocalDateTime, Integer> availableDateTimes;
 
     public Taxi(String city, String taxiType, int availableCount, double baseFare, double perKmRate, int id) {
         super(availableCount);
@@ -28,8 +32,8 @@ public class Taxi extends Product {
         this.perKmRate = perKmRate;
         this.id = id;
 
-        // Initialize the map to avoid NullPointerExceptions
-        this.availableDates = new HashMap<>();
+        // Initialize to avoid NullPointerExceptions
+        this.availableDateTimes = new HashMap<>();
     }
 
     /**
@@ -40,45 +44,49 @@ public class Taxi extends Product {
     }
 
     /**
-     * 2) Reads 'taxiavailability.txt' and populates the availableDates map
-     *    with (date -> capacity) entries for this taxi's ID.
+     * Reads 'taxiavailability.txt' and populates the availableDateTimes map
+     * with (dateTime -> capacity) entries for this taxi's ID.
+     * Updated to parse date and time using yyyy-MM-dd HH:mm:ss
      */
     public void taxiAvailabilityParser() throws FileNotFoundException {
         File file = new File("products/taxiavailability.txt");
         Scanner reader = new Scanner(file);
 
         // Clear out any existing data to avoid duplicates
-        this.availableDates.clear();
+        this.availableDateTimes.clear();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // Updated formatter: includes year, month, day, hour, minute, second
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
             String[] dataArray = line.split(",");
-            // Make sure the line has at least 3 parts: id, date, capacity
+            // Make sure the line has at least 3 parts: id, dateTime, capacity
             if (dataArray.length < 3) {
                 continue; // skip malformed lines
             }
 
             int lineId = Integer.parseInt(dataArray[0]);
-            LocalDate date = LocalDate.parse(dataArray[1], formatter);
+            LocalDateTime dateTime = LocalDateTime.parse(dataArray[1], formatter);
             int capacity = Integer.parseInt(dataArray[2]);
 
             // Only load data for this particular taxi
             if (lineId == this.id) {
-                this.availableDates.put(date, capacity);
+                this.availableDateTimes.put(dateTime, capacity);
             }
         }
         reader.close();
     }
-    public static ArrayList<Taxi> availableCarsListMaker(LocalDate dateStart,
+
+    /**
+     * Generates a list of Taxis that have capacity > 0 at the given startDateTime.
+     */
+    public static ArrayList<Taxi> availableCarsListMaker(LocalDateTime startDateTime,
                                                          ArrayList<Taxi> taxiList) {
         ArrayList<Taxi> newTaxiList = new ArrayList<>();
 
-        // Check each Taxi in the provided list
         for (Taxi taxi : taxiList) {
-            // Check availability only for the start date
-            if (taxi.getAvailabilityForDate(dateStart) > 0) {
+            if (taxi.getAvailabilityForDateTime(startDateTime) > 0) {
                 newTaxiList.add(taxi);
             }
         }
@@ -86,14 +94,17 @@ public class Taxi extends Product {
         return newTaxiList;
     }
 
+    /**
+     * Calculates taxi price based on the hotel's distance to airport.
+     */
     public double taxiPriceCalculator(Hotel hotel) {
         // baseFare + (airportDistance * perKmRate)
         return this.baseFare + (hotel.getDistanceToAirport() * this.perKmRate);
     }
 
     /**
-     * 3) Rewrites 'taxiavailability.txt' to reflect the updated availability
-     *    for all taxis, including this one.
+     * Rewrites 'taxiavailability.txt' to reflect the updated availability
+     * for all taxis, including this one, using dateTime in yyyy-MM-dd HH:mm:ss format.
      */
     public void updateFile() throws FileNotFoundException {
         File file = new File("products/taxiavailability.txt");
@@ -107,40 +118,40 @@ public class Taxi extends Product {
         }
 
         // Prepare for parsing and rewriting
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         List<String> updatedLines = new ArrayList<>();
-        // We'll track which LocalDates we’ve updated so we don't add duplicates
-        Set<LocalDate> updatedDates = new HashSet<>();
+        // We'll track which LocalDateTimes we've updated so we don't add duplicates
+        Set<LocalDateTime> updatedDateTimes = new HashSet<>();
 
         // 2) Loop through existing lines
         for (String line : lines) {
             String[] dataArray = line.split(",");
             if (dataArray.length < 3) {
-                // If line is malformed, just skip or keep it as is
+                // If line is malformed, just keep it as-is or skip
                 updatedLines.add(line);
                 continue;
             }
 
             int lineId = Integer.parseInt(dataArray[0]);
-            LocalDate lineDate = LocalDate.parse(dataArray[1], formatter);
+            LocalDateTime lineDateTime = LocalDateTime.parse(dataArray[1], formatter);
             int lineCapacity = Integer.parseInt(dataArray[2]);
 
-            // If this line belongs to our taxi and date is in our map, replace it
-            if (lineId == this.id && availableDates.containsKey(lineDate)) {
-                int newCapacity = availableDates.get(lineDate);
-                updatedLines.add(this.id + "," + lineDate.format(formatter) + "," + newCapacity);
-                updatedDates.add(lineDate);
+            // If this line belongs to our taxi and dateTime is in our map, replace it
+            if (lineId == this.id && availableDateTimes.containsKey(lineDateTime)) {
+                int newCapacity = availableDateTimes.get(lineDateTime);
+                updatedLines.add(this.id + "," + lineDateTime.format(formatter) + "," + newCapacity);
+                updatedDateTimes.add(lineDateTime);
             } else {
                 // Otherwise, keep the existing line
                 updatedLines.add(line);
             }
         }
 
-        // 3) Add lines for any date in availableDates not found in original file
-        for (LocalDate date : availableDates.keySet()) {
-            if (!updatedDates.contains(date)) {
-                int newCapacity = availableDates.get(date);
-                updatedLines.add(this.id + "," + date.format(formatter) + "," + newCapacity);
+        // 3) Add lines for any dateTime in availableDateTimes not found in the original file
+        for (LocalDateTime dateTime : availableDateTimes.keySet()) {
+            if (!updatedDateTimes.contains(dateTime)) {
+                int newCapacity = availableDateTimes.get(dateTime);
+                updatedLines.add(this.id + "," + dateTime.format(formatter) + "," + newCapacity);
             }
         }
 
@@ -155,43 +166,74 @@ public class Taxi extends Product {
     }
 
     /**
-     * 4) Books a taxi on a specific date (similar to hotel bookings).
-     *    - Loads availability if not already loaded.
-     *    - Checks if the date has capacity > 0; if so, decrement.
-     *    - If date doesn't exist, sets a default capacity, then decrements.
-     *    - Updates the file at the end.
+     * Books a taxi on a specific dateTime.
+     * - Loads availability if not already loaded.
+     * - Checks if the dateTime has capacity > 0; if so, decrement.
+     * - If dateTime doesn't exist, sets a default capacity, then decrements.
+     * - Updates the file at the end.
      */
-    public void book(LocalDate date) {
+    public void book(LocalDateTime dateTime) {
         try {
-            // Ensure availableDates is loaded
-            if (availableDates == null || availableDates.isEmpty()) {
+            // Ensure availableDateTimes is loaded
+            if (availableDateTimes == null || availableDateTimes.isEmpty()) {
                 taxiAvailabilityParser();
             }
 
-            // Check if the date exists in the dictionary
-            if (availableDates.containsKey(date)) {
-                int currentCap = availableDates.get(date);
-                // If there's capacity, decrement
+            // Check if the dateTime exists in the map
+            if (availableDateTimes.containsKey(dateTime)) {
+                int currentCap = availableDateTimes.get(dateTime);
                 if (currentCap > 0) {
-                    availableDates.put(date, currentCap - 1);
+                    availableDateTimes.put(dateTime, currentCap - 1);
                 } else {
-                    System.out.println("No more available taxis on " + date);
+                    System.out.println("No more available taxis on " + dateTime);
                     return;
                 }
             } else {
-                // If the date doesn't exist, add a default capacity
-                int defaultCapacity = getAvailableCount(); // adjust this value as needed
-                availableDates.put(date, defaultCapacity - 1);
+                // If the dateTime doesn't exist, add a default capacity
+                int defaultCapacity = getAvailableCount(); // or any desired default
+                availableDateTimes.put(dateTime, defaultCapacity - 1);
             }
 
-            // Finally, update the file to reflect the changes
+            // Update the file
             updateFile();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+    public void cancelBook(LocalDateTime dateTime) {
+        try {
+            // Ensure availableDateTimes is loaded
+            if (availableDateTimes == null || availableDateTimes.isEmpty()) {
+                taxiAvailabilityParser();
+            }
 
+            // Check if the dateTime exists in the map
+            if (availableDateTimes.containsKey(dateTime)) {
+                int currentCap = availableDateTimes.get(dateTime);
+                int maxCapacity = getAvailableCount();
+                // Ensure we don't exceed the maximum number of taxis
+                if (currentCap < maxCapacity) {
+                    availableDateTimes.put(dateTime, currentCap + 1);
+                    System.out.println("Taxi booking cancelled successfully for " + dateTime);
+                } else {
+                    System.out.println("Cannot cancel booking - taxi capacity already at maximum for " + dateTime);
+                    return;
+                }
+            } else {
+                // If the dateTime doesn't exist, can't cancel a non-existent booking
+                System.out.println("No taxi booking record found for " + dateTime);
+                return;
+            }
+
+            // Update the file
+            updateFile();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    // --- Getters and other methods ---
 
     public String getCity() {
         return city;
@@ -217,13 +259,14 @@ public class Taxi extends Product {
     public int getId() {
         return id;
     }
+
+    /**
+     * Select Taxis by city name.
+     */
     public static ArrayList<Taxi> selectByCity(String city) {
-        // Create a list to store all matching taxis
         ArrayList<Taxi> taxisInCity = new ArrayList<>();
 
-        // Iterate through all taxis in the TravelParser's dictionary
         for (Taxi taxi : TravelParser.getTaxisDict().values()) {
-            // Compare city names, ignoring case to make the search more robust
             if (taxi.getCity().equalsIgnoreCase(city)) {
                 taxisInCity.add(taxi);
             }
@@ -231,9 +274,13 @@ public class Taxi extends Product {
 
         return taxisInCity;
     }
-    public int getAvailabilityForDate(LocalDate date) {
+
+    /**
+     * Get the availability for a specific dateTime. If dateTime not in map, return default capacity.
+     */
+    public int getAvailabilityForDateTime(LocalDateTime dateTime) {
         // Ensure the availability data is loaded
-        if (availableDates == null || availableDates.isEmpty()) {
+        if (availableDateTimes == null || availableDateTimes.isEmpty()) {
             try {
                 taxiAvailabilityParser();
             } catch (FileNotFoundException e) {
@@ -242,6 +289,6 @@ public class Taxi extends Product {
         }
 
         // Return capacity if present; otherwise the default
-        return availableDates.getOrDefault(date, getAvailableCount());
+        return availableDateTimes.getOrDefault(dateTime, getAvailableCount());
     }
 }

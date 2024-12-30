@@ -155,6 +155,39 @@ public class Hotel extends Product{
             e.printStackTrace();
         }
     }
+    public void cancelBook(LocalDate date) {
+        try {
+            // 1) Ensure availableDates is loaded
+            if (availableDates == null || availableDates.isEmpty()) {
+                hotelAvailabilityParser();
+            }
+
+            // 2) Check if the date exists in the dictionary
+            if (availableDates.containsKey(date)) {
+                int currentCap = availableDates.get(date);
+                // 3) Add 1 to available capacity
+                int maxCapacity = getAvailableCount();
+                // Ensure we don't exceed the maximum capacity
+                if (currentCap < maxCapacity) {
+                    availableDates.put(date, currentCap + 1);
+                    System.out.println("Booking cancelled successfully for " + date);
+                } else {
+                    System.out.println("Cannot cancel booking - room capacity already at maximum for " + date);
+                    return;
+                }
+            } else {
+                // 4) If this date doesn't exist, something is wrong
+                System.out.println("No booking record found for " + date);
+                return;
+            }
+
+            // 5) Update the file to reflect the new availability
+            updateFile();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     public static ArrayList<Hotel> availableRoomsListMaker(LocalDate dateStart,
                                                   LocalDate dateEnd,
                                                   ArrayList<Hotel> hotelList)

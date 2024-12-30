@@ -256,7 +256,38 @@ public class Flight extends Product {
         }
     }
 
+    public void cancelBook(LocalDate date) {
+        try {
+            // 1) Ensure availability is loaded
+            if (availableDates == null || availableDates.isEmpty()) {
+                flightAvailabilityParser();
+            }
 
+            // 2) Check if the date is in our map
+            if (availableDates.containsKey(date)) {
+                int currentCap = availableDates.get(date);
+                int maxCapacity = getAvailableCount();
+                // Ensure we don't exceed the maximum seat capacity
+                if (currentCap < maxCapacity) {
+                    availableDates.put(date, currentCap + 1);
+                    System.out.println("Flight booking cancelled successfully for " + date);
+                } else {
+                    System.out.println("Cannot cancel booking - flight already at maximum capacity for " + date);
+                    return;
+                }
+            } else {
+                // 3) If date not present, can't cancel a non-existent booking
+                System.out.println("No flight booking record found for " + date);
+                return;
+            }
+
+            // 4) Persist changes
+            updateFile();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String toString() {

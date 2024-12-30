@@ -7,14 +7,17 @@ import products.Taxi;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class PackageManager {
-protected static HashMap<Integer,Package> packageDict;
+public static HashMap<Integer,Package> packageDict;
 private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 private static int newID=400000;
     public static void packageDictGenerator() {
         packageDict = new HashMap<Integer,Package>();
@@ -32,8 +35,11 @@ private static int newID=400000;
                     continue;
                 }
                 int id = Integer.parseInt(lineSep[0]);
+
                 Package aPackage = new Package(lineSep[1],Integer.parseInt(lineSep[2]),Integer.parseInt(lineSep[3])
-                        ,Integer.parseInt(lineSep[4]),LocalDate.parse(lineSep[6],formatter),LocalDate.parse(lineSep[7],formatter));
+                        ,Integer.parseInt(lineSep[4]),LocalDate.parse(lineSep[7],formatter),LocalDate.parse(lineSep[8],formatter),LocalDateTime.parse(lineSep[9],dateTimeFormatter),id);
+
+                aPackage.setDiscountedPrice(Integer.parseInt(lineSep[6]));
                 packageDict.put(id, aPackage);
             }
             scanner.close();
@@ -42,12 +48,44 @@ private static int newID=400000;
         }
 
     }
-    public static Package retrievePackage(int packageId) {
-        // Make sure packageDict is initialized
+    public static void deletePackage(int packageId) {
+        // Make sure packageDict is loaded
         if (packageDict == null) {
             packageDict = new HashMap<>();
-            packageDictGenerator();  // loads from packages.txt
+            packageDictGenerator();
         }
+
+        // Retrieve the package
+        Package toDelete = packageDict.get(packageId);
+
+        if (toDelete == null) {
+            System.out.println("No package with ID " + packageId + " found.");
+            return;
+        }
+
+        // Set its type to "not offered"
+        toDelete.setType("not offered");
+
+        // Rewrite the packages file to persist changes
+        updatePackagesFile();
+
+        System.out.println("Package " + packageId + " is now marked as 'not offered'.");
+    }
+public static HashMap<Integer,Package> getActivePackages(){
+        packageDictGenerator();
+        HashMap<Integer,Package> returnDict = new HashMap<Integer,Package>();
+        for(Package p: packageDict.values()) {
+            if(!p.getType().equals("not offered")){
+                returnDict.put(p.getId(),p);
+            }
+        }
+        return returnDict;
+}
+    public static Package retrievePackage(int packageId) {
+        // Make sure packageDict is initialized
+
+            packageDictGenerator();  // loads from packages.txt
+
 
         // Retrieve the package from the dictionary
         return packageDict.get(packageId);
@@ -63,9 +101,9 @@ private static int newID=400000;
     }
 
 
-    public static Package makePackage(String type, int hotelID, int flightID, int taxiID, LocalDate dateStart, LocalDate dateEnd){
+    public static Package makePackage(String type, int hotelID, int flightID, int taxiID, LocalDate dateStart, LocalDate dateEnd, LocalDateTime taxiTime){
         idGenerator();
-        Package newPack = new Package(type,hotelID,flightID,taxiID,dateStart,dateEnd);
+        Package newPack = new Package(type,hotelID,flightID,taxiID,dateStart,dateEnd,taxiTime,newID);
         newPack.setId(newID);
         packageDict.put(newID,newPack);
         updatePackagesFile();
@@ -73,14 +111,14 @@ private static int newID=400000;
 
     }
 
-    private static void updatePackagesFile() {
+    public static void updatePackagesFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/packages.txt"))) {
             for (int id : packageDict.keySet()) {
                 Package pck = packageDict.get(id);
                 writer.write(id + "," + pck.getType() + "," + pck.getHotel().getId() + ","
                         + pck.getFlight().getId() + "," + pck.getTaxi().getId() + ","
-                        + pck.getTotalCost() + "," + pck.getDateStart().format(formatter) + ","
-                        + pck.getDateEnd().format(formatter));
+                        + pck.getTotalCost() + "," + pck.getDiscountedPrice() + "," + pck.getDateStart().format(formatter) + ","
+                        + pck.getDateEnd().format(formatter) + "," + pck.getTaxiTime().format(dateTimeFormatter));
                 writer.newLine();
             }
             System.out.println("Packages successfully written to file.");
@@ -88,17 +126,35 @@ private static int newID=400000;
             System.out.println("Error updating packages file: " + e.getMessage());
         }
     }
-    private static void appendPackageToFile(Package pck, int id) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/packages.txt", true))) { // 'true' enables append mode
-            writer.write(id + "," + pck.getType() + "," + pck.getHotel().getId() + ","
-                    + pck.getFlight().getId() + "," + pck.getTaxi().getId() + ","
-                    + pck.getTotalCost() + "," + pck.getDateStart().format(formatter) + ","
-                    + pck.getDateEnd().format(formatter));
-            writer.newLine();
-            System.out.println("Package successfully appended to file.");
-        } catch (IOException e) {
-            System.out.println("Error appending package to file: " + e.getMessage());
+
+
+    public static Package editPackage(int packageId, Integer newHotelId, Integer newFlightId, Integer newTaxiId,
+                                      LocalDate newDateStart, LocalDate newDateEnd) {
+        PackageManager.packageDictGenerator();
+        Package currentPackage = packageDict.get(packageId);
+        if (currentPackage == null) {
+            System.out.println("Package not found: " + packageId);
+            return null;
         }
+
+        // Mark the current package as "not offered" before creating the new one
+        packageDict.get(packageId).setType("not offered");
+        updatePackagesFile();
+        // Use existing values if new ones aren't provided
+        int hotelId = newHotelId != null ? newHotelId : currentPackage.getHotel().getId();
+        int flightId = newFlightId != null ? newFlightId : currentPackage.getFlight().getId();
+        int taxiId = newTaxiId != null ? newTaxiId : currentPackage.getTaxi().getId();
+        LocalDate dateStart = newDateStart != null ? newDateStart : currentPackage.getDateStart();
+        LocalDate dateEnd = newDateEnd != null ? newDateEnd : currentPackage.getDateEnd();
+        LocalDateTime taxiTime = LocalDateTime.of(dateStart, Flight.retrieveFlight(flightId).getArrivalTime());
+
+        // Create the new package with updated components
+        Package newPackage = makePackage("offered", hotelId, flightId, taxiId, dateStart, dateEnd, taxiTime);
+
+        // Save the updated package details
+        updatePackagesFile();
+
+        return newPackage;
     }
 
 }

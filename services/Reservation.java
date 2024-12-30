@@ -17,10 +17,10 @@ public class Reservation {
     private boolean status = true; //confirmed or cancelled
     private LocalDate dateStart;
     private LocalDate dateEnd;
-    private User customer;
+    private Customer customer;
 
 
-    public Reservation(int id,Package pck,User customer){
+    public Reservation(int id,Package pck,Customer customer){
         this.id = id;
         this.relatedPackage = pck;
         this.customer = customer;
@@ -52,7 +52,7 @@ public class Reservation {
         return relatedPackage;
     }
 
-    public User getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
