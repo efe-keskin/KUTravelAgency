@@ -8,10 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Users.Customer;
+import constants.Constants;
 import core.App;
 import products.Hotel;
 import products.Flight;
 import products.Taxi;
+import reservationlogs.Logger;
 import services.Package;
 import services.PackageManager;
 
@@ -26,6 +28,7 @@ public class PackageMakerGUI extends JFrame {
     private Hotel selectedHotel;
     private Flight selectedFlight;
     private LocalDateTime taxiTime;
+    private boolean isReservationMaker;
     DateTimeFormatter formatterDate = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter formatterTime = java.time.format.DateTimeFormatter.ofPattern("H:mm");
     public PackageMakerGUI() {
@@ -46,74 +49,100 @@ public class PackageMakerGUI extends JFrame {
 /**
  * This method
  * **/
-    private void createInitialPanel() {
-        String[] cityNames = {
-                "Istanbul", "Paris", "Berlin", "Rome", "Amsterdam", "Madrid",
-                "Vienna", "Prague", "Budapest", "Dublin", "Copenhagen", "Stockholm",
-                "Helsinki", "Ankara", "Lisbon", "Brussels", "Zurich", "Oslo",
-                "Athens", "Edinburgh", "Dubai"
-        };
-        JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+private void createInitialPanel() {
+    String[] cityNames = {
+            "Istanbul", "Paris", "Berlin", "Rome", "Amsterdam", "Madrid",
+            "Vienna", "Prague", "Budapest", "Dublin", "Copenhagen", "Stockholm",
+            "Helsinki", "Ankara", "Lisbon", "Brussels", "Zurich", "Oslo",
+            "Athens", "Edinburgh", "Dubai"
+    };
+    JPanel panel = new JPanel(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(5, 5, 5, 5);
+    gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Source City
-        gbc.gridx = 0; gbc.gridy = 0;
-        panel.add(new JLabel("Source City:"), gbc);
-        gbc.gridx = 1;
-        sourceCity = new JComboBox<>(cityNames);
-        panel.add(sourceCity, gbc);
+    // Source City
+    gbc.gridx = 0; gbc.gridy = 0;
+    panel.add(new JLabel("Source City:"), gbc);
+    gbc.gridx = 1;
+    sourceCity = new JComboBox<>(cityNames);
+    panel.add(sourceCity, gbc);
 
-        // Destination City
-        gbc.gridx = 0; gbc.gridy = 1;
-        panel.add(new JLabel("Destination City:"), gbc);
-        gbc.gridx = 1;
-        destinationCity = new JComboBox<>(cityNames);
-        panel.add(destinationCity, gbc);
+    // Destination City
+    gbc.gridx = 0; gbc.gridy = 1;
+    panel.add(new JLabel("Destination City:"), gbc);
+    gbc.gridx = 1;
+    destinationCity = new JComboBox<>(cityNames);
+    panel.add(destinationCity, gbc);
 
-        // Date Selection
-        gbc.gridx = 0; gbc.gridy = 2;
-        panel.add(new JLabel("Start Date (YYYY-MM-DD):"), gbc);
-        gbc.gridx = 1;
-        JTextField startDateField = new JTextField(20);
-        panel.add(startDateField, gbc);
+    // Date Selection
+    gbc.gridx = 0; gbc.gridy = 2;
+    panel.add(new JLabel("Start Date (YYYY-MM-DD):"), gbc);
+    gbc.gridx = 1;
+    JTextField startDateField = new JTextField(20);
+    panel.add(startDateField, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 3;
-        panel.add(new JLabel("End Date (YYYY-MM-DD):"), gbc);
-        gbc.gridx = 1;
-        JTextField endDateField = new JTextField(20);
-        panel.add(endDateField, gbc);
+    gbc.gridx = 0; gbc.gridy = 3;
+    panel.add(new JLabel("End Date (YYYY-MM-DD):"), gbc);
+    gbc.gridx = 1;
+    JTextField endDateField = new JTextField(20);
+    panel.add(endDateField, gbc);
 
-        // Search Button
-        gbc.gridx = 0; gbc.gridy = 4;
-        gbc.gridwidth = 2;
-        JButton searchButton = new JButton("Search Hotels");
-        searchButton.addActionListener(e -> {
-            try {
-                startDate = LocalDate.parse(startDateField.getText());
-                endDate = LocalDate.parse(endDateField.getText());
-                searchHotels((String) destinationCity.getSelectedItem());
-             //   cardLayout.show(mainPanel, "hotelSelection");
-            } catch (Exception ex) {
+    // Search Button
+    gbc.gridx = 0; gbc.gridy = 4;
+    gbc.gridwidth = 2;
+    JButton searchButton = new JButton("Search Hotels");
+    searchButton.setFont(Constants.font);
+    searchButton.addActionListener(e -> {
+        try {
+            LocalDate today = LocalDate.now();
+            LocalDate proposedStartDate = LocalDate.parse(startDateField.getText());
+            LocalDate proposedEndDate = LocalDate.parse(endDateField.getText());
+
+            // Validate dates are not in the past
+            if (proposedStartDate.isBefore(today)) {
                 JOptionPane.showMessageDialog(this,
-                        "Please enter valid dates in YYYY-MM-DD format",
-                        "Invalid Input",
+                        "Start date cannot be in the past",
+                        "Invalid Date",
                         JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        });
-        panel.add(searchButton, gbc);
-        // Back Button
-        gbc.gridx = 0; gbc.gridy = 5;
-        JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> {
-            if(App.isAdmin){dispose(); new AdminGUI().setVisible(true);}
-            else{dispose(); new CustomerUI().setVisible(true);}
-        });
-        panel.add(backButton, gbc);
 
-        mainPanel.add(panel, "initial");
-    }
+            // Validate end date is not before start date
+            if (proposedEndDate.isBefore(proposedStartDate)) {
+                JOptionPane.showMessageDialog(this,
+                        "End date cannot be before start date",
+                        "Invalid Date",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // If all validations pass, set the dates and proceed
+            startDate = proposedStartDate;
+            endDate = proposedEndDate;
+            searchHotels((String) destinationCity.getSelectedItem());
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter valid dates in YYYY-MM-DD format",
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    });
+    panel.add(searchButton, gbc);
+
+    // Back Button
+    gbc.gridx = 0; gbc.gridy = 5;
+    JButton backButton = new JButton("Back");
+    backButton.setFont(Constants.font);
+    backButton.addActionListener(e -> {
+        if(App.isAdmin){dispose(); new AdminGUI().setVisible(true);}
+        else{dispose(); new CustomerUI().setVisible(true);}
+    });
+    panel.add(backButton, gbc);
+
+    mainPanel.add(panel, "initial");
+}
 
 
     private void createHotelSelectionPanel() {
@@ -124,14 +153,23 @@ public class PackageMakerGUI extends JFrame {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
+
+        // Back Button
+        JButton backButton = new JButton("Back to Search");
+        backButton.setFont(Constants.font);
+        backButton.addActionListener(e -> {
+            cardLayout.show(mainPanel, "initial");
+        });
+        buttonPanel.add(backButton);
+
         JButton selectButton = new JButton("Select Hotel");
+        selectButton.setFont(Constants.font);
         selectButton.addActionListener(e -> {
             int selectedRow = resultsTable.getSelectedRow();
             if (selectedRow >= 0) {
                 int hotelId = (int) resultsTable.getValueAt(selectedRow, 0);
                 selectedHotel = currentHotels.get(selectedRow);
                 searchFlights((String)sourceCity.getSelectedItem(), (String) destinationCity.getSelectedItem());
-             //   cardLayout.show(mainPanel, "flightSelection");
             }
         });
         buttonPanel.add(selectButton);
@@ -139,6 +177,7 @@ public class PackageMakerGUI extends JFrame {
 
         mainPanel.add(panel, "hotelSelection");
     }
+
 
     private void createTaxiSelectionPanel() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -148,7 +187,17 @@ public class PackageMakerGUI extends JFrame {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
+
+        // Back Button
+        JButton backButton = new JButton("Back to Flights");
+        backButton.setFont(Constants.font);
+        backButton.addActionListener(e -> {
+            cardLayout.show(mainPanel, "flightSelection");
+        });
+        buttonPanel.add(backButton);
+
         JButton selectButton = new JButton("Select Taxi");
+        selectButton.setFont(Constants.font);
         selectButton.addActionListener(e -> {
             int selectedRow = taxiTable.getSelectedRow();
             if (selectedRow >= 0) {
@@ -238,28 +287,32 @@ public class PackageMakerGUI extends JFrame {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
+
+        // Back Button
+        JButton backButton = new JButton("Back to Hotels");
+        backButton.setFont(Constants.font);
+        backButton.addActionListener(e -> {
+            cardLayout.show(mainPanel, "hotelSelection");
+        });
+        buttonPanel.add(backButton);
+
         JButton selectButton = new JButton("Select Flight");
+        selectButton.setFont(Constants.font);
         selectButton.addActionListener(e -> {
             int selectedRow = flightTable.getSelectedRow();
             if (selectedRow >= 0) {
                 selectedFlight = currentFlights.get(selectedRow);
 
-                // Suppose the flight arrives the same day or next day:
-                // If flight.isDayChange() is true, arrival is the next day
                 LocalDate arrivalDate = selectedFlight.isDayChange()
                         ? startDate.plusDays(1)
                         : startDate;
 
-                // Merge arrival date + flight arrival time into LocalDateTime
                 LocalDateTime flightArrivalDateTime = LocalDateTime.of(
                         arrivalDate,
                         selectedFlight.getArrivalTime()
                 );
 
-                // Now we call searchTaxis with city and the flight arrival dateTime
                 searchTaxis((String) destinationCity.getSelectedItem(), flightArrivalDateTime);
-
-             //   cardLayout.show(mainPanel, "taxiSelection");
             }
         });
 
@@ -361,6 +414,22 @@ public class PackageMakerGUI extends JFrame {
             gui.setVisible(true);
         });
     }
+    public PackageMakerGUI(boolean isReservationMaker){
+        this.isReservationMaker = isReservationMaker;
+        setTitle("Travel Package Booking");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 600);
+
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+        add(mainPanel);
+
+        createInitialPanel();
+        createHotelSelectionPanel();
+        createFlightSelectionPanel();
+        createTaxiSelectionPanel();
+
+    }
     private void createPackage() {
         try {
             Package travelPackage = PackageManager.makePackage(
@@ -377,9 +446,13 @@ public class PackageMakerGUI extends JFrame {
                     "Package created successfully!\nTotal Cost: $" + travelPackage.getTotalCost(),
                     "Success",
                     JOptionPane.INFORMATION_MESSAGE);
+            Logger.logPackageCreation(String.valueOf(travelPackage.getId()), App.user.getUsername(),travelPackage.toString());
             dispose();
             if(App.isAdmin){
-                new AdminGUI().setVisible(true);
+                if(!isReservationMaker) {
+                    new AdminGUI().setVisible(true);
+                }
+                else{new PaymentGUI((Customer) App.user,travelPackage).setVisible(true);}
             }
             else{new PaymentGUI((Customer) App.user,travelPackage).setVisible(true);}
         } catch (IllegalArgumentException e) {

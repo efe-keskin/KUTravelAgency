@@ -20,4 +20,7 @@ public class Constants {
     public static final Color PRIMARY_COLOR = new Color(33, 53, 85);
     public static final Color SECONDARY_COLOR = new Color(62, 88, 121);
     public static final Color BUTTON_COLOR = new Color(216,196,182);
+    // font config
+    public static final Font font = new Font("Arial", Font.PLAIN, 14);
+
 }

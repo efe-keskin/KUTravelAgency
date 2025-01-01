@@ -24,6 +24,7 @@ public class AdminGUI extends JFrame {
     private JLabel userCount;
     private JLabel packageCount;
     private JLabel reservationsCount;
+    private JButton logsButton;
     private static final Font font = new Font("Arial", Font.PLAIN, 14);
     public AdminGUI() {
         super("Admin Panel");
@@ -48,19 +49,12 @@ public class AdminGUI extends JFrame {
         editDeletePackagesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                new PackageManagementGUI().setVisible(true);
+                editDeletePackagesFunction();
             }
         });
 
 
-        refreshButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new AdminGUI().setVisible(true);
-            }
-        });
+
         reservationsManagementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,8 +62,20 @@ public class AdminGUI extends JFrame {
                 new AdminReservationsGUI().setVisible(true);
             }
         });
+        customerSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CustomerSearchGUI().setVisible(true);
+            }
+        });
     }
-
+public void editDeletePackagesFunction(){
+    if(!PackageManager.getActivePackages().isEmpty()) {
+        dispose();
+        new PackageManagementGUI().setVisible(true);
+    }else{
+        JOptionPane.showMessageDialog(this,"There are not any active packages at the moment.","Error",JOptionPane.INFORMATION_MESSAGE);
+    }}
 
 
 }

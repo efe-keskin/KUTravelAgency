@@ -1,53 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.CustomerUI">
-  <grid id="27dc6" binding="CustomerPanel" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <grid id="27dc6" binding="CustomerPanel" layout-manager="GridLayoutManager" row-count="9" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="20" left="20" bottom="20" right="20"/>
     <constraints>
-      <xy x="20" y="20" width="541" height="400"/>
+      <xy x="20" y="20" width="541" height="408"/>
     </constraints>
     <properties>
-      <background color="-6233373"/>
+      <background color="-659481"/>
     </properties>
     <border type="none"/>
     <children>
       <vspacer id="61c06">
         <constraints>
-          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <vspacer id="c3776">
         <constraints>
-          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="72161" class="javax.swing.JLabel" binding="customerPanelLabel" default-binding="true">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-6233373"/>
-          <font name="Segoe UI" size="20" style="1"/>
-          <foreground color="-1750148"/>
-          <text value="Customer Panel"/>
-        </properties>
-      </component>
-      <component id="ca512" class="javax.swing.JButton" binding="bookTravelPackagesButton" default-binding="true">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-11248395"/>
-          <text value="Book Travel Packages"/>
-        </properties>
-      </component>
       <component id="5c976" class="javax.swing.JButton" binding="myTravelHistoryButton" default-binding="true">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-11248395"/>
+          <background color="-12691335"/>
+          <foreground color="-659481"/>
+          <margin top="10" left="10" bottom="10" right="10"/>
           <text value="My Travel History"/>
         </properties>
       </component>
@@ -56,17 +36,10 @@
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-11248395"/>
+          <background color="-12691335"/>
+          <foreground color="-659481"/>
+          <margin top="10" left="10" bottom="10" right="10"/>
           <text value="Edit Reservations"/>
-        </properties>
-      </component>
-      <component id="4f9dd" class="javax.swing.JButton" binding="myPaymentsButton" default-binding="true">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <background color="-11248395"/>
-          <text value="Transactions"/>
         </properties>
       </component>
       <component id="d1562" class="javax.swing.JButton" binding="makeACustomTravelButton" default-binding="true">
@@ -74,20 +47,102 @@
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-11248395"/>
+          <background color="-12691335"/>
+          <foreground color="-659481"/>
+          <margin top="10" left="10" bottom="10" right="10"/>
           <text value="Make a Custom Travel"/>
         </properties>
       </component>
-      <hspacer id="10cc2">
+      <grid id="e9001" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="1" vgap="1">
+        <margin top="20" left="10" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-      </hspacer>
-      <hspacer id="7748d">
+        <properties>
+          <background color="-659481"/>
+          <foreground color="-659481"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="7098d" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
-          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-      </hspacer>
+        <properties>
+          <background color="-2571082"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="72161" class="javax.swing.JLabel" binding="customerPanelLabel" default-binding="true">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-6233373"/>
+              <font name="Segoe UI" size="20" style="1"/>
+              <foreground color="-14600875"/>
+              <text value="Customer Panel"/>
+            </properties>
+          </component>
+          <component id="28ef7" class="javax.swing.JButton" binding="logOutButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-2571082"/>
+              <borderPainted value="false"/>
+              <font name="Segoe UI" style="2"/>
+              <foreground color="-14600875"/>
+              <text value="Log Out"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="b750" binding="imagePane" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints>
+          <grid row="2" column="1" row-span="5" col-span="4" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <component id="ca512" class="javax.swing.JButton" binding="bookTravelPackagesButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12691335"/>
+          <foreground color="-659481"/>
+          <margin top="10" left="10" bottom="10" right="10"/>
+          <text value="Book Travel Packages"/>
+        </properties>
+      </component>
+      <component id="4f9dd" class="javax.swing.JButton" binding="myPaymentsButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12691335"/>
+          <foreground color="-659481"/>
+          <margin top="10" left="10" bottom="10" right="10"/>
+          <text value="Transactions"/>
+        </properties>
+      </component>
+      <component id="e71b5" class="javax.swing.JButton" binding="myProfileButton" default-binding="true">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12691335"/>
+          <foreground color="-659481"/>
+          <margin top="10" left="10" bottom="10" right="10"/>
+          <text value="My Profile"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

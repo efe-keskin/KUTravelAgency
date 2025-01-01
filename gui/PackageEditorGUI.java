@@ -9,11 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import services.Package;
-import services.PackageManager;
+import core.App;
+import reservationlogs.Logger;
+import services.*;
 import products.Hotel;
 import products.Flight;
 import products.Taxi;
+import services.Package;
 
 public class PackageEditorGUI extends JFrame {
     private JPanel mainPanel;
@@ -30,8 +32,15 @@ public class PackageEditorGUI extends JFrame {
     private final DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("H:mm");
     private JTextField startDateField;
     private JTextField endDateField;
-    public PackageEditorGUI(int packageId) {
-        currentPackage = PackageManager.packageDict.get(packageId);
+    private boolean isFromAdminReservations;
+    private AdminReservationsGUI arg;
+    private Reservation res;
+    public PackageEditorGUI(Package pck, boolean isFromAdminReservations,Reservation res,AdminReservationsGUI arg) {
+        currentPackage = pck;
+        this.arg = arg;
+        this.isFromAdminReservations = isFromAdminReservations;
+        this.res =res;
+        int packageId = pck.getId();
         startDate = currentPackage.getDateStart();
         endDate = currentPackage.getDateEnd();
         selectedHotel = currentPackage.getHotel();
@@ -53,6 +62,9 @@ public class PackageEditorGUI extends JFrame {
         createTaxiSelectionPanel();
 
         cardLayout.show(mainPanel, "main");
+    }
+    public PackageEditorGUI(Package pck) {
+        this(pck, false, null,null);
     }
     private void createMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
@@ -517,6 +529,14 @@ public class PackageEditorGUI extends JFrame {
                     "Package updated successfully!\nNew Total Cost: $" + newCost,
                     "Success",
                     JOptionPane.INFORMATION_MESSAGE);
+            if (isFromAdminReservations && res !=null) {
+                services.Package newPack = PackageManager.retrievePackage(PackageManager.getNewID());
+                Reservation newRes = ReservationsManagers.makeReservation(newPack, res.getCustomer());
+                Vendor.packageSeller(newRes,res.getCustomer());
+                ReservationsManagers.cancellationInitiator(res);
+                arg.refreshReservationList();
+            }
+            Logger.logPackageModification(currentPackage.toString(), App.user.getUsername(),newPackage.toString());
             dispose();
 
         } catch (Exception e) {
@@ -525,6 +545,7 @@ public class PackageEditorGUI extends JFrame {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
 }

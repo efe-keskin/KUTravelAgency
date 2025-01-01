@@ -6,6 +6,7 @@ import custom.PasswordFieldCustom;
 import custom.TextFieldCustom;
 import databases.AdminDB;
 import databases.CustomerDB;
+import reservationlogs.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -188,6 +189,7 @@ public class RegisterGUI extends JFrame implements ActionListener, FocusListener
 
                 // show a dialog that the user has been added to the UserDB
                 resultLabel.setText("Account Registered!");
+                Logger.logUserRegistration(usernameField.getText(),"Customer");
 
                 // take user back to the login gui (after closing dialog window)
                 resultDialog.addWindowListener(new WindowAdapter() {

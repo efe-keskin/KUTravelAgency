@@ -9,7 +9,7 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.util.EventObject;
 
-public class CustomerChooserGUI extends JFrame {
+public class CustomerSearchGUI extends JFrame {
     private JTable customerTable;
     private JPanel mainPanel;
     private DefaultTableModel tableModel;
@@ -17,7 +17,7 @@ public class CustomerChooserGUI extends JFrame {
     private JTextField searchField;
     private static final Font font = new Font("Arial", Font.PLAIN, 14);
 
-    public CustomerChooserGUI() {
+    public CustomerSearchGUI() {
         setTitle("Customer Selection");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(1000, 600);
@@ -124,21 +124,9 @@ public class CustomerChooserGUI extends JFrame {
 
                 final Customer customer = CustomerDB.getCustomer(username);
                 selectButton.addActionListener(e -> {
-                    App.user = customer;
                     dispose();
+                    new CustomerDetailsGUI(customer).setVisible(true);
 
-                    int choice = JOptionPane.showConfirmDialog(
-                            this,
-                            "Do you want to choose from existing packages?",
-                            "Package Selection",
-                            JOptionPane.YES_NO_OPTION
-                    );
-
-                    if (choice == JOptionPane.YES_OPTION) {
-                        new TravelSelectorGUI().setVisible(true);
-                    } else {
-                        new PackageMakerGUI(true).setVisible(true);
-                    }
                 });
 
                 buttonPanel.add(selectButton);

@@ -24,9 +24,24 @@ public class Package {
     private LocalDateTime taxiTime;
     private long daysInHotel;
 
+    public Package(Package pck) {
+        this.hotel = pck.getHotel();
+        this.flight = pck.getFlight();
+        this.taxiTime = pck.getTaxiTime();
+        this.taxi = pck.getTaxi();
+        this.dateEnd = pck.getDateEnd();
+        this.totalCost = pck.getTotalCost();
+        this.discountedPrice = pck.getDiscountedPrice();
+        this.daysInHotel = pck.getDaysInHotel();
+        this.dateStart = pck.getDateStart();
+        this.hotelStart = pck.getHotelStart();
+        this.type = pck.getType();
+        this.id = pck.getId();
+
+    }
 
     public Package(String type, int hotelID, int flightID, int taxiID,
-                   LocalDate dateStart, LocalDate dateEnd,LocalDateTime taxiTime,int id) {
+                   LocalDate dateStart, LocalDate dateEnd, LocalDateTime taxiTime, int id) {
 
         this.hotel = Hotel.retrieveHotel(hotelID);
         this.flight = Flight.retrieveFlight(flightID);
@@ -37,7 +52,7 @@ public class Package {
         this.id = id;
 
 
-            this.hotelStart = dateStart;
+        this.hotelStart = dateStart;
 
 
         this.dateEnd = dateEnd;
@@ -50,26 +65,30 @@ public class Package {
         }
 
         // Multiply the number of days by the hotel's price per night
-        this.totalCost = (int) (hotel.getPricePerNight() * daysInHotel +flight.getPrice() + (taxi.getBaseFare() + (taxi.getPerKmRate()*hotel.getDistanceToAirport())  ) );
-     setDiscountedPrice(totalCost);
+        this.totalCost = (int) (hotel.getPricePerNight() * daysInHotel + flight.getPrice() + (taxi.getBaseFare() + (taxi.getPerKmRate() * hotel.getDistanceToAirport())));
+        setDiscountedPrice(totalCost);
+
     }
 
 
     @Override
     public String toString() {
-        return this.hotel.getId()+","+this.flight.getId()+","+this.taxi.getId();
+        return this.hotel.getName() + "," + this.flight.getAirline() + "," + this.taxi.getTaxiType();
     }
 
 
-public void setHotel(Hotel hotel){
+    public void setHotel(Hotel hotel) {
         this.hotel = hotel;
-}
-public void setTaxi(Taxi taxi){
+    }
+
+    public void setTaxi(Taxi taxi) {
         this.taxi = taxi;
-}
-public void setFlight(Flight flight){
-     this.flight = flight;
-}
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
     public int getTotalCost() {
         return totalCost;
     }
@@ -131,7 +150,7 @@ public void setFlight(Flight flight){
     }
 
     public void setDateEnd(LocalDate endDate) {
-        this.dateEnd =endDate;
+        this.dateEnd = endDate;
     }
 
     public int getDiscountedPrice() {
@@ -141,4 +160,5 @@ public void setFlight(Flight flight){
     public void setDiscountedPrice(int discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
+
 }

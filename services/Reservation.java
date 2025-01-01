@@ -37,11 +37,11 @@ public class Reservation {
 
         return String.join(",",
                 String.valueOf(id),
-                relatedPackage != null ? relatedPackage.toString() : "", // Assuming Package has a proper toString method
+                relatedPackage != null ? relatedPackage.toString() : "",
                 status ? "confirmed" : "cancelled",
-                dateStart != null ? dateStart.format(formatter) : "", // Format start date
-                dateEnd != null ? dateEnd.format(formatter) : "", // Format end date
-                customer != null ? customer.toString() : "" // Assuming User has a toString method
+                dateStart != null ? dateStart.format(formatter) : "",
+                dateEnd != null ? dateEnd.format(formatter) : "",
+                customer != null ? customer.toString() : ""
         );
     }
     public void setStatus(boolean status) {

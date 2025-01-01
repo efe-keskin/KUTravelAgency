@@ -81,6 +81,9 @@ public static HashMap<Integer,Package> getActivePackages(){
         }
         return returnDict;
 }
+public static int getNewID(){
+        return newID;
+}
     public static Package retrievePackage(int packageId) {
         // Make sure packageDict is initialized
 
@@ -97,7 +100,6 @@ public static HashMap<Integer,Package> getActivePackages(){
             int lastID = 400000;
             lastID = lastID+ packageDict.size();
             newID = lastID + 1;
-
     }
 
 
@@ -109,6 +111,14 @@ public static HashMap<Integer,Package> getActivePackages(){
         updatePackagesFile();
         return newPack;
 
+    }
+    public static Package duplicatePackage(Package pck){
+        idGenerator();
+        Package newPack = new Package(pck);
+        newPack.setId(newID);
+        packageDict.put(newID,newPack);
+        updatePackagesFile();
+        return newPack;
     }
 
     public static void updatePackagesFile() {

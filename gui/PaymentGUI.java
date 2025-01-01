@@ -61,12 +61,12 @@ public class PaymentGUI extends JFrame {
 
         // Add package details
         addDetailsSection("Package Details");
-        addDetailRow("Hotel:", pck.getHotel().toString());
+        addDetailRow("Hotel:", (pck.getHotel().toString())+" Price per night: "+"$"+pck.getHotel().getPricePerNight()+" * "+pck.getDaysInHotel()+" = $"+ pck.getTotalCost());
         addDetailRow("Check-in:", hotelStartDate.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         addDetailRow("Check-out:", dateEnd.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
-        addDetailRow("Flight:", pck.getFlight().toString());
+        addDetailRow("Flight:", (pck.getFlight().toString())+" Price of the ticket: $"+(pck.getFlight().getPrice()));
         addDetailRow("Flight Date:", dateStart.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
-        addDetailRow("Taxi:", pck.getTaxi().toString());
+        addDetailRow("Taxi:", (pck.getTaxi().toString())+" Estimated cost from the airport to the hotel: $"+pck.getTaxi().taxiPriceCalculator(pck.getHotel()));
         addDetailRow("Pickup Time:", taxiTime.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm")));
 
         // Add customer details

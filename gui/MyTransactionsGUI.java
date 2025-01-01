@@ -1,6 +1,7 @@
 package gui;
 
 import Users.Customer;
+import core.App;
 import services.Reservation;
 import services.ReservationsManagers;
 
@@ -29,7 +30,18 @@ public class MyTransactionsGUI extends JFrame {
         dtm.addColumn("From City");
         dtm.addColumn("To City");
         dtm.addColumn("Transaction Type");
-        //fill the table
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> {
+            if (App.isAdmin) {
+                new AdminGUI().setVisible(true);
+            } else {
+                new CustomerUI().setVisible(true);
+            }
+            this.dispose();
+        });
+        buttonPanel.add(backButton);
+        mainPanel.add(buttonPanel, BorderLayout.NORTH);
         while (scn.hasNextLine()){
             String line = scn.nextLine();
             String[] linSep = line.split(",");

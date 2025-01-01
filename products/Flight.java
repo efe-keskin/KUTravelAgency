@@ -1,5 +1,7 @@
 package products;
 
+import core.App;
+import reservationlogs.Logger;
 import services.TravelParser;
 
 import java.io.File;
@@ -28,7 +30,7 @@ public class Flight extends Product {
     private LocalTime leg1ArrivalTime;
     private LocalTime leg2DepartureTime;
     private LocalTime leg2ArrivalTime;
-
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
     // New boolean indicating if the flight crosses midnight
     private boolean dayChange;
 
@@ -250,7 +252,7 @@ public class Flight extends Product {
 
             // 4) Persist changes
             updateFile();
-
+            Logger.logFlightreservation(App.user.getUsername(),this.toString(),departureTime.format(formatter),arrivalTime.format(formatter),ticketClass);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

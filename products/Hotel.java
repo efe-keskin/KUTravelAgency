@@ -1,5 +1,7 @@
 package products;
 
+import core.App;
+import reservationlogs.Logger;
 import services.TravelParser;
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -4,6 +4,7 @@ import Users.Customer;
 import products.Flight;
 import products.Hotel;
 import products.Taxi;
+import reservationlogs.Logger;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,6 +17,34 @@ public class Vendor {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    public static void packageSeller(Reservation res, Customer cst) throws IOException {
+        Package pck = res.getRelatedPackage();
+        // Book hotel
+        Hotel hotel = pck.getHotel();
+        for (LocalDate date = res.getRelatedPackage().getHotelStart(); !date.isAfter(res.getDateEnd()); date = date.plusDays(1)) {
+            hotel.book(date);
+        }
+
+        // Book flight
+        Flight flight = pck.getFlight();
+        flight.book(res.getRelatedPackage().getFlight().isDayChange() ? res.getDateStart().minusDays(1):res.getDateStart());
+
+        // Book taxi
+        Taxi taxi = pck.getTaxi();
+        // Calculate travel duration based on hotel distance
+        double distanceKm = hotel.getDistanceToAirport();
+        int travelTimeMinutes = (int) Math.ceil((distanceKm / 60.0) * 60);
+        LocalDateTime taxiArrivalTime = res.getRelatedPackage().getTaxiTime().plusMinutes(travelTimeMinutes);
+
+        // Book taxi for each 2-minute interval of the journey
+        LocalDateTime bookingTime = res.getRelatedPackage().getTaxiTime();
+        while (!bookingTime.isAfter(taxiArrivalTime)) {
+            taxi.book(bookingTime);
+            bookingTime = bookingTime.plusMinutes(2);
+        }
+
+        createTransaction(res, cst);
+    }
     public static void packageSeller(Package pck, Customer cst, LocalDateTime taxiTime,
                                      LocalDate hotelStartDate, LocalDate dateStart, LocalDate dateEnd) throws IOException {
         // Book hotel
@@ -45,9 +74,10 @@ public class Vendor {
         // Create reservation and process payment
         Reservation newRes = ReservationsManagers.makeReservation(pck, cst);
         createTransaction(newRes, cst);
+        Logger.logPayment(cst.getUsername(),"Package",newRes.toString()+" Reservation ID "+newRes.getId(),newRes.getRelatedPackage().getDiscountedPrice());
     }
 
-    private static void createTransaction(Reservation res, Customer cst) throws IOException {
+    public static void createTransaction(Reservation res, Customer cst) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/transactions.txt", true))) {
             LocalDate now = LocalDate.now();
             String date = now.format(DATE_FORMATTER);

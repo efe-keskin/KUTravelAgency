@@ -81,7 +81,7 @@ public class PackageManagementGUI extends JFrame {
                 JButton deleteButton = new JButton("Delete");
                 deleteButton.setFont(font);
                 editButton.addActionListener(e -> {
-                    new PackageEditorGUI(id).setVisible(true);
+                    new PackageEditorGUI(PackageManager.retrievePackage(id)).setVisible(true);
                     System.out.println("Edit clicked for ID: " + id);
                 });
 

@@ -6,13 +6,17 @@ import custom.PasswordFieldCustom;
 import custom.TextFieldCustom;
 import databases.AdminDB;
 import databases.CustomerDB;
+import reservationlogs.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
 public class LoginGUI extends JFrame implements ActionListener {
     private TextFieldCustom usernameField;
@@ -36,7 +40,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         usernameField.setForeground(Color.WHITE);
         usernameField.setBounds(
                 50,
-                315,
+                100,
                 Constants.TEXTFIELD_SIZE.width, Constants.TEXTFIELD_SIZE.height
         );
         // password field
@@ -61,7 +65,6 @@ public class LoginGUI extends JFrame implements ActionListener {
         );
         loginButton.addActionListener(this);
 
-        // login -> register label
         JLabel registerLabel = new JLabel("Not registered? Click Here!");
         registerLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         registerLabel.setBackground(Constants.SECONDARY_COLOR);
@@ -86,7 +89,6 @@ public class LoginGUI extends JFrame implements ActionListener {
                 registerLabel.setForeground(Constants.SECONDARY_COLOR);
             }
         });
-        // add to frame
 
         getContentPane().add(usernameField);
         getContentPane().add(passwordField);
@@ -98,45 +100,47 @@ public class LoginGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         if (command.equalsIgnoreCase("Login")) {
-            // create dialog box
+
             JDialog resultDialog = new JDialog();
             resultDialog.setPreferredSize(Constants.RESULT_DIALOG_SIZE);
             resultDialog.pack();
             resultDialog.setLocationRelativeTo(this);
             resultDialog.setModal(true);
-            // create label (display result)
+
+
             JLabel resultLabel = new JLabel();
             resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
             resultDialog.add(resultLabel);
             resultDialog.getContentPane().setBackground(Constants.BUTTON_COLOR);
             resultLabel.setForeground(Constants.SECONDARY_COLOR);
 
-            // retrieve entered credentials
+
             String username = usernameField.getText();
             String password = passwordField.getText();
 
-            // Check if username exists in CustomerDB
+
             String customerPass = CustomerDB.getCustomerPass(username);
-            // Check if username exists in AdminDB
+
             String adminPass = AdminDB.getAdminPass(username);
 
             if (customerPass != null) {
-                // username exists in CustomerDB
+
                 if (password.equals(customerPass)) {
-                    // Customer password is correct
+
                     resultLabel.setText("Login Successful!");
                     App.loggedIn = true;
                     App.user = CustomerDB.getCustomer(username);
                     dispose();
+                    Logger.logUserLogin(App.user.getUsername());
                     new CustomerUI().setVisible(true);
                 } else {
-                    // Customer password is incorrect
+
                     resultLabel.setText("Invalid Password!");
                 }
             } else if (adminPass != null) {
-                // username exists in AdminDB
+
                 if (password.equals(adminPass)) {
-                    // Admin password is correct
+
                     App.loggedIn = true;
                     App.isAdmin = true;
                     App.user = AdminDB.getAdmin(username);
@@ -144,11 +148,11 @@ public class LoginGUI extends JFrame implements ActionListener {
                     dispose();
                     new AdminGUI().setVisible(true);
                 } else {
-                    // Admin password is incorrect
+
                     resultLabel.setText("Invalid Password!");
                 }
             } else {
-                // username does not exist in either DB
+
                 resultLabel.setText("Invalid Username!");
             }
 

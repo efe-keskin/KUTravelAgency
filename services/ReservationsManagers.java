@@ -14,13 +14,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import products.*;
+import reservationlogs.Logger;
 
 /**
  * ReservationsManager handles creating, reading, updating, and saving
  * Reservation objects to a local file for persistence.
  */
 public class ReservationsManagers {
-
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     // Storage file path
     private static final String FILE_PATH = "services/reservations.txt";
 
@@ -49,7 +50,8 @@ public class ReservationsManagers {
      * </ul>
      */
     public static void loadReservations() {
-        reservations.clear(); // Clear the map before loading fresh
+        // Clear the map before loading fresh
+        reservations.clear();
 
         if (!Files.exists(Paths.get(FILE_PATH))) {
             System.out.println("No existing reservations file found. Starting fresh.");
@@ -58,39 +60,41 @@ public class ReservationsManagers {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
+            Set<Integer> processedIds = new HashSet<>();  // Track processed IDs
 
             while ((line = reader.readLine()) != null) {
-                // Skip empty lines (if any)
                 if (line.trim().isEmpty()) {
                     continue;
                 }
 
-                // Split CSV
                 String[] parts = line.split(",");
-
-                // Guard against malformed lines
                 if (parts.length < 6) {
                     System.out.println("Skipping malformed reservation line: " + line);
                     continue;
                 }
 
                 int id = Integer.parseInt(parts[0]);
+
+                // Skip if we've already processed this ID
+                if (processedIds.contains(id)) {
+                    System.out.println("Skipping duplicate reservation ID: " + id);
+                    continue;
+                }
+
+                processedIds.add(id);
+
                 int packageId = Integer.parseInt(parts[1]);
                 boolean status = parts[2].equalsIgnoreCase("confirmed");
                 String userId = parts[5];
 
-                // Retrieve actual Package and User objects
                 Package pck = PackageManager.retrievePackage(packageId);
                 Customer user = CustomerDB.retrieveCustomer(userId);
 
-                // Build the Reservation
                 Reservation res = new Reservation(id, pck, user);
                 res.setStatus(status);
 
-
                 reservations.put(id, res);
 
-                // Keep track of the largest ID so we can set nextId properly
                 if (id >= nextId) {
                     nextId = id + 1;
                 }
@@ -151,18 +155,21 @@ public class ReservationsManagers {
      * @throws FileNotFoundException if the file is not found when loading
      */
     public static Reservation makeReservation(Package pck, Customer user) throws FileNotFoundException {
-        CustomerDB.loadCustomers(); // Ensure customers are loaded
-        loadReservations();
+        loadReservations(); // Get fresh state
 
         int id = generateId();
         Reservation newRes = new Reservation(id, pck, user);
         newRes.setStatus(true);
-        reservations.put(id, newRes);
 
+
+        reservations.put(id, newRes);
         saveReservations();
+        Logger.logHotelreservation(App.user.getUsername(),pck.getHotel().getName(),pck.getHotel().getCity(),pck.getHotel().getRoomType(),pck.getHotelStart().format(formatter),pck.getDateEnd().format(formatter));
+        Logger.logTaxireservation(App.user.getUsername(), pck.getTaxi().getCity(),pck.getTaxi().getTaxiType(),pck.getTaxiTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         user.loadTravelHistory();
         return newRes;
     }
+
 
 
     /**
@@ -177,94 +184,115 @@ public class ReservationsManagers {
     }
 
 
-    public static void ReservationCancellation (int id, String keyword) throws FileNotFoundException {
-        loadReservations();
+
+    public static void ReservationCancellation(int id, String keyword) throws FileNotFoundException {
+        loadReservations(); // Reload to get fresh state
         Reservation res = reservations.get(id);
-        if (res != null) {
-            Package pck = res.getRelatedPackage();
+
+        if (res == null || !res.isStatus()) {
+            throw new IllegalArgumentException("Reservation " + id + " not found or already cancelled");
+        }
+
+        Package pck = res.getRelatedPackage();
+        if (pck == null) {
+            throw new IllegalStateException("Package not found for reservation " + id);
+        }
+
+        try {
+            // First mark as cancelled and save to ensure state is updated
+            res.setStatus(false);
+            saveReservations();
+
+            // Now handle all the cancellations
+            // Cancel hotel bookings
             Hotel hotel = pck.getHotel();
             for (LocalDate date = pck.getHotelStart(); !date.isAfter(pck.getDateEnd()); date = date.plusDays(1)) {
                 hotel.cancelBook(date);
             }
 
+            // Cancel flight booking
             Flight flight = pck.getFlight();
-            flight.cancelBook(!flight.isDayChange()?pck.getDateStart():pck.getDateStart().minusDays(1));
+            LocalDate flightDate = flight.isDayChange() ? pck.getDateStart().minusDays(1) : pck.getDateStart();
+            flight.cancelBook(flightDate);
 
+            // Cancel taxi bookings
             Taxi taxi = pck.getTaxi();
-
             double distanceKm = hotel.getDistanceToAirport();
             int travelTimeMinutes = (int) Math.ceil((distanceKm / 60.0) * 60);
-            LocalDateTime taxiArrivalTime = pck.getTaxiTime().plusMinutes(travelTimeMinutes);
 
-            LocalDateTime bookingTime = pck.getTaxiTime();
-            while (!bookingTime.isAfter(taxiArrivalTime)) {
-                taxi.cancelBook(bookingTime);
-                bookingTime = bookingTime.plusMinutes(2);
+            LocalDateTime taxiPickupTime = pck.getTaxiTime();
+            LocalDateTime taxiEndTime = taxiPickupTime.plusMinutes(travelTimeMinutes);
+
+            LocalDateTime currentTime = taxiPickupTime;
+            while (!currentTime.isAfter(taxiEndTime)) {
+                taxi.cancelBook(currentTime);
+                currentTime = currentTime.plusMinutes(2);
             }
-            res.setStatus(false);
-            saveReservations();
-            Customer customer = reservations.get(id).getCustomer();
+
+            // Process refund
+            int refundAmount;
+            switch (keyword.toLowerCase()) {
+                case "immediate":
+                case "far":
+                    refundAmount = pck.getDiscountedPrice();
+                    break;
+                case "inter":
+                    refundAmount = (int) (pck.getDiscountedPrice() * 0.85);
+                    break;
+                case "close":
+                    refundAmount = (int) (pck.getDiscountedPrice() * 0.70);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid cancellation type: " + keyword);
+            }
+
+            // Update customer history and process refund
+            Customer customer = res.getCustomer();
             customer.loadTravelHistory();
-            int amount = pck.getDiscountedPrice();
-            if(keyword.equals("immediate")) {
-               amount = pck.getDiscountedPrice();
-            }
-            else if(keyword.equals("far")){
-                amount = pck.getDiscountedPrice();
-            }
-            else if (keyword.equals("inter")) {
-                amount = (int) (pck.getDiscountedPrice()*0.85);
-            }
-            else if (keyword.equals("close")){
-                amount = (int) (pck.getDiscountedPrice()*0.70);
-            }
+            Vendor.moneyReturn(res.getId(), refundAmount);
+            saveReservations();
+            Logger.logCancellation(App.user.getUsername(),"Package",String.valueOf(res.getId()),res.toString());
 
-
-            Vendor.moneyReturn(res.getId(), amount);
-
-
-
-
+        } catch (Exception e) {
+            System.err.println("Error during cancellation of reservation " + id + ": " + e.getMessage());
+            throw e;
         }
-        else{System.out.println("Reservation couldn't be found");}
-
-
     }
 
-
-
-
     public static String cancellationInitiator(Reservation res) throws FileNotFoundException {
-        LocalTime departureTime =  res.getRelatedPackage().getFlight().getDepartureTime();
-        LocalDate departureDate = !res.getRelatedPackage().getFlight().isDayChange() ? res.getDateStart():res.getDateStart().minusDays(1);
-        LocalDateTime departureDateTime = LocalDateTime.of(departureDate,departureTime);
+        if (res == null) {
+            throw new IllegalArgumentException("Reservation cannot be null");
+        }
+
+        Flight flight = res.getRelatedPackage().getFlight();
+        if (flight == null) {
+            throw new IllegalStateException("Flight not found in package");
+        }
+
+        // Calculate departure date/time
+        LocalDate departureDate = flight.isDayChange() ?
+                res.getDateStart().minusDays(1) : res.getDateStart();
+        LocalDateTime departureDateTime = LocalDateTime.of(departureDate, flight.getDepartureTime());
         LocalDateTime now = LocalDateTime.now();
-        long hoursBetween = ChronoUnit.HOURS.between(now,departureDateTime);
-        System.out.println("Departure DateTime: " + departureDateTime);
-        System.out.println("Current DateTime: " + now);
-        System.out.println(hoursBetween);
-        if(App.isAdmin){
-            ReservationCancellation(res.getId(),"immediate");
-            return "immediate";
-        }
-        else if (
-                hoursBetween>72 //more than 72h before departure
 
-        ) {
-            ReservationCancellation(res.getId(),"far");
-            return "far";
+        // Calculate hours between now and departure
+        long hoursBetween = ChronoUnit.HOURS.between(now, departureDateTime);
 
-        } else if (
-                hoursBetween>=48//48-72h
-        ) {
-            ReservationCancellation(res.getId(),"inter");
-            return "inter";
+        // Determine cancellation type
+        String cancellationType;
+        if (App.isAdmin) {
+            cancellationType = "immediate";
+        } else if (hoursBetween > 72) {
+            cancellationType = "far";
+        } else if (hoursBetween >= 48) {
+            cancellationType = "inter";
         } else {
-            ReservationCancellation(res.getId(),"close");
-            return "close";
+            cancellationType = "close";
         }
 
-
+        // Process cancellation
+        ReservationCancellation(res.getId(), cancellationType);
+        return cancellationType;
     }
     public static Collection<Reservation> getAllReservations() {
         loadReservations();

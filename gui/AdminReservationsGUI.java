@@ -1,11 +1,13 @@
 package gui;
 
+import services.PackageManager;
 import services.Reservation;
 import services.ReservationsManagers;
 
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -112,7 +114,6 @@ public class AdminReservationsGUI extends JFrame {
         searchButton.addActionListener(e -> searchReservations());
         makeReservationButton.addActionListener(e -> {
             new CustomerChooserGUI().setVisible(true);
-            // Implementation for make reservation will go here
         });
 
         add(mainPanel);
@@ -159,8 +160,21 @@ public class AdminReservationsGUI extends JFrame {
 
                         if (confirm == JOptionPane.YES_OPTION) {
                             try {
-                                ReservationsManagers.cancellationInitiator(reservation);
-                                refreshReservationList();
+                                // Get the reservation ID from the current row
+                                int row = reservationTable.getEditingRow();
+                                String reservationId = (String) tableModel.getValueAt(row, 0);
+
+                                // Perform cancellation
+                                ReservationsManagers.cancellationInitiator(ReservationsManagers.getReservation(Integer.parseInt(reservationId)));
+
+                                // Instead of calling refreshReservationList, remove just this row
+                                tableModel.removeRow(row);
+
+                                JOptionPane.showMessageDialog(this,
+                                        "Reservation cancelled successfully",
+                                        "Success",
+                                        JOptionPane.INFORMATION_MESSAGE);
+
                             } catch (Exception ex) {
                                 JOptionPane.showMessageDialog(this,
                                         "Error canceling reservation: " + ex.getMessage(),
@@ -171,7 +185,12 @@ public class AdminReservationsGUI extends JFrame {
                     });
 
                     editButton.addActionListener(e -> {
-                        // Edit button implementation will go here
+                        int row = reservationTable.getEditingRow();
+                        String reservationId = (String) tableModel.getValueAt(row, 0);
+                        services.Reservation thisRes = ReservationsManagers.getReservation(Integer.parseInt(reservationId));
+                        services.Package current = ReservationsManagers.getReservation(Integer.parseInt(reservationId)).getRelatedPackage();
+                        new PackageEditorGUI(current,true,thisRes,this).setVisible(true);
+
                     });
 
                     buttonPanel.add(editButton);
@@ -189,7 +208,7 @@ public class AdminReservationsGUI extends JFrame {
         populateTable(searchTerm);
     }
 
-    private void refreshReservationList() {
+    public void refreshReservationList() {
         searchField.setText("");
         populateTable("");
     }
@@ -215,9 +234,11 @@ public class AdminReservationsGUI extends JFrame {
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value,
                                                      boolean isSelected, int row, int column) {
+            table.setRowSelectionInterval(row, row);  // Force row selection
             panel = (JPanel) value;
             return panel;
         }
+
 
         @Override
         public Object getCellEditorValue() {
