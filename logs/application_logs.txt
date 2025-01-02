@@ -1,0 +1,110 @@
+[2025-01-02 03:07:02] USER REGISTRATION - Username: Aykut Bir, Type: Customer
+[2025-01-02 03:07:26] USER LOGIN - Username: Aykut Bir
+[2025-01-02 03:12:54] USER REGISTRATION - Username: Bunyamin Emre Efe, Type: Customer
+[2025-01-02 03:14:10] USER REGISTRATION - Username: Ece Sever, Type: Customer
+[2025-01-02 03:16:41] USER LOGIN - Username: Aykut Bir
+[2025-01-02 03:18:18] PACKAGE CREATION - Package ID: 400001, Created by: Vahideh Hayyolalam, Details: Double Tree by Hilton,Turkish Airlines,Black Taxi
+[2025-01-02 03:18:57] PACKAGE CREATION - Package ID: 400002, Created by: Vahideh Hayyolalam, Details: Hilton,Turkish Airlines,Orange Taxi
+[2025-01-02 03:19:08] PACKAGE MODIFICATION - Package: Double Tree by Hilton,Turkish Airlines,Black Taxi, Modified by: Vahideh Hayyolalam, Changes: Double Tree by Hilton,Turkish Airlines,Black Taxi
+[2025-01-02 03:20:06] PACKAGE CREATION - Package ID: 400004, Created by: Vahideh Hayyolalam, Details: Sheraton,KUFly,Yellow Taxi
+[2025-01-02 03:20:50] PACKAGE CREATION - Package ID: 400005, Created by: Vahideh Hayyolalam, Details: SunnySide Hostel,KUFly,Orange Taxi
+[2025-01-02 03:21:28] USER LOGIN - Username: Aykut Bir
+[2025-01-02 03:21:35] FLIGHT reservation - User: Aykut Bir, Flight: 200000 Turkish Airlines Istanbul Paris, From: 18:00, To: 23:00, Class: Economy
+[2025-01-02 03:21:36] HOTEL reservation - User: Aykut Bir, Hotel: Double Tree by Hilton, City: Paris, Room: Suite, Check-in: 2025-01-10, Check-out: 2025-01-19
+[2025-01-02 03:21:36] TAXI reservation - User: Aykut Bir, City: Paris, Type: Black Taxi, DateTime: 2025-01-10 23:00
+[2025-01-02 03:21:36] PAYMENT - User: Aykut Bir, Type: Package, reservation ID: 500000,Double Tree by Hilton,Turkish Airlines,Black Taxi,confirmed,2025-01-10,2025-01-19,Aykut Bir Reservation ID 500000, Amount: 2128.0
+[2025-01-02 03:22:24] PACKAGE CREATION - Package ID: 400006, Created by: Aykut Bir, Details: Radisson Blue,Turkish Airlines,Yellow Taxi
+[2025-01-02 03:22:26] FLIGHT reservation - User: Aykut Bir, Flight: 200011 Turkish Airlines Istanbul Vienna, From: 15:30, To: 1:30, Class: First Class
+[2025-01-02 03:22:26] HOTEL reservation - User: Aykut Bir, Hotel: Radisson Blue, City: Vienna, Room: Suite, Check-in: 2025-09-09, Check-out: 2025-09-30
+[2025-01-02 03:22:26] TAXI reservation - User: Aykut Bir, City: Vienna, Type: Yellow Taxi, DateTime: 2025-09-10 01:30
+[2025-01-02 03:22:26] PAYMENT - User: Aykut Bir, Type: Package, reservation ID: 500001,Radisson Blue,Turkish Airlines,Yellow Taxi,confirmed,2025-09-09,2025-09-30,Aykut Bir Reservation ID 500001, Amount: 12083.0
+[2025-01-02 03:23:33] USER LOGIN - Username: Aykut Bir
+[2025-01-02 03:23:45] CANCELLATION - User: Aykut Bir, Type: Package, reservation ID: 500001, Details: 500001,Radisson Blue,Turkish Airlines,Yellow Taxi,cancelled,2025-09-09,2025-09-30,Aykut Bir
+[2025-01-02 03:23:58] FLIGHT reservation - User: Aykut Bir, Flight: 200024 KUFly Istanbul Ankara, From: 8:30, To: 9:30, Class: First Class
+[2025-01-02 03:23:58] HOTEL reservation - User: Aykut Bir, Hotel: Sheraton, City: Ankara, Room: Deluxe, Check-in: 2025-11-10, Check-out: 2025-11-11
+[2025-01-02 03:23:58] TAXI reservation - User: Aykut Bir, City: Ankara, Type: Yellow Taxi, DateTime: 2025-11-10 09:30
+[2025-01-02 03:23:58] PAYMENT - User: Aykut Bir, Type: Package, reservation ID: 500002,Sheraton,KUFly,Yellow Taxi,confirmed,2025-11-10,2025-11-11,Aykut Bir Reservation ID 500002, Amount: 1177.0
+[2025-01-02 03:24:24] PACKAGE CREATION - Package ID: 400007, Created by: Aykut Bir, Details: Marriott,EuroWings,Black Taxi
+[2025-01-02 03:24:25] FLIGHT reservation - User: Aykut Bir, Flight: 200008 EuroWings Istanbul Madrid, From: 15:00, To: 17:00, Class: First Class
+[2025-01-02 03:24:25] HOTEL reservation - User: Aykut Bir, Hotel: Marriott, City: Madrid, Room: Standard, Check-in: 2025-12-31, Check-out: 2026-01-05
+[2025-01-02 03:24:25] TAXI reservation - User: Aykut Bir, City: Madrid, Type: Black Taxi, DateTime: 2025-12-31 17:00
+[2025-01-02 03:24:25] PAYMENT - User: Aykut Bir, Type: Package, reservation ID: 500003,Marriott,EuroWings,Black Taxi,confirmed,2025-12-31,2026-01-05,Aykut Bir Reservation ID 500003, Amount: 3148.0
+[2025-01-02 03:25:08] USER LOGIN - Username: Ece Sever
+[2025-01-02 03:25:17] FLIGHT reservation - User: Ece Sever, Flight: 200024 KUFly Istanbul Ankara, From: 8:30, To: 9:30, Class: First Class
+[2025-01-02 03:25:17] HOTEL reservation - User: Ece Sever, Hotel: Sheraton, City: Ankara, Room: Deluxe, Check-in: 2025-11-10, Check-out: 2025-11-11
+[2025-01-02 03:25:17] TAXI reservation - User: Ece Sever, City: Ankara, Type: Yellow Taxi, DateTime: 2025-11-10 09:30
+[2025-01-02 03:25:17] PAYMENT - User: Ece Sever, Type: Package, reservation ID: 500004,Sheraton,KUFly,Yellow Taxi,confirmed,2025-11-10,2025-11-11,Ece Sever Reservation ID 500004, Amount: 1177.0
+[2025-01-02 03:26:36] PACKAGE MODIFICATION - Package: Sheraton,KUFly,Yellow Taxi, Modified by: Vahideh Hayyolalam, Changes: Sheraton,KUFly,Yellow Taxi
+[2025-01-02 03:26:47] PACKAGE MODIFICATION - Package: Hilton,Turkish Airlines,Orange Taxi, Modified by: Vahideh Hayyolalam, Changes: Hilton,Turkish Airlines,Orange Taxi
+[2025-01-02 03:27:41] USER LOGIN - Username: Ece Sever
+[2025-01-02 03:27:51] FLIGHT reservation - User: Ece Sever, Flight: 200024 KUFly Istanbul Ankara, From: 8:30, To: 9:30, Class: First Class
+[2025-01-02 03:27:51] HOTEL reservation - User: Ece Sever, Hotel: Sheraton, City: Ankara, Room: Deluxe, Check-in: 2025-11-10, Check-out: 2025-11-11
+[2025-01-02 03:27:51] TAXI reservation - User: Ece Sever, City: Ankara, Type: Yellow Taxi, DateTime: 2025-11-10 09:30
+[2025-01-02 03:27:51] PAYMENT - User: Ece Sever, Type: Package, reservation ID: 500005,Sheraton,KUFly,Yellow Taxi,confirmed,2025-11-10,2025-11-11,Ece Sever Reservation ID 500005, Amount: 470.0
+[2025-01-02 03:28:52] CANCELLATION - User: Ece Sever, Type: Package, reservation ID: 500005, Details: 500005,Sheraton,KUFly,Yellow Taxi,cancelled,2025-11-10,2025-11-11,Ece Sever
+[2025-01-02 03:29:05] CANCELLATION - User: Ece Sever, Type: Package, reservation ID: 500004, Details: 500004,Sheraton,KUFly,Yellow Taxi,cancelled,2025-11-10,2025-11-11,Ece Sever
+[2025-01-02 03:29:08] CANCELLATION - User: Ece Sever, Type: Package, reservation ID: 500002, Details: 500002,Sheraton,KUFly,Yellow Taxi,cancelled,2025-11-10,2025-11-11,Aykut Bir
+[2025-01-02 03:29:18] FLIGHT reservation - User: Ece Sever, Flight: 200024 KUFly Istanbul Ankara, From: 8:30, To: 9:30, Class: First Class
+[2025-01-02 03:29:18] HOTEL reservation - User: Ece Sever, Hotel: Sheraton, City: Ankara, Room: Deluxe, Check-in: 2025-11-10, Check-out: 2025-11-11
+[2025-01-02 03:29:18] TAXI reservation - User: Ece Sever, City: Ankara, Type: Yellow Taxi, DateTime: 2025-11-10 09:30
+[2025-01-02 03:29:18] PAYMENT - User: Ece Sever, Type: Package, reservation ID: 500006,Sheraton,KUFly,Yellow Taxi,confirmed,2025-11-10,2025-11-11,Ece Sever Reservation ID 500006, Amount: 470.0
+[2025-01-02 03:29:49] FLIGHT reservation - User: Ece Sever, Flight: 200006 Turkish Airlines Istanbul Amsterdam, From: 12:00, To: 16:00, Class: Economy
+[2025-01-02 03:29:49] HOTEL reservation - User: Ece Sever, Hotel: Hilton, City: Amsterdam, Room: Deluxe, Check-in: 2026-05-10, Check-out: 2026-05-16
+[2025-01-02 03:29:49] TAXI reservation - User: Ece Sever, City: Amsterdam, Type: Orange Taxi, DateTime: 2026-05-10 16:00
+[2025-01-02 03:29:49] PAYMENT - User: Ece Sever, Type: Package, reservation ID: 500007,Hilton,Turkish Airlines,Orange Taxi,confirmed,2026-05-10,2026-05-16,Ece Sever Reservation ID 500007, Amount: 3000.0
+[2025-01-02 03:34:35] USER LOGIN - Username: Ece Sever
+[2025-01-02 03:34:50] FLIGHT reservation - User: Ece Sever, Flight: 200021 KUFly Istanbul Stockholm, From: 11:30, To: 22:30, Class: Business
+[2025-01-02 03:34:50] HOTEL reservation - User: Ece Sever, Hotel: SunnySide Hostel, City: Stockholm, Room: Deluxe, Check-in: 2025-02-14, Check-out: 2025-02-18
+[2025-01-02 03:34:50] TAXI reservation - User: Ece Sever, City: Stockholm, Type: Orange Taxi, DateTime: 2025-02-14 22:30
+[2025-01-02 03:34:50] PAYMENT - User: Ece Sever, Type: Package, reservation ID: 500008,SunnySide Hostel,KUFly,Orange Taxi,confirmed,2025-02-14,2025-02-18,Ece Sever Reservation ID 500008, Amount: 2501.0
+[2025-01-02 03:34:55] FLIGHT reservation - User: Ece Sever, Flight: 200000 Turkish Airlines Istanbul Paris, From: 18:00, To: 23:00, Class: Economy
+[2025-01-02 03:34:55] HOTEL reservation - User: Ece Sever, Hotel: Double Tree by Hilton, City: Paris, Room: Suite, Check-in: 2025-01-10, Check-out: 2025-01-19
+[2025-01-02 03:34:55] TAXI reservation - User: Ece Sever, City: Paris, Type: Black Taxi, DateTime: 2025-01-10 23:00
+[2025-01-02 03:34:55] PAYMENT - User: Ece Sever, Type: Package, reservation ID: 500009,Double Tree by Hilton,Turkish Airlines,Black Taxi,confirmed,2025-01-10,2025-01-19,Ece Sever Reservation ID 500009, Amount: 2128.0
+[2025-01-02 03:37:13] USER LOGIN - Username: Bunyamin Emre Efe
+[2025-01-02 03:37:51] PACKAGE CREATION - Package ID: 400010, Created by: Bunyamin Emre Efe, Details: Hilton,Pegasus Airlines,Black Taxi
+[2025-01-02 03:37:52] FLIGHT reservation - User: Bunyamin Emre Efe, Flight: 200004 Pegasus Airlines Istanbul Rome, From: 12:00, To: 14:00, Class: Economy
+[2025-01-02 03:37:53] HOTEL reservation - User: Bunyamin Emre Efe, Hotel: Hilton, City: Rome, Room: Standard, Check-in: 2025-05-01, Check-out: 2025-05-07
+[2025-01-02 03:37:53] TAXI reservation - User: Bunyamin Emre Efe, City: Rome, Type: Black Taxi, DateTime: 2025-05-01 14:00
+[2025-01-02 03:37:53] PAYMENT - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500010,Hilton,Pegasus Airlines,Black Taxi,confirmed,2025-05-01,2025-05-07,Bunyamin Emre Efe Reservation ID 500010, Amount: 1363.0
+[2025-01-02 03:38:11] USER LOGIN - Username: Bunyamin Emre Efe
+[2025-01-02 03:38:22] FLIGHT reservation - User: Bunyamin Emre Efe, Flight: 200024 KUFly Istanbul Ankara, From: 8:30, To: 9:30, Class: First Class
+[2025-01-02 03:38:22] HOTEL reservation - User: Bunyamin Emre Efe, Hotel: Sheraton, City: Ankara, Room: Deluxe, Check-in: 2025-11-10, Check-out: 2025-11-11
+[2025-01-02 03:38:22] TAXI reservation - User: Bunyamin Emre Efe, City: Ankara, Type: Yellow Taxi, DateTime: 2025-11-10 09:30
+[2025-01-02 03:38:22] PAYMENT - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500011,Sheraton,KUFly,Yellow Taxi,confirmed,2025-11-10,2025-11-11,Bunyamin Emre Efe Reservation ID 500011, Amount: 470.0
+[2025-01-02 03:38:25] FLIGHT reservation - User: Bunyamin Emre Efe, Flight: 200006 Turkish Airlines Istanbul Amsterdam, From: 12:00, To: 16:00, Class: Economy
+[2025-01-02 03:38:25] HOTEL reservation - User: Bunyamin Emre Efe, Hotel: Hilton, City: Amsterdam, Room: Deluxe, Check-in: 2026-05-10, Check-out: 2026-05-16
+[2025-01-02 03:38:25] TAXI reservation - User: Bunyamin Emre Efe, City: Amsterdam, Type: Orange Taxi, DateTime: 2026-05-10 16:00
+[2025-01-02 03:38:25] PAYMENT - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500012,Hilton,Turkish Airlines,Orange Taxi,confirmed,2026-05-10,2026-05-16,Bunyamin Emre Efe Reservation ID 500012, Amount: 3000.0
+[2025-01-02 03:38:31] FLIGHT reservation - User: Bunyamin Emre Efe, Flight: 200000 Turkish Airlines Istanbul Paris, From: 18:00, To: 23:00, Class: Economy
+[2025-01-02 03:38:31] HOTEL reservation - User: Bunyamin Emre Efe, Hotel: Double Tree by Hilton, City: Paris, Room: Suite, Check-in: 2025-01-10, Check-out: 2025-01-19
+[2025-01-02 03:38:31] TAXI reservation - User: Bunyamin Emre Efe, City: Paris, Type: Black Taxi, DateTime: 2025-01-10 23:00
+[2025-01-02 03:38:31] PAYMENT - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500013,Double Tree by Hilton,Turkish Airlines,Black Taxi,confirmed,2025-01-10,2025-01-19,Bunyamin Emre Efe Reservation ID 500013, Amount: 2128.0
+[2025-01-02 03:38:49] CANCELLATION - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500013, Details: 500013,Double Tree by Hilton,Turkish Airlines,Black Taxi,cancelled,2025-01-10,2025-01-19,Bunyamin Emre Efe
+[2025-01-02 03:38:51] CANCELLATION - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500011, Details: 500011,Sheraton,KUFly,Yellow Taxi,cancelled,2025-11-10,2025-11-11,Bunyamin Emre Efe
+[2025-01-02 03:38:53] CANCELLATION - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500012, Details: 500012,Hilton,Turkish Airlines,Orange Taxi,cancelled,2026-05-10,2026-05-16,Bunyamin Emre Efe
+[2025-01-02 03:38:54] CANCELLATION - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500010, Details: 500010,Hilton,Pegasus Airlines,Black Taxi,cancelled,2025-05-01,2025-05-07,Bunyamin Emre Efe
+[2025-01-02 03:38:59] FLIGHT reservation - User: Bunyamin Emre Efe, Flight: 200000 Turkish Airlines Istanbul Paris, From: 18:00, To: 23:00, Class: Economy
+[2025-01-02 03:38:59] HOTEL reservation - User: Bunyamin Emre Efe, Hotel: Double Tree by Hilton, City: Paris, Room: Suite, Check-in: 2025-01-10, Check-out: 2025-01-19
+[2025-01-02 03:38:59] TAXI reservation - User: Bunyamin Emre Efe, City: Paris, Type: Black Taxi, DateTime: 2025-01-10 23:00
+[2025-01-02 03:38:59] PAYMENT - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500014,Double Tree by Hilton,Turkish Airlines,Black Taxi,confirmed,2025-01-10,2025-01-19,Bunyamin Emre Efe Reservation ID 500014, Amount: 2128.0
+[2025-01-02 03:39:02] FLIGHT reservation - User: Bunyamin Emre Efe, Flight: 200021 KUFly Istanbul Stockholm, From: 11:30, To: 22:30, Class: Business
+[2025-01-02 03:39:02] HOTEL reservation - User: Bunyamin Emre Efe, Hotel: SunnySide Hostel, City: Stockholm, Room: Deluxe, Check-in: 2025-02-14, Check-out: 2025-02-18
+[2025-01-02 03:39:02] TAXI reservation - User: Bunyamin Emre Efe, City: Stockholm, Type: Orange Taxi, DateTime: 2025-02-14 22:30
+[2025-01-02 03:39:02] PAYMENT - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500015,SunnySide Hostel,KUFly,Orange Taxi,confirmed,2025-02-14,2025-02-18,Bunyamin Emre Efe Reservation ID 500015, Amount: 2501.0
+[2025-01-02 03:39:04] FLIGHT reservation - User: Bunyamin Emre Efe, Flight: 200024 KUFly Istanbul Ankara, From: 8:30, To: 9:30, Class: First Class
+[2025-01-02 03:39:04] HOTEL reservation - User: Bunyamin Emre Efe, Hotel: Sheraton, City: Ankara, Room: Deluxe, Check-in: 2025-11-10, Check-out: 2025-11-11
+[2025-01-02 03:39:04] TAXI reservation - User: Bunyamin Emre Efe, City: Ankara, Type: Yellow Taxi, DateTime: 2025-11-10 09:30
+[2025-01-02 03:39:04] PAYMENT - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500016,Sheraton,KUFly,Yellow Taxi,confirmed,2025-11-10,2025-11-11,Bunyamin Emre Efe Reservation ID 500016, Amount: 470.0
+[2025-01-02 03:39:07] FLIGHT reservation - User: Bunyamin Emre Efe, Flight: 200006 Turkish Airlines Istanbul Amsterdam, From: 12:00, To: 16:00, Class: Economy
+[2025-01-02 03:39:07] HOTEL reservation - User: Bunyamin Emre Efe, Hotel: Hilton, City: Amsterdam, Room: Deluxe, Check-in: 2026-05-10, Check-out: 2026-05-16
+[2025-01-02 03:39:07] TAXI reservation - User: Bunyamin Emre Efe, City: Amsterdam, Type: Orange Taxi, DateTime: 2026-05-10 16:00
+[2025-01-02 03:39:07] PAYMENT - User: Bunyamin Emre Efe, Type: Package, reservation ID: 500017,Hilton,Turkish Airlines,Orange Taxi,confirmed,2026-05-10,2026-05-16,Bunyamin Emre Efe Reservation ID 500017, Amount: 3000.0
+[2025-01-02 03:54:04] USER LOGIN - Username: Aykut Bir
+[2025-01-02 04:18:19] USER LOGIN - Username: Bunyamin Emre Efe
+[2025-01-02 04:51:15] PACKAGE CREATION - Package ID: 400011, Created by: Bunyamin Emre Efe, Details: Marriott,Pegasus Airlines,Orange Taxi
+[2025-01-02 11:40:24] HOTEL reservation - User: Vahideh Hayyolalam, Hotel: Hilton, City: Amsterdam, Room: Deluxe, Check-in: 2026-05-10, Check-out: 2026-05-16
+[2025-01-02 11:40:24] TAXI reservation - User: Vahideh Hayyolalam, City: Amsterdam, Type: Orange Taxi, DateTime: 2026-05-10 16:00
+[2025-01-02 11:40:24] FLIGHT reservation - User: Vahideh Hayyolalam, Flight: 200006 Turkish Airlines Istanbul Amsterdam, From: 12:00, To: 16:00, Class: Economy
+[2025-01-02 11:40:25] CANCELLATION - User: Vahideh Hayyolalam, Type: Package, reservation ID: 500007, Details: 500007,Hilton,Turkish Airlines,Orange Taxi,cancelled,2026-05-10,2026-05-16,Ece Sever
+[2025-01-02 11:40:25] PACKAGE MODIFICATION - Package: Hilton,Turkish Airlines,Orange Taxi, Modified by: Vahideh Hayyolalam, Changes: Hilton,Turkish Airlines,Orange Taxi
