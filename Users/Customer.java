@@ -39,9 +39,13 @@ public class Customer implements User{
 
     }
 
-public ArrayList<Reservation> getTravelHistory() throws FileNotFoundException {
+public ArrayList<Reservation> getTravelHistory(){
+    try {
         loadTravelHistory();
-        return travelHistory;
+    } catch (FileNotFoundException e) {
+        throw new RuntimeException(e);
+    }
+    return travelHistory;
 }
 
     public String getUsername() {

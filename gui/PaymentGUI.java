@@ -15,6 +15,9 @@ import java.util.Locale;
 
 import services.Package;
 
+/**
+ * GUI for confirming payment details for a package booking.
+ */
 public class PaymentGUI extends JFrame {
     private Package pck;
     private Customer cst;
@@ -28,6 +31,11 @@ public class PaymentGUI extends JFrame {
     private JButton confirmButton;
     private JButton cancelButton;
 
+    /**
+     * Constructs a PaymentGUI instance.
+     * @param cst The customer making the booking.
+     * @param pck The package being booked.
+     */
     public PaymentGUI(Customer cst, Package pck) {
         this.pck = pck;
         this.taxiTime = pck.getTaxiTime();
@@ -42,6 +50,9 @@ public class PaymentGUI extends JFrame {
         addListeners();
     }
 
+    /**
+     * Configures the main frame settings.
+     */
     private void setupFrame() {
         setTitle("Payment Confirmation");
         setSize(600, 800);
@@ -52,34 +63,32 @@ public class PaymentGUI extends JFrame {
         getContentPane().setBackground(Constants.PRIMARY_COLOR);
     }
 
+    /**
+     * Initializes all components used in the GUI.
+     */
     private void initializeComponents() {
-        // Initialize details panel
         detailsPanel = new JPanel();
         detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS));
         detailsPanel.setBackground(Color.WHITE);
         detailsPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Add package details
         addDetailsSection("Package Details");
-        addDetailRow("Hotel:", (pck.getHotel().toString())+" Price per night: "+"$"+pck.getHotel().getPricePerNight()+" * "+pck.getDaysInHotel()+" = $"+ pck.getTotalCost());
+        addDetailRow("Hotel:", (pck.getHotel().toString()) + " Price per night: " + "$" + pck.getHotel().getPricePerNight() + " * " + pck.getDaysInHotel() + " = $" + pck.getTotalCost());
         addDetailRow("Check-in:", hotelStartDate.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         addDetailRow("Check-out:", dateEnd.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
-        addDetailRow("Flight:", (pck.getFlight().toString())+" Price of the ticket: $"+(pck.getFlight().getPrice()));
+        addDetailRow("Flight:", (pck.getFlight().toString()) + " Price of the ticket: $" + (pck.getFlight().getPrice()));
         addDetailRow("Flight Date:", dateStart.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
-        addDetailRow("Taxi:", (pck.getTaxi().toString())+" Estimated cost from the airport to the hotel: $"+pck.getTaxi().taxiPriceCalculator(pck.getHotel()));
+        addDetailRow("Taxi:", (pck.getTaxi().toString()) + " Estimated cost from the airport to the hotel: $" + pck.getTaxi().taxiPriceCalculator(pck.getHotel()));
         addDetailRow("Pickup Time:", taxiTime.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm")));
 
-        // Add customer details
         addDetailsSection("Customer Information");
         addDetailRow("Name:", cst.getUsername());
         addDetailRow("ID:", String.valueOf(cst.getID()));
 
-        // Add payment details
         addDetailsSection("Payment Details");
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
         addDetailRow("Total Amount:", currencyFormat.format(pck.getDiscountedPrice()));
 
-        // Initialize payment panel
         paymentPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         paymentPanel.setBackground(Constants.PRIMARY_COLOR);
 
@@ -94,18 +103,22 @@ public class PaymentGUI extends JFrame {
         cancelButton.setPreferredSize(new Dimension(150, 40));
     }
 
+    /**
+     * Adds components to the frame.
+     */
     private void addComponents() {
-        // Add scrollable details panel
         JScrollPane scrollPane = new JScrollPane(detailsPanel);
         scrollPane.setBorder(null);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Add buttons panel
         paymentPanel.add(confirmButton);
         paymentPanel.add(cancelButton);
         add(paymentPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Adds event listeners to the buttons.
+     */
     private void addListeners() {
         confirmButton.addActionListener(e -> handleBooking());
 
@@ -114,6 +127,10 @@ public class PaymentGUI extends JFrame {
         });
     }
 
+    /**
+     * Adds a section title to the details panel.
+     * @param title The title of the section.
+     */
     private void addDetailsSection(String title) {
         JLabel titleLabel = new JLabel(title);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -122,6 +139,11 @@ public class PaymentGUI extends JFrame {
         detailsPanel.add(titleLabel);
     }
 
+    /**
+     * Adds a detail row to the details panel.
+     * @param label The label for the detail.
+     * @param value The value of the detail.
+     */
     private void addDetailRow(String label, String value) {
         JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT));
         row.setBackground(Color.WHITE);
@@ -139,12 +161,13 @@ public class PaymentGUI extends JFrame {
         detailsPanel.add(row);
     }
 
+    /**
+     * Handles the booking confirmation process.
+     */
     private void handleBooking() {
         try {
-            // Process the booking
             Vendor.packageSeller(pck, cst, taxiTime, hotelStartDate, dateStart, dateEnd);
 
-            // Show success message
             JOptionPane.showMessageDialog(this,
                     "Booking confirmed successfully!",
                     "Booking Confirmed",
@@ -159,6 +182,4 @@ public class PaymentGUI extends JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
 }

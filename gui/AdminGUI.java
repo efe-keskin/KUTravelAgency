@@ -65,7 +65,15 @@ public class AdminGUI extends JFrame {
         customerSearchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new CustomerSearchGUI().setVisible(true);
+                SwingUtilities.invokeLater(() -> {
+                    new CustomerSearchGUI().setVisible(true);
+                });
+            }
+        });
+        logsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AdminLogGUI().setVisible(true);
             }
         });
     }

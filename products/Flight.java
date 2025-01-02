@@ -258,6 +258,9 @@ public class Flight extends Product {
         }
     }
 
+    /**
+     * @param date
+     */
     public void cancelBook(LocalDate date) {
         try {
             // 1) Ensure availability is loaded

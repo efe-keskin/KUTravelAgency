@@ -16,7 +16,9 @@ import products.Taxi;
 import reservationlogs.Logger;
 import services.Package;
 import services.PackageManager;
-
+/**
+ * GUI for creating and managing travel packages.
+ */
 public class PackageMakerGUI extends JFrame {
     private JPanel mainPanel;
     private CardLayout cardLayout;
@@ -31,6 +33,9 @@ public class PackageMakerGUI extends JFrame {
     private boolean isReservationMaker;
     DateTimeFormatter formatterDate = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter formatterTime = java.time.format.DateTimeFormatter.ofPattern("H:mm");
+    /**
+     * Default constructor for the PackageMakerGUI.
+     */
     public PackageMakerGUI() {
         setTitle("Travel Package Booking");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,9 +51,9 @@ public class PackageMakerGUI extends JFrame {
         createTaxiSelectionPanel();
 
     }
-/**
- * This method
- * **/
+    /**
+     * Creates the initial panel for selecting travel details.
+     */
 private void createInitialPanel() {
     String[] cityNames = {
             "Istanbul", "Paris", "Berlin", "Rome", "Amsterdam", "Madrid",
@@ -144,7 +149,9 @@ private void createInitialPanel() {
     mainPanel.add(panel, "initial");
 }
 
-
+    /**
+     * Creates the panel for selecting hotels.
+     */
     private void createHotelSelectionPanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -178,7 +185,9 @@ private void createInitialPanel() {
         mainPanel.add(panel, "hotelSelection");
     }
 
-
+    /**
+     * Creates the panel for selecting taxis.
+     */
     private void createTaxiSelectionPanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -211,7 +220,11 @@ private void createInitialPanel() {
 
         mainPanel.add(panel, "taxiSelection");
     }
-
+    /**
+     * Searches for taxis in the selected city.
+     * @param city City for taxi search.
+     * @param taxiPickupDateTime Pickup date and time for taxi.
+     */
     void searchTaxis(String city, LocalDateTime taxiPickupDateTime) {
         ArrayList<Taxi> taxisInCity = Taxi.selectByCity(city);
         double distanceKm = selectedHotel.getDistanceToAirport();
@@ -323,7 +336,10 @@ private void createInitialPanel() {
     }
 
     private ArrayList<Hotel> currentHotels; // Add this as class field
-
+    /**
+     * Searches for hotels in the selected destination city.
+     * @param city Destination city for hotel search.
+     */
     void searchHotels(String city) {
         ArrayList<Hotel> hotelsInCity = Hotel.selectByCity(city);
         currentHotels = Hotel.availableRoomsListMaker(startDate, endDate, hotelsInCity);
@@ -362,7 +378,11 @@ private void createInitialPanel() {
         resultsTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         cardLayout.show(mainPanel, "hotelSelection");
     }
-
+    /**
+     * Searches for flights between source and destination cities.
+     * @param source Source city.
+     * @param destination Destination city.
+     */
     void searchFlights(String source, String destination) {
         ArrayList<Flight> flights = Flight.selectByCity(destination, source);
         currentFlights = Flight.availableSeatsListMaker(startDate, flights);
@@ -408,12 +428,10 @@ private void createInitialPanel() {
         cardLayout.show(mainPanel, "flightSelection");
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            PackageMakerGUI gui = new PackageMakerGUI();
-            gui.setVisible(true);
-        });
-    }
+    /**
+     * Constructor with reservation maker option.
+     * @param isReservationMaker Specifies if the instance is for reservation creation.
+     */
     public PackageMakerGUI(boolean isReservationMaker){
         this.isReservationMaker = isReservationMaker;
         setTitle("Travel Package Booking");
@@ -430,6 +448,9 @@ private void createInitialPanel() {
         createTaxiSelectionPanel();
 
     }
+    /**
+     * Creates the final travel package and logs the details.
+     */
     private void createPackage() {
         try {
             Package travelPackage = PackageManager.makePackage(
@@ -452,9 +473,12 @@ private void createInitialPanel() {
                 if(!isReservationMaker) {
                     new AdminGUI().setVisible(true);
                 }
-                else{new PaymentGUI((Customer) App.user,travelPackage).setVisible(true);}
+                else{new AdminGUI().setVisible(true);
+                    new PaymentGUI((Customer) App.user,travelPackage).setVisible(true);}
             }
-            else{new PaymentGUI((Customer) App.user,travelPackage).setVisible(true);}
+            else{
+                new CustomerUI().setVisible(true);
+                new PaymentGUI((Customer) App.user,travelPackage).setVisible(true);}
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this,
                     "Error creating package: " + e.getMessage(),

@@ -41,7 +41,7 @@ public class Reservation {
                 status ? "confirmed" : "cancelled",
                 dateStart != null ? dateStart.format(formatter) : "",
                 dateEnd != null ? dateEnd.format(formatter) : "",
-                customer != null ? customer.toString() : ""
+                customer != null ? customer.getUsername() : ""
         );
     }
     public void setStatus(boolean status) {

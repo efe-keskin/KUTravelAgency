@@ -78,7 +78,7 @@ public class CustomerUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new EditReservationsUI().setVisible(true);
+                new EditReservationsUI((Customer) App.user).setVisible(true);
             }
         });
         logOutButton.addActionListener(new ActionListener() {

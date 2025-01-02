@@ -1,15 +1,19 @@
 package gui;
 
-
 import Users.Customer;
 import core.App;
 import databases.CustomerDB;
+
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.util.EventObject;
 
+/**
+ * GUI for selecting and managing customers, including searching, selecting, and adding new customers.
+ */
 public class CustomerChooserGUI extends JFrame {
+
     private JTable customerTable;
     private JPanel mainPanel;
     private DefaultTableModel tableModel;
@@ -17,6 +21,9 @@ public class CustomerChooserGUI extends JFrame {
     private JTextField searchField;
     private static final Font font = new Font("Arial", Font.PLAIN, 14);
 
+    /**
+     * Constructs the CustomerChooserGUI and initializes components.
+     */
     public CustomerChooserGUI() {
         setTitle("Customer Selection");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -24,12 +31,10 @@ public class CustomerChooserGUI extends JFrame {
 
         mainPanel = new JPanel(new BorderLayout());
 
-        // Top panel for search and buttons
         JPanel topPanel = new JPanel(new BorderLayout());
         JPanel searchPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
 
-        // Search components
         searchField = new JTextField(20);
         JButton searchButton = new JButton("Search");
         searchField.setFont(font);
@@ -38,7 +43,6 @@ public class CustomerChooserGUI extends JFrame {
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
 
-        // Button components
         JButton refreshButton = new JButton("Refresh");
         JButton backButton = new JButton("Back");
         refreshButton.setFont(font);
@@ -49,7 +53,6 @@ public class CustomerChooserGUI extends JFrame {
         topPanel.add(searchPanel, BorderLayout.WEST);
         topPanel.add(buttonPanel, BorderLayout.EAST);
 
-        // Table setup
         customerTable = new JTable();
         scrollPane = new JScrollPane(customerTable);
         customerTable.setFont(font);
@@ -77,23 +80,19 @@ public class CustomerChooserGUI extends JFrame {
         customerTable.setModel(tableModel);
         customerTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        // Button column
         TableColumn actionColumn = customerTable.getColumnModel().getColumn(3);
         actionColumn.setCellRenderer(new ButtonRenderer());
         actionColumn.setCellEditor(new ButtonEditor());
 
-        // Add components to main panel
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Add New Customer Button
         JButton addCustomerButton = new JButton("Add New Customer");
         addCustomerButton.setFont(font);
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.add(addCustomerButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        // Add action listeners
         refreshButton.addActionListener(e -> refreshCustomerList());
         backButton.addActionListener(e -> dispose());
         searchButton.addActionListener(e -> searchCustomers());
@@ -102,15 +101,19 @@ public class CustomerChooserGUI extends JFrame {
         add(mainPanel);
     }
 
+    /**
+     * Populates the table with customer data, optionally filtering by username.
+     *
+     * @param searchUsername the username to filter by, or empty for all customers
+     */
     private void populateTable(String searchUsername) {
-        tableModel.setRowCount(0); // Clear existing rows
+        tableModel.setRowCount(0);
         CustomerDB.loadCustomers();
 
         for (Customer cst : CustomerDB.getAllCustomers()) {
             String username = cst.getUsername();
             String password = cst.getPassword();
             Integer id = cst.getID();
-
 
             if (searchUsername.isEmpty() || username.toLowerCase().contains(searchUsername.toLowerCase())) {
                 Object[] rowData = new Object[4];
@@ -149,6 +152,9 @@ public class CustomerChooserGUI extends JFrame {
         }
     }
 
+    /**
+     * Adds a new customer to the database after user input.
+     */
     private void addNewCustomer() {
         JTextField usernameField = new JTextField();
         JTextField passwordField = new JTextField();
@@ -175,17 +181,25 @@ public class CustomerChooserGUI extends JFrame {
         }
     }
 
+    /**
+     * Searches for customers based on the entered username.
+     */
     private void searchCustomers() {
         String searchTerm = searchField.getText().trim();
         populateTable(searchTerm);
     }
 
+    /**
+     * Refreshes the customer list by clearing search filters.
+     */
     private void refreshCustomerList() {
         searchField.setText("");
         populateTable("");
     }
 
-    // Button renderer for the action column
+    /**
+     * Custom button renderer for the action column.
+     */
     class ButtonRenderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
@@ -194,7 +208,9 @@ public class CustomerChooserGUI extends JFrame {
         }
     }
 
-    // Button editor for the action column
+    /**
+     * Custom button editor for the action column.
+     */
     class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
         private JPanel panel;
 
@@ -216,6 +232,11 @@ public class CustomerChooserGUI extends JFrame {
         }
     }
 
+    /**
+     * Main method for testing the CustomerChooserGUI.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             CustomerChooserGUI gui = new CustomerChooserGUI();

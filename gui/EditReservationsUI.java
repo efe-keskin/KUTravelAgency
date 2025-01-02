@@ -1,5 +1,6 @@
 package gui;
 
+import Users.Customer;
 import services.Reservation;
 import services.ReservationsManagers;
 
@@ -8,18 +9,29 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.EventObject;
 
+/**
+ * GUI for managing reservations of a specific customer, including canceling reservations.
+ */
 public class EditReservationsUI extends JFrame {
+
     private JTable reservationTable;
     private JPanel mainPanel;
+    private Customer cst;
     private DefaultTableModel tableModel;
     private JScrollPane scrollPane;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("H:mm");
     private static final Font font = new Font("Arial", Font.PLAIN, 14);
 
-    public EditReservationsUI() {
+    /**
+     * Constructs the EditReservationsUI for a given customer.
+     *
+     * @param cst the customer whose reservations are being managed
+     */
+    public EditReservationsUI(Customer cst) {
+        this.cst = cst;
         setTitle("Reservation Management");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(1400, 800);
@@ -33,7 +45,7 @@ public class EditReservationsUI extends JFrame {
         tableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 11; // Make only the Actions column editable
+                return column == 11;
             }
 
             @Override
@@ -42,7 +54,6 @@ public class EditReservationsUI extends JFrame {
             }
         };
 
-        // Add columns
         tableModel.addColumn("Reservation ID");
         tableModel.addColumn("From City");
         tableModel.addColumn("To City");
@@ -56,9 +67,39 @@ public class EditReservationsUI extends JFrame {
         tableModel.addColumn("Price ($)");
         tableModel.addColumn("Actions");
 
-        // Populate table with reservations
-        for (Reservation reservation : ReservationsManagers.getAllReservations()) {
-            if (reservation.isStatus()) {  // Only show active reservations
+        populateTable();
+
+        reservationTable.setRowHeight(60);
+        reservationTable.setModel(tableModel);
+        reservationTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+        TableColumn actionColumn = reservationTable.getColumnModel().getColumn(11);
+        actionColumn.setCellRenderer(new ButtonRenderer());
+        actionColumn.setCellEditor(new ButtonEditor());
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JButton refreshButton = new JButton("Refresh");
+        JButton backButton = new JButton("Back");
+        refreshButton.setFont(font);
+        backButton.setFont(font);
+
+        buttonPanel.add(refreshButton);
+        buttonPanel.add(backButton);
+        mainPanel.add(buttonPanel, BorderLayout.NORTH);
+
+        refreshButton.addActionListener(e -> refreshReservationList());
+        backButton.addActionListener(e -> backReturn());
+
+        add(mainPanel);
+    }
+
+    /**
+     * Populates the reservation table with active reservations of the customer.
+     */
+    private void populateTable() {
+        tableModel.setRowCount(0);
+        for (Reservation reservation : cst.getTravelHistory()) {
+            if (reservation.isStatus()) {
                 Object[] rowData = new Object[12];
                 rowData[0] = String.valueOf(reservation.getId());
                 rowData[1] = reservation.getRelatedPackage().getFlight().getDepartureCity();
@@ -72,12 +113,10 @@ public class EditReservationsUI extends JFrame {
                 rowData[9] = reservation.getRelatedPackage().getDateEnd().format(DATE_FORMATTER);
                 rowData[10] = String.valueOf(reservation.getRelatedPackage().getDiscountedPrice());
 
-                // Create cancel button panel
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
                 JButton cancelButton = new JButton("Cancel");
                 cancelButton.setFont(font);
 
-                int reservationId = reservation.getId();
                 cancelButton.addActionListener(e -> {
                     int confirm = JOptionPane.showConfirmDialog(
                             this,
@@ -102,44 +141,27 @@ public class EditReservationsUI extends JFrame {
                 tableModel.addRow(rowData);
             }
         }
-
-        reservationTable.setRowHeight(60);
-        reservationTable.setModel(tableModel);
-        reservationTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-
-        // Set up the button column
-        TableColumn actionColumn = reservationTable.getColumnModel().getColumn(11);
-        actionColumn.setCellRenderer(new ButtonRenderer());
-        actionColumn.setCellEditor(new ButtonEditor());
-
-        // Add refresh and back buttons
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JButton refreshButton = new JButton("Refresh");
-        JButton backButton = new JButton("Back");
-        refreshButton.setFont(font);
-        backButton.setFont(font);
-
-        buttonPanel.add(refreshButton);
-        buttonPanel.add(backButton);
-        mainPanel.add(buttonPanel, BorderLayout.NORTH);
-
-        refreshButton.addActionListener(e -> refreshReservationList());
-        backButton.addActionListener(e -> backReturn());
-
-        add(mainPanel);
     }
 
+    /**
+     * Refreshes the reservation table.
+     */
     private void refreshReservationList() {
         dispose();
-        new EditReservationsUI().setVisible(true);
+        new EditReservationsUI(cst).setVisible(true);
     }
 
+    /**
+     * Returns to the customer UI.
+     */
     private void backReturn() {
         dispose();
         new CustomerUI().setVisible(true);
     }
 
-    // Button renderer for the action column
+    /**
+     * Custom button renderer for the action column.
+     */
     class ButtonRenderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
@@ -148,7 +170,9 @@ public class EditReservationsUI extends JFrame {
         }
     }
 
-    // Button editor for the action column
+    /**
+     * Custom button editor for the action column.
+     */
     class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
         private JPanel panel;
 
@@ -168,12 +192,5 @@ public class EditReservationsUI extends JFrame {
         public boolean shouldSelectCell(EventObject anEvent) {
             return true;
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            EditReservationsUI gui = new EditReservationsUI();
-            gui.setVisible(true);
-        });
     }
 }

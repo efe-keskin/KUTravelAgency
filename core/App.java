@@ -3,7 +3,6 @@ package core;
 import Users.User;
 import gui.AdminGUI;
 import gui.LoginGUI;
-import gui.MenuGUI;
 import gui.RegisterGUI;
 
 import javax.swing.*;
@@ -26,11 +25,9 @@ public class App {
             @Override
             public void run() {
                 new AdminGUI().setVisible(false);
-                if(loggedIn){new MenuGUI().setVisible(true);}
-                else{
                     new LoginGUI().setVisible(true);
                     new RegisterGUI().setVisible(false);
-                }
+
 
             }
         });

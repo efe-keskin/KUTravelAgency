@@ -1,6 +1,5 @@
 package databases;
 
-
 import Users.Customer;
 import constants.Constants;
 
@@ -9,46 +8,51 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-
+/**
+ * Manages the customer database, including loading, retrieval, and modification of customer data.
+ */
 public class CustomerDB {
 
     private static HashMap<String, Customer> customerDB = new HashMap<>();
     private static HashMap<String, Customer> customerIDDB = new HashMap<>();
-    private static int uniqueID=600000;
+    private static int uniqueID = 600000;
     private static int size;
+
     static {
         loadCustomers();
-    uniqueID += customerDB.size();
-
+        uniqueID += customerDB.size();
     }
-public static Customer retrieveCustomer(String id){
-        loadCustomers();
-        if(customerIDDB.size()>0){
-            loadCustomers();
-            return customerIDDB.get(id);
-                }
-    else{
+
+    /**
+     * Retrieves a customer by their unique ID.
+     *
+     * @param id the unique ID of the customer
+     * @return the Customer object or null if not found
+     */
+    public static Customer retrieveCustomer(String id) {
         loadCustomers();
         return customerIDDB.get(id);
+    }
 
-        }
-}
-
-
-
-
-    // Add a user and save it to the file
+    /**
+     * Adds a new customer to the database and saves it to the file.
+     *
+     * @param username the username of the customer
+     * @param password the password of the customer
+     */
     public static void addCustomer(String username, String password) {
         loadCustomers();
-        Customer newCustomer = new Customer(username,password,uniqueID++);
+        Customer newCustomer = new Customer(username, password, uniqueID++);
         customerDB.put(username, newCustomer);
         saveToFile();
     }
 
-    // Load users from the file into the HashMap
+    /**
+     * Loads customer data from the file into the database.
+     */
     public static void loadCustomers() {
-        if (!customerDB.isEmpty()&&!customerIDDB.isEmpty()) {
-            return; // Avoid reloading if already populated
+        if (!customerDB.isEmpty() && !customerIDDB.isEmpty()) {
+            return;
         }
         try (BufferedReader reader = new BufferedReader(new FileReader(Constants.DB_PATH))) {
             String line;
@@ -56,7 +60,7 @@ public static Customer retrieveCustomer(String id){
                 String[] parts = line.split(":");
                 if (parts.length == 3) {
                     customerDB.put(parts[0], new Customer(parts[0], parts[1], Integer.valueOf(parts[2])));
-                    customerIDDB.put(parts[2],new Customer(parts[0],parts[1],Integer.valueOf(parts[2])));
+                    customerIDDB.put(parts[2], new Customer(parts[0], parts[1], Integer.valueOf(parts[2])));
                 }
             }
             size = customerDB.size();
@@ -65,8 +69,9 @@ public static Customer retrieveCustomer(String id){
         }
     }
 
-
-    // Save all users to the file
+    /**
+     * Saves all customer data to the file.
+     */
     private static void saveToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Constants.DB_PATH))) {
             for (String username : customerDB.keySet()) {
@@ -78,30 +83,55 @@ public static Customer retrieveCustomer(String id){
         }
     }
 
-    // Retrieve a user's password
+    /**
+     * Retrieves the password for a given customer username.
+     *
+     * @param username the username of the customer
+     * @return the password of the customer or null if not found
+     */
     public static String getCustomerPass(String username) {
         loadCustomers();
-        if(customerDB.get(username) == null){return null;}
-        return customerDB.get(username).getPassword();
+        Customer customer = customerDB.get(username);
+        return customer != null ? customer.getPassword() : null;
     }
-    public static Customer getCustomer(String username){
+
+    /**
+     * Retrieves the Customer object for a given username.
+     *
+     * @param username the username of the customer
+     * @return the Customer object or null if not found
+     */
+    public static Customer getCustomer(String username) {
         loadCustomers();
         return customerDB.get(username);
     }
-    public static Boolean hasCustomer(String username){
+
+    /**
+     * Checks if a customer exists in the database.
+     *
+     * @param username the username of the customer
+     * @return true if the customer exists, false otherwise
+     */
+    public static Boolean hasCustomer(String username) {
         loadCustomers();
-        if(customerDB.containsKey(username)){
-            return true;
-        }
-        return false;
+        return customerDB.containsKey(username);
     }
-public static Collection<Customer> getAllCustomers(){
+
+    /**
+     * Retrieves all customers from the database.
+     *
+     * @return a collection of all Customer objects
+     */
+    public static Collection<Customer> getAllCustomers() {
         loadCustomers();
         return customerDB.values();
+    }
 
-}
-
-
+    /**
+     * Retrieves the total number of customers in the database.
+     *
+     * @return the number of customers
+     */
     public static int getSize() {
         loadCustomers();
         return size;

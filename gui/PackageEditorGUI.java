@@ -17,7 +17,12 @@ import products.Flight;
 import products.Taxi;
 import services.Package;
 
+/**
+ * GUI for editing travel packages, including updating hotels, flights, taxis, and dates.
+ * Supports adding discounts and provides integration with Admin and Reservation GUIs.
+ */
 public class PackageEditorGUI extends JFrame {
+
     private JPanel mainPanel;
     private CardLayout cardLayout;
     private Package currentPackage;
@@ -35,11 +40,20 @@ public class PackageEditorGUI extends JFrame {
     private boolean isFromAdminReservations;
     private AdminReservationsGUI arg;
     private Reservation res;
-    public PackageEditorGUI(Package pck, boolean isFromAdminReservations,Reservation res,AdminReservationsGUI arg) {
+
+    /**
+     * Constructs the PackageEditorGUI for a given package with optional admin reservation context.
+     *
+     * @param pck                     the package to edit
+     * @param isFromAdminReservations whether this editor was opened from Admin Reservations GUI
+     * @param res                     the reservation associated with the package (if applicable)
+     * @param arg                     the AdminReservationsGUI instance (if applicable)
+     */
+    public PackageEditorGUI(Package pck, boolean isFromAdminReservations, Reservation res, AdminReservationsGUI arg) {
         currentPackage = pck;
         this.arg = arg;
         this.isFromAdminReservations = isFromAdminReservations;
-        this.res =res;
+        this.res = res;
         int packageId = pck.getId();
         startDate = currentPackage.getDateStart();
         endDate = currentPackage.getDateEnd();
@@ -63,16 +77,25 @@ public class PackageEditorGUI extends JFrame {
 
         cardLayout.show(mainPanel, "main");
     }
+
+    /**
+     * Constructs the PackageEditorGUI for a given package.
+     *
+     * @param pck the package to edit
+     */
     public PackageEditorGUI(Package pck) {
-        this(pck, false, null,null);
+        this(pck, false, null, null);
     }
+
+    /**
+     * Creates the main panel displaying the current package details and edit options.
+     */
     private void createMainPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Current Package Info
         int row = 0;
         addLabelAndValue(panel, gbc, row++, "Current Hotel:", selectedHotel.getName());
         addLabelAndValue(panel, gbc, row++, "Current Flight:",
@@ -81,13 +104,9 @@ public class PackageEditorGUI extends JFrame {
         addLabelAndValue(panel, gbc, row++, "Start Date:", startDate.format(formatterDate));
         addLabelAndValue(panel, gbc, row++, "End Date:", endDate.format(formatterDate));
 
-        // Date Selection
         row = addDateFields(panel, gbc, row);
-
-        // Edit Buttons
         row = addEditButtons(panel, gbc, row);
 
-        // Save Button
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.gridwidth = 2;
@@ -98,8 +117,10 @@ public class PackageEditorGUI extends JFrame {
         mainPanel.add(panel, "main");
     }
 
-    private void addLabelAndValue(JPanel panel, GridBagConstraints gbc, int row,
-                                  String label, String value) {
+    /**
+     * Adds a label and corresponding value to the panel.
+     */
+    private void addLabelAndValue(JPanel panel, GridBagConstraints gbc, int row, String label, String value) {
         gbc.gridx = 0;
         gbc.gridy = row;
         gbc.gridwidth = 1;
@@ -109,6 +130,9 @@ public class PackageEditorGUI extends JFrame {
         panel.add(new JLabel(value), gbc);
     }
 
+    /**
+     * Adds fields for updating the start and end dates of the package.
+     */
     private int addDateFields(JPanel panel, GridBagConstraints gbc, int row) {
         gbc.gridx = 0;
         gbc.gridy = row;
@@ -129,6 +153,10 @@ public class PackageEditorGUI extends JFrame {
 
         return row + 1;
     }
+
+    /**
+     * Updates the start and end dates based on user input.
+     */
     private void updateDates() throws DateTimeParseException {
         String startDateText = startDateField.getText().trim();
         String endDateText = endDateField.getText().trim();
@@ -148,6 +176,9 @@ public class PackageEditorGUI extends JFrame {
         }
     }
 
+    /**
+     * Adds buttons for editing travel details and applying discounts.
+     */
     private int addEditButtons(JPanel panel, GridBagConstraints gbc, int row) {
         gbc.gridwidth = 2;
         gbc.gridx = 0;
@@ -202,9 +233,10 @@ public class PackageEditorGUI extends JFrame {
             }
         });
         panel.add(editTaxiButton, gbc);
+
         gbc.gridy = row++;
         JButton editPriceButton = new JButton("Add Discount");
-        panel.add(editPriceButton,gbc);
+        panel.add(editPriceButton, gbc);
         editPriceButton.addActionListener(e -> {
             String discountStr = JOptionPane.showInputDialog(
                     this,
@@ -219,7 +251,7 @@ public class PackageEditorGUI extends JFrame {
                     if (discount < 0 || discount > 100) {
                         throw new IllegalArgumentException("Discount must be between 0 and 100.");
                     }
-                    this.currentPackage.setDiscountedPrice((int) (currentPackage.getTotalCost() - discount * (0.01) *currentPackage.getTotalCost()));
+                    this.currentPackage.setDiscountedPrice((int) (currentPackage.getTotalCost() - discount * (0.01) * currentPackage.getTotalCost()));
                     discounted = true;
 
                     JOptionPane.showMessageDialog(this,
@@ -242,6 +274,9 @@ public class PackageEditorGUI extends JFrame {
         return row;
     }
 
+    /**
+     * Creates the panel for selecting hotels.
+     */
     private void createHotelSelectionPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         JTable hotelTable = new JTable();
@@ -267,6 +302,9 @@ public class PackageEditorGUI extends JFrame {
         mainPanel.add(panel, "hotelSelection");
     }
 
+    /**
+     * Creates the panel for selecting flights.
+     */
     private void createFlightSelectionPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         JTable flightTable = new JTable();
@@ -278,7 +316,6 @@ public class PackageEditorGUI extends JFrame {
             int selectedRow = flightTable.getSelectedRow();
             if (selectedRow >= 0) {
                 selectedFlight = currentFlights.get(selectedRow);
-                // Update taxi time based on new flight
                 LocalDate arrivalDate = selectedFlight.isDayChange() ?
                         startDate.minusDays(1) : startDate;
                 LocalDateTime flightArrivalDateTime = LocalDateTime.of(
@@ -297,6 +334,7 @@ public class PackageEditorGUI extends JFrame {
         panel.add(buttonPanel, BorderLayout.SOUTH);
         mainPanel.add(panel, "flightSelection");
     }
+
 
     private void createTaxiSelectionPanel() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -327,6 +365,9 @@ public class PackageEditorGUI extends JFrame {
     private ArrayList<Flight> currentFlights;
     private ArrayList<Taxi> currentTaxis;
 
+    /**
+     * Searches for hotels in a specified city.
+     */
     private void searchHotels(String city) {
         ArrayList<Hotel> hotelsInCity = Hotel.selectByCity(city);
         currentHotels = Hotel.availableRoomsListMaker(startDate, endDate, hotelsInCity);
@@ -362,11 +403,15 @@ public class PackageEditorGUI extends JFrame {
             });
         }
 
-        ((JTable)((JScrollPane)((JPanel)mainPanel.getComponent(1))
+        ((JTable) ((JScrollPane) ((JPanel) mainPanel.getComponent(1))
                 .getComponent(0)).getViewport().getView()).setModel(model);
         cardLayout.show(mainPanel, "hotelSelection");
     }
 
+
+    /**
+     * Searches for flights between specified cities.
+     */
     private void searchFlights(String source, String destination) {
         ArrayList<Flight> flights = Flight.selectByCity(destination, source);
         currentFlights = Flight.availableSeatsListMaker(startDate, flights);
@@ -407,11 +452,14 @@ public class PackageEditorGUI extends JFrame {
             });
         }
 
-        ((JTable)((JScrollPane)((JPanel)mainPanel.getComponent(2))
+        ((JTable) ((JScrollPane) ((JPanel) mainPanel.getComponent(2))
                 .getComponent(0)).getViewport().getView()).setModel(model);
         cardLayout.show(mainPanel, "flightSelection");
     }
 
+    /**
+     * Searches for available taxis in a specified city for a given pickup time.
+     */
     private void searchTaxis(String city, LocalDateTime taxiPickupDateTime) {
         ArrayList<Taxi> taxisInCity = Taxi.selectByCity(city);
         double distanceKm = selectedHotel.getDistanceToAirport();
@@ -472,35 +520,36 @@ public class PackageEditorGUI extends JFrame {
             });
         }
 
-        ((JTable)((JScrollPane)((JPanel)mainPanel.getComponent(3))
+        ((JTable) ((JScrollPane) ((JPanel) mainPanel.getComponent(3))
                 .getComponent(0)).getViewport().getView()).setModel(model);
         cardLayout.show(mainPanel, "taxiSelection");
     }
 
+    /**
+     * Updates the main panel with selected package details.
+     */
     private void updateMainPanelInfo() {
-        JPanel mainPanel = (JPanel)this.mainPanel.getComponent(0);
-        // Update hotel info
-        ((JLabel)mainPanel.getComponent(1)).setText(selectedHotel.getName());
-        // Update flight info
-        ((JLabel)mainPanel.getComponent(3)).setText(
+        JPanel mainPanel = (JPanel) this.mainPanel.getComponent(0);
+        ((JLabel) mainPanel.getComponent(1)).setText(selectedHotel.getName());
+        ((JLabel) mainPanel.getComponent(3)).setText(
                 String.format("%s to %s", selectedFlight.getDepartureCity(), selectedFlight.getArrivalCity()));
-        // Update taxi info
-        ((JLabel)mainPanel.getComponent(5)).setText(selectedTaxi.getTaxiType());
+        ((JLabel) mainPanel.getComponent(5)).setText(selectedTaxi.getTaxiType());
     }
+
+    /**
+     * Saves changes to the selected package.
+     */
     private void saveChanges() {
         try {
             updateDates();
 
-            // Get IDs from selected components
             Integer newHotelId = selectedHotel != null ? selectedHotel.getId() : null;
             Integer newFlightId = selectedFlight != null ? selectedFlight.getId() : null;
             Integer newTaxiId = selectedTaxi != null ? selectedTaxi.getId() : null;
 
-            // Convert dates if they've changed
             LocalDate newStartDate = startDate != null ? startDate : null;
             LocalDate newEndDate = endDate != null ? endDate : null;
 
-            // Call the new edit method
             Package newPackage = PackageManager.editPackage(
                     currentPackage.getId(),
                     newHotelId,
@@ -510,17 +559,13 @@ public class PackageEditorGUI extends JFrame {
                     newEndDate
             );
 
-            // Handle discount
             if (discounted) {
-                // Preserve the existing discounted price calculation
                 int discountedPrice = currentPackage.getDiscountedPrice();
                 newPackage.setDiscountedPrice(discountedPrice);
             } else {
-                // If no discount applied, set discounted price equal to total cost
                 newPackage.setDiscountedPrice(newPackage.getTotalCost());
             }
 
-            // Save the updated package details to the file
             PackageManager.updatePackagesFile();
 
             int newCost = newPackage.getDiscountedPrice();
@@ -529,14 +574,16 @@ public class PackageEditorGUI extends JFrame {
                     "Package updated successfully!\nNew Total Cost: $" + newCost,
                     "Success",
                     JOptionPane.INFORMATION_MESSAGE);
-            if (isFromAdminReservations && res !=null) {
+
+            if (isFromAdminReservations && res != null) {
                 services.Package newPack = PackageManager.retrievePackage(PackageManager.getNewID());
                 Reservation newRes = ReservationsManagers.makeReservation(newPack, res.getCustomer());
-                Vendor.packageSeller(newRes,res.getCustomer());
+                Vendor.packageSeller(newRes, res.getCustomer());
                 ReservationsManagers.cancellationInitiator(res);
                 arg.refreshReservationList();
             }
-            Logger.logPackageModification(currentPackage.toString(), App.user.getUsername(),newPackage.toString());
+
+            Logger.logPackageModification(currentPackage.toString(), App.user.getUsername(), newPackage.toString());
             dispose();
 
         } catch (Exception e) {
@@ -545,7 +592,5 @@ public class PackageEditorGUI extends JFrame {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-
     }
-
 }

@@ -10,6 +10,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
+/**
+ * A GUI application for managing travel packages.
+ * Displays package details in a table with edit and delete options.
+ */
 public class PackageManagementGUI extends JFrame {
     private JTable packageTable;
     private JPanel mainPanel;
@@ -17,22 +21,25 @@ public class PackageManagementGUI extends JFrame {
     private JScrollPane jScrollPane;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final Font font = new Font("Arial", Font.PLAIN, 14);
-    public PackageManagementGUI(){
+
+    /**
+     * Constructs the PackageManagementGUI, initializes components, and loads package data.
+     */
+    public PackageManagementGUI() {
         setTitle("Package Manager");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(1400,800);
+        setSize(1400, 800);
+
         mainPanel = new JPanel(new BorderLayout());
         packageTable = new JTable();
         jScrollPane = new JScrollPane(packageTable);
-        mainPanel.add(jScrollPane,BorderLayout.CENTER);
+        mainPanel.add(jScrollPane, BorderLayout.CENTER);
         packageTable.setFont(font);
-
-
 
         tableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 11; // Make only the Actions column editable
+                return column == 11; // Only the Actions column is editable
             }
 
             @Override
@@ -40,6 +47,34 @@ public class PackageManagementGUI extends JFrame {
                 return columnIndex == 11 ? JPanel.class : String.class;
             }
         };
+
+        initializeColumns();
+        loadPackageData();
+        setupButtons();
+
+        add(mainPanel);
+    }
+
+    /**
+     * Refreshes the package list by reinitializing the GUI.
+     */
+    public void refreshPackageList() {
+        dispose();
+        new PackageManagementGUI().setVisible(true);
+    }
+
+    /**
+     * Returns to the admin panel.
+     */
+    public void backReturn() {
+        dispose();
+        new AdminGUI().setVisible(true);
+    }
+
+    /**
+     * Initializes table columns for package data.
+     */
+    private void initializeColumns() {
         tableModel.addColumn("PackageID");
         tableModel.addColumn("From City");
         tableModel.addColumn("To City");
@@ -52,7 +87,14 @@ public class PackageManagementGUI extends JFrame {
         tableModel.addColumn("Start Date");
         tableModel.addColumn("End Date");
         tableModel.addColumn("Actions");
+    }
+
+    /**
+     * Loads package data from the PackageManager and populates the table.
+     */
+    private void loadPackageData() {
         PackageManager.packageDictGenerator();
+
         for (int id : PackageManager.packageDict.keySet()) {
             if (!Objects.equals(PackageManager.retrievePackage(id).getType(), "not offered")) {
                 Object[] rowData = new Object[12];
@@ -64,30 +106,29 @@ public class PackageManagementGUI extends JFrame {
                 rowData[5] = PackageManager.retrievePackage(id).getHotel().getName();
                 rowData[6] = PackageManager.retrievePackage(id).getTaxi().getTaxiType();
                 rowData[7] = String.valueOf(PackageManager.retrievePackage(id).getTotalCost());
+
                 if (Objects.equals(PackageManager.retrievePackage(id).getType(), "offered")) {
                     rowData[8] = String.valueOf(PackageManager.retrievePackage(id).getDiscountedPrice());
-                    System.out.println(PackageManager.retrievePackage(id).getDiscountedPrice());
-                }
-                else{
+                } else {
                     rowData[8] = "no discount";
                 }
+
                 rowData[9] = PackageManager.retrievePackage(id).getDateStart().format(DATE_FORMATTER);
                 rowData[10] = PackageManager.retrievePackage(id).getDateEnd().format(DATE_FORMATTER);
 
-
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
                 JButton editButton = new JButton("Edit");
-                editButton.setFont(font);
                 JButton deleteButton = new JButton("Delete");
+
+                editButton.setFont(font);
                 deleteButton.setFont(font);
+
                 editButton.addActionListener(e -> {
                     new PackageEditorGUI(PackageManager.retrievePackage(id)).setVisible(true);
-                    System.out.println("Edit clicked for ID: " + id);
                 });
 
                 deleteButton.addActionListener(e -> {
                     PackageManager.deletePackage(id);
-                    System.out.println("Delete clicked for ID: " + id);
                 });
 
                 buttonPanel.add(editButton);
@@ -95,51 +136,54 @@ public class PackageManagementGUI extends JFrame {
                 rowData[11] = buttonPanel;
 
                 tableModel.addRow(rowData);
-
-
-
-                packageTable.setRowHeight(60);
-                packageTable.setModel(tableModel);
-                packageTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-                TableColumn actionColumn = packageTable.getColumnModel().getColumn(11);
-                actionColumn.setCellRenderer(new ButtonRenderer());
-                actionColumn.setCellEditor(new ButtonEditor());
-
-                TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tableModel);
-                packageTable.setRowSorter(sorter);
-                List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
-                sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
-                sorter.setSortKeys(sortKeys);
-
-                add(mainPanel);
             }
         }
+
+        setupTable();
+    }
+
+    /**
+     * Configures table properties and sorting.
+     */
+    private void setupTable() {
+        packageTable.setRowHeight(60);
+        packageTable.setModel(tableModel);
+        packageTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+        TableColumn actionColumn = packageTable.getColumnModel().getColumn(11);
+        actionColumn.setCellRenderer(new ButtonRenderer());
+        actionColumn.setCellEditor(new ButtonEditor());
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+        packageTable.setRowSorter(sorter);
+
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+    }
+
+    /**
+     * Sets up refresh and back buttons in the GUI.
+     */
+    private void setupButtons() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton refreshButton = new JButton("Refresh");
         JButton backButton = new JButton("Back");
+
         refreshButton.setFont(font);
         backButton.setFont(font);
+
         buttonPanel.add(refreshButton);
         buttonPanel.add(backButton);
         mainPanel.add(buttonPanel, BorderLayout.NORTH);
-        refreshButton.addActionListener(e -> {
-            refreshPackageList();
-        });
-        backButton.addActionListener(e -> {
-            backReturn();
-        });
 
-
-    }
-    public void refreshPackageList(){
-        dispose();
-        new PackageManagementGUI().setVisible(true);
+        refreshButton.addActionListener(e -> refreshPackageList());
+        backButton.addActionListener(e -> backReturn());
     }
 
-    public void backReturn(){
-        dispose();
-        new AdminGUI().setVisible(true);
-    }
+    /**
+     * Custom cell renderer for the Actions column.
+     */
     class ButtonRenderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
@@ -148,6 +192,9 @@ public class PackageManagementGUI extends JFrame {
         }
     }
 
+    /**
+     * Custom cell editor for the Actions column.
+     */
     class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
         private JPanel panel;
 
@@ -169,6 +216,10 @@ public class PackageManagementGUI extends JFrame {
         }
     }
 
+    /**
+     * Main method to launch the GUI.
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             PackageManagementGUI gui = new PackageManagementGUI();

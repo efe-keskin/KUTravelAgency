@@ -16,16 +16,18 @@ import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * GUI for displaying detailed information about a customer's travel history,
+ * including reservations, spending statistics, and booking counts.
+ */
 public class CustomerDetailsGUI extends JFrame {
 
-    ArrayList<Reservation> resList;
-    int confirmedSize;
-    double moneySpent;
-
-    // Added counters for hotel, flight, and taxi bookings
-    int hotelBookings = 0;
-    int flightBookings = 0;
-    int taxiBookings = 0;
+    private ArrayList<Reservation> resList;
+    private int confirmedSize;
+    private double moneySpent;
+    private int hotelBookings = 0;
+    private int flightBookings = 0;
+    private int taxiBookings = 0;
 
     private JPanel panel1;
     private JTable travelTable;
@@ -36,15 +38,19 @@ public class CustomerDetailsGUI extends JFrame {
     private JPanel infoPanel2;
     private static final Font fontBig = new Font("Arial", Font.PLAIN, 20);
     private static final Font fontSmall = new Font("Arial", Font.PLAIN, 14);
-
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    DateTimeFormatter formatterDate = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    DateTimeFormatter formatterDateTime = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
+    private final DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private final DateTimeFormatter formatterDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd H:mm");
 
-    public CustomerDetailsGUI(Customer customer){
+    /**
+     * Constructs the CustomerDetailsGUI for a specific customer.
+     *
+     * @param customer the customer whose details are to be displayed
+     */
+    public CustomerDetailsGUI(Customer customer) {
         setTitle("Customer Details #" + customer.getID());
-        setSize(1400,800);
+        setSize(1400, 800);
 
         panel1 = new JPanel(new BorderLayout());
         setContentPane(panel1);
@@ -64,7 +70,7 @@ public class CustomerDetailsGUI extends JFrame {
             customer.loadTravelHistory();
             resList = customer.getTravelHistory();
 
-            DefaultTableModel dtm = new DefaultTableModel(){
+            DefaultTableModel dtm = new DefaultTableModel() {
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
@@ -88,17 +94,18 @@ public class CustomerDetailsGUI extends JFrame {
             travelTable.setRowHeight(30);
             JButton backButton = new JButton("Back");
 
-            dataPanel.add(dataScrollPane,BorderLayout.SOUTH);
-            dataPanel.setBorder(new EmptyBorder(30,30,30,30));
-            panel1.add(dataPanel,BorderLayout.SOUTH);
-            panel1.add(infoPanel,BorderLayout.NORTH);
+            dataPanel.add(dataScrollPane, BorderLayout.SOUTH);
+            dataPanel.setBorder(new EmptyBorder(30, 30, 30, 30));
+            panel1.add(dataPanel, BorderLayout.SOUTH);
+            panel1.add(infoPanel, BorderLayout.NORTH);
 
-            for(Reservation reservation : resList) {
-                hotelBookings++;
-                flightBookings++;
-                taxiBookings++;
-
-                moneySpent += reservation.getRelatedPackage().getDiscountedPrice();
+            for (Reservation reservation : resList) {
+                if (reservation.isStatus()) {
+                    hotelBookings++;
+                    flightBookings++;
+                    taxiBookings++;
+                    moneySpent += reservation.getRelatedPackage().getDiscountedPrice();
+                }
 
                 String[] row = new String[14];
                 row[0] = String.valueOf(reservation.getId());
@@ -109,8 +116,7 @@ public class CustomerDetailsGUI extends JFrame {
                 row[5] = reservation.getRelatedPackage().getFlight().getTicketClass();
                 row[6] = reservation.getRelatedPackage().getTaxi().getTaxiType();
 
-                row[7] = reservation.getRelatedPackage().getTaxiTime()
-                        .format(formatterDateTime).split(" ")[1];
+                row[7] = reservation.getRelatedPackage().getTaxiTime().format(formatterDateTime).split(" ")[1];
 
                 row[8] = reservation.getRelatedPackage().getDateStart().format(formatterDate);
                 row[9] = reservation.getRelatedPackage().getDateEnd().format(formatterDate);
@@ -121,78 +127,74 @@ public class CustomerDetailsGUI extends JFrame {
                 row[10] = df.format(totalCost);
                 row[11] = df.format(discountedCost);
 
-                double ratio = 100 - 100*(discountedCost / totalCost);
+                double ratio = 100 - 100 * (discountedCost / totalCost);
                 row[12] = df.format(ratio);
-                row[13] = reservation.isStatus() ? "Confirmed": "Cancelled";
+                row[13] = reservation.isStatus() ? "Confirmed" : "Cancelled";
                 confirmedSize += reservation.isStatus() ? 1 : 0;
 
                 dtm.addRow(row);
             }
 
-            // Info panel setup
-            infoPanel.add(infoPanel1,BorderLayout.WEST);
+            infoPanel.add(infoPanel1, BorderLayout.WEST);
             JTextPane custInfo = new JTextPane();
             custInfo.setFont(fontBig);
             custInfo.setText("Username: " + customer.getUsername()
                     + "\nID: " + customer.getID());
 
-            infoPanel1.add(custInfo,BorderLayout.CENTER);
-            infoPanel.setBorder(new EmptyBorder(30,30,30,200));
-            infoPanel.setBackground(Color.decode("#F5EFE7"));
-            infoPanel1.setBackground(Color.decode("#F5EFE7"));
+            infoPanel1.add(custInfo, BorderLayout.CENTER);
+            infoPanel.setBorder(new EmptyBorder(30, 30, 30, 200));
             custInfo.setBackground(Color.decode("#D8C4B6"));
             custInfo.setEditable(false);
-            panel1.add(backButton,BorderLayout.LINE_START);
-            backButton.setBorder(new EmptyBorder(30,30,30,30));
+            panel1.add(backButton, BorderLayout.LINE_START);
+            backButton.setBorder(new EmptyBorder(30, 30, 30, 30));
             backButton.setBackground(Color.decode("#3E5879"));
             backButton.setForeground(Color.decode("#F5EFE7"));
             backButton.addActionListener(e -> {
-            dispose();
+                dispose();
                 if (App.isAdmin) {
-                new CustomerSearchGUI().setVisible(true);
-                }
-                else{
+                    new CustomerSearchGUI().setVisible(true);
+                } else {
                     new CustomerUI().setVisible(true);
                 }
-
             });
 
             infoPanel2 = new JPanel(new BorderLayout());
-            infoPanel.add(infoPanel2,BorderLayout.EAST);
-            infoPanel2.setBackground(Color.decode("#F5EFE7"));
-
+            infoPanel.add(infoPanel2, BorderLayout.EAST);
             JTextPane custInfo2 = new JTextPane();
             custInfo2.setEditable(false);
-            custInfo2.setBorder(new EmptyBorder(10,10,10,10));
+            custInfo2.setBorder(new EmptyBorder(10, 10, 10, 10));
             custInfo2.setFont(fontSmall);
             custInfo2.setBackground(Color.decode("#D8C4B6"));
-            custInfo.setForeground(Color.decode("#213555"));
-            custInfo2.setForeground(Color.decode("#213555"));
-            infoPanel2.add(custInfo2,BorderLayout.EAST);
-
             custInfo2.setText(
                     "Total Money Spent: $" + df.format(moneySpent)
                             + "     Average Spending Per Reservation: $"
-                            + df.format(moneySpent / resList.size())
+                            + df.format(moneySpent / confirmedSize)
                             + "\n\nNumber of Reservations: " + resList.size()
                             + "     Number of Confirmed Reservations: " + confirmedSize
                             + "\n\nNumber of Cancelled Reservations: "
                             + (resList.size() - confirmedSize)
                             + "     Rate of Successful Reservations: %"
-                            + df.format((confirmedSize / (double)resList.size()) * 100)
+                            + df.format((confirmedSize / (double) resList.size()) * 100)
                             + "\n\nRate of Cancellation: %"
                             + df.format(((resList.size() - confirmedSize)
-                            / (double)resList.size()) * 100)
+                            / (double) resList.size()) * 100)
                             + "     Number of Hotel Bookings: " + hotelBookings
                             + "\n\nNumber of Flight Bookings: " + flightBookings
                             + "     Number of Taxi Bookings: " + taxiBookings
             );
+
+            infoPanel2.add(custInfo2, BorderLayout.EAST);
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Main method for testing the CustomerDetailsGUI.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         Customer sevvalonna = CustomerDB.getCustomer("sevvalonna");
         new CustomerDetailsGUI(sevvalonna).setVisible(true);

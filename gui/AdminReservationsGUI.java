@@ -11,7 +11,11 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * GUI for managing reservations, allowing admins to view, search, edit, and cancel reservations.
+ */
 public class AdminReservationsGUI extends JFrame {
+
     private JTable reservationTable;
     private JPanel mainPanel;
     private DefaultTableModel tableModel;
@@ -21,6 +25,9 @@ public class AdminReservationsGUI extends JFrame {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("H:mm");
     private static final Font font = new Font("Arial", Font.PLAIN, 14);
 
+    /**
+     * Constructs the AdminReservationsGUI and initializes components.
+     */
     public AdminReservationsGUI() {
         setTitle("Admin Reservation Management");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -28,12 +35,10 @@ public class AdminReservationsGUI extends JFrame {
 
         mainPanel = new JPanel(new BorderLayout());
 
-        //top panel for search and buttons
         JPanel topPanel = new JPanel(new BorderLayout());
         JPanel searchPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
 
-        // Search components
         searchField = new JTextField(20);
         JButton searchButton = new JButton("Search");
         searchField.setFont(font);
@@ -42,7 +47,6 @@ public class AdminReservationsGUI extends JFrame {
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
 
-        // Button components
         JButton refreshButton = new JButton("Refresh");
         JButton backButton = new JButton("Back");
         refreshButton.setFont(font);
@@ -53,7 +57,6 @@ public class AdminReservationsGUI extends JFrame {
         topPanel.add(searchPanel, BorderLayout.WEST);
         topPanel.add(buttonPanel, BorderLayout.EAST);
 
-        // Table setup
         reservationTable = new JTable();
         scrollPane = new JScrollPane(reservationTable);
         reservationTable.setFont(font);
@@ -69,7 +72,6 @@ public class AdminReservationsGUI extends JFrame {
                 return columnIndex == 13 ? JPanel.class : String.class;
             }
         };
-
 
         tableModel.addColumn("Reservation ID");
         tableModel.addColumn("User ID");
@@ -92,23 +94,19 @@ public class AdminReservationsGUI extends JFrame {
         reservationTable.setModel(tableModel);
         reservationTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-        //button column
         TableColumn actionColumn = reservationTable.getColumnModel().getColumn(13);
         actionColumn.setCellRenderer(new ButtonRenderer());
         actionColumn.setCellEditor(new ButtonEditor());
 
-        // Add components to main panel
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
-        // Make Reservation Button
         JButton makeReservationButton = new JButton("Make Reservation");
         makeReservationButton.setFont(font);
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.add(makeReservationButton);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        // Add action listeners
         refreshButton.addActionListener(e -> refreshReservationList());
         backButton.addActionListener(e -> backReturn());
         searchButton.addActionListener(e -> searchReservations());
@@ -119,14 +117,18 @@ public class AdminReservationsGUI extends JFrame {
         add(mainPanel);
     }
 
+    /**
+     * Populates the table with reservations, optionally filtering by username.
+     *
+     * @param searchUsername the username to filter by, or empty for all reservations
+     */
     private void populateTable(String searchUsername) {
-        tableModel.setRowCount(0); // Clear existing rows
+        tableModel.setRowCount(0);
 
         for (Reservation reservation : ReservationsManagers.getAllReservations()) {
-            if (reservation.isStatus()) {  // Only show active reservations
+            if (reservation.isStatus()) {
                 String username = reservation.getCustomer().getUsername();
 
-                // If search is empty or username matches search
                 if (searchUsername.isEmpty() || username.toLowerCase().contains(searchUsername.toLowerCase())) {
                     Object[] rowData = new Object[14];
                     rowData[0] = String.valueOf(reservation.getId());
@@ -143,7 +145,6 @@ public class AdminReservationsGUI extends JFrame {
                     rowData[11] = reservation.getRelatedPackage().getDateEnd().format(DATE_FORMATTER);
                     rowData[12] = String.valueOf(reservation.getRelatedPackage().getDiscountedPrice());
 
-                    // Create button panel
                     JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
                     JButton cancelButton = new JButton("Cancel");
                     JButton editButton = new JButton("Edit");
@@ -160,14 +161,9 @@ public class AdminReservationsGUI extends JFrame {
 
                         if (confirm == JOptionPane.YES_OPTION) {
                             try {
-                                // Get the reservation ID from the current row
                                 int row = reservationTable.getEditingRow();
                                 String reservationId = (String) tableModel.getValueAt(row, 0);
-
-                                // Perform cancellation
                                 ReservationsManagers.cancellationInitiator(ReservationsManagers.getReservation(Integer.parseInt(reservationId)));
-
-                                // Instead of calling refreshReservationList, remove just this row
                                 tableModel.removeRow(row);
 
                                 JOptionPane.showMessageDialog(this,
@@ -187,10 +183,9 @@ public class AdminReservationsGUI extends JFrame {
                     editButton.addActionListener(e -> {
                         int row = reservationTable.getEditingRow();
                         String reservationId = (String) tableModel.getValueAt(row, 0);
-                        services.Reservation thisRes = ReservationsManagers.getReservation(Integer.parseInt(reservationId));
+                        Reservation thisRes = ReservationsManagers.getReservation(Integer.parseInt(reservationId));
                         services.Package current = ReservationsManagers.getReservation(Integer.parseInt(reservationId)).getRelatedPackage();
-                        new PackageEditorGUI(current,true,thisRes,this).setVisible(true);
-
+                        new PackageEditorGUI(current, true, thisRes, this).setVisible(true);
                     });
 
                     buttonPanel.add(editButton);
@@ -203,22 +198,33 @@ public class AdminReservationsGUI extends JFrame {
         }
     }
 
+    /**
+     * Searches reservations based on the entered username.
+     */
     private void searchReservations() {
         String searchTerm = searchField.getText().trim();
         populateTable(searchTerm);
     }
 
+    /**
+     * Refreshes the reservation list by clearing search filters.
+     */
     public void refreshReservationList() {
         searchField.setText("");
         populateTable("");
     }
 
+    /**
+     * Returns to the previous admin GUI.
+     */
     private void backReturn() {
         dispose();
         new AdminGUI().setVisible(true);
     }
 
-    // Button renderer for the action column
+    /**
+     * Custom button renderer for the action column.
+     */
     class ButtonRenderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
@@ -227,18 +233,19 @@ public class AdminReservationsGUI extends JFrame {
         }
     }
 
-    // Button editor for the action column
+    /**
+     * Custom button editor for the action column.
+     */
     class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
         private JPanel panel;
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value,
                                                      boolean isSelected, int row, int column) {
-            table.setRowSelectionInterval(row, row);  // Force row selection
+            table.setRowSelectionInterval(row, row);
             panel = (JPanel) value;
             return panel;
         }
-
 
         @Override
         public Object getCellEditorValue() {
@@ -251,6 +258,11 @@ public class AdminReservationsGUI extends JFrame {
         }
     }
 
+    /**
+     * Main method for testing the AdminReservationsGUI.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             AdminReservationsGUI gui = new AdminReservationsGUI();
