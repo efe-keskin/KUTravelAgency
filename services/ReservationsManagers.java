@@ -2,7 +2,7 @@ package services;
 
 import Users.Customer;
 import core.App;
-import databases.CustomerDB; // or wherever your user lookup code is
+import databases.CustomerDB;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,40 +17,19 @@ import products.*;
 import reservationlogs.Logger;
 
 /**
- * ReservationsManager handles creating, reading, updating, and saving
- * Reservation objects to a local file for persistence.
+ * Manages the creation, storage, and modification of hotel reservations.
  */
 public class ReservationsManagers {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    // Storage file path
     private static final String FILE_PATH = "services/reservations.txt";
-
-    // A thread-safe way (if needed) to store all reservations by ID
     private static final Map<Integer, Reservation> reservations = new HashMap<>();
-
-    // Next ID to assign. This will get updated after loading.
     private static int nextId = 500000;
-
-    // Date format used in Reservation#toString
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /**
-     * Loads reservation data from reservations.txt into the in-memory 'reservations' map.
-     * Each line in the file is assumed to look like:
-     * <pre>
-     *  ID,PACKAGE_ID,STATUS,DATE_START,DATE_END,USER_ID
-     * </pre>
-     * where:
-     * <ul>
-     *   <li>ID is an int</li>
-     *   <li>PACKAGE_ID is an int</li>
-     *   <li>STATUS is either "confirmed" or "cancelled"</li>
-     *   <li>DATE_START and DATE_END are YYYY-MM-DD or empty strings</li>
-     *   <li>USER_ID is a string that identifies the user (e.g., email, username, etc.)</li>
-     * </ul>
+     * Loads all reservations from storage file into memory.
      */
     public static void loadReservations() {
-        // Clear the map before loading fresh
         reservations.clear();
 
         if (!Files.exists(Paths.get(FILE_PATH))) {
@@ -60,7 +39,7 @@ public class ReservationsManagers {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
-            Set<Integer> processedIds = new HashSet<>();  // Track processed IDs
+            Set<Integer> processedIds = new HashSet<>();
 
             while ((line = reader.readLine()) != null) {
                 if (line.trim().isEmpty()) {
@@ -75,7 +54,6 @@ public class ReservationsManagers {
 
                 int id = Integer.parseInt(parts[0]);
 
-                // Skip if we've already processed this ID
                 if (processedIds.contains(id)) {
                     System.out.println("Skipping duplicate reservation ID: " + id);
                     continue;
@@ -105,8 +83,7 @@ public class ReservationsManagers {
     }
 
     /**
-     * Saves the in-memory reservations map to reservations.txt,
-     * overwriting any existing contents.
+     * Saves all reservations from memory to storage file.
      */
     public static void saveReservations() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
@@ -146,21 +123,17 @@ public class ReservationsManagers {
     }
 
     /**
-     * Creates a new Reservation for the given Package and User, adds it to our in-memory map,
-     * and immediately saves to file for persistence.
-     *
-     * @param pck  the Package being reserved
-     * @param user the user (customer) making the reservation
-     * @return the newly created Reservation object
-     * @throws FileNotFoundException if the file is not found when loading
+     * Creates a new reservation and saves it to storage.
+     * @param pck Package to reserve
+     * @param user Customer making the reservation
+     * @return New reservation
      */
     public static Reservation makeReservation(Package pck, Customer user) throws FileNotFoundException {
-        loadReservations(); // Get fresh state
+        loadReservations();
 
         int id = generateId();
         Reservation newRes = new Reservation(id, pck, user);
         newRes.setStatus(true);
-
 
         reservations.put(id, newRes);
         saveReservations();
@@ -170,23 +143,23 @@ public class ReservationsManagers {
         return newRes;
     }
 
-
-
     /**
-     * Fetch a reservation by ID (if it exists).
-     *
-     * @param id the reservation ID
-     * @return the Reservation object or null if not found
+     * Retrieves a reservation by ID.
+     * @param id Reservation ID
+     * @return Reservation if found, null otherwise
      */
     public static Reservation getReservation(int id) {
         loadReservations();
         return reservations.get(id);
     }
 
-
-
+    /**
+     * Cancels a reservation and processes refund based on cancellation type.
+     * @param id Reservation ID
+     * @param keyword Cancellation type (immediate, far, inter, close)
+     */
     public static void ReservationCancellation(int id, String keyword) throws FileNotFoundException {
-        loadReservations(); // Reload to get fresh state
+        loadReservations();
         Reservation res = reservations.get(id);
 
         if (res == null || !res.isStatus()) {
@@ -199,23 +172,18 @@ public class ReservationsManagers {
         }
 
         try {
-            // First mark as cancelled and save to ensure state is updated
             res.setStatus(false);
             saveReservations();
 
-            // Now handle all the cancellations
-            // Cancel hotel bookings
             Hotel hotel = pck.getHotel();
             for (LocalDate date = pck.getHotelStart(); !date.isAfter(pck.getDateEnd()); date = date.plusDays(1)) {
                 hotel.cancelBook(date);
             }
 
-            // Cancel flight booking
             Flight flight = pck.getFlight();
             LocalDate flightDate = flight.isDayChange() ? pck.getDateStart().minusDays(1) : pck.getDateStart();
             flight.cancelBook(flightDate);
 
-            // Cancel taxi bookings
             Taxi taxi = pck.getTaxi();
             double distanceKm = hotel.getDistanceToAirport();
             int travelTimeMinutes = (int) Math.ceil((distanceKm / 60.0) * 60);
@@ -229,7 +197,6 @@ public class ReservationsManagers {
                 currentTime = currentTime.plusMinutes(2);
             }
 
-            // Process refund
             int refundAmount;
             switch (keyword.toLowerCase()) {
                 case "immediate":
@@ -246,7 +213,6 @@ public class ReservationsManagers {
                     throw new IllegalArgumentException("Invalid cancellation type: " + keyword);
             }
 
-            // Update customer history and process refund
             Customer customer = res.getCustomer();
             customer.loadTravelHistory();
             Vendor.moneyReturn(res.getId(), refundAmount);
@@ -259,6 +225,11 @@ public class ReservationsManagers {
         }
     }
 
+    /**
+     * Determines cancellation type and initiates cancellation process.
+     * @param res Reservation to cancel
+     * @return Cancellation type applied
+     */
     public static String cancellationInitiator(Reservation res) throws FileNotFoundException {
         if (res == null) {
             throw new IllegalArgumentException("Reservation cannot be null");
@@ -269,16 +240,13 @@ public class ReservationsManagers {
             throw new IllegalStateException("Flight not found in package");
         }
 
-        // Calculate departure date/time
         LocalDate departureDate = flight.isDayChange() ?
                 res.getDateStart().minusDays(1) : res.getDateStart();
         LocalDateTime departureDateTime = LocalDateTime.of(departureDate, flight.getDepartureTime());
         LocalDateTime now = LocalDateTime.now();
 
-        // Calculate hours between now and departure
         long hoursBetween = ChronoUnit.HOURS.between(now, departureDateTime);
 
-        // Determine cancellation type
         String cancellationType;
         if (App.isAdmin) {
             cancellationType = "immediate";
@@ -290,21 +258,24 @@ public class ReservationsManagers {
             cancellationType = "close";
         }
 
-        // Process cancellation
         ReservationCancellation(res.getId(), cancellationType);
         return cancellationType;
     }
+
+    /**
+     * Retrieves all reservations from storage.
+     * @return Collection of all reservations
+     */
     public static Collection<Reservation> getAllReservations() {
         loadReservations();
         return reservations.values();
     }
 
     /**
-     * A helper method to generate a unique integer ID.
+     * Generates a unique reservation ID.
+     * @return New unique ID
      */
     private static int generateId() {
-        // nextId is updated as we load from file,
-        // so it's always at least one above the highest ID encountered.
         return nextId++;
     }
 }

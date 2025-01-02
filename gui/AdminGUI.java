@@ -77,7 +77,12 @@ public class AdminGUI extends JFrame {
             }
         });
     }
-public void editDeletePackagesFunction(){
+
+    /**
+     * Functions the edit delete button
+     * */
+
+    public void editDeletePackagesFunction(){
     if(!PackageManager.getActivePackages().isEmpty()) {
         dispose();
         new PackageManagementGUI().setVisible(true);

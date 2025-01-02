@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
+/**
+ * GUI for selecting travel packages. Displays available packages and allows users to view details or proceed to payment.
+ */
 public class TravelSelectorGUI extends JFrame {
     private JTable packageTable;
     private JPanel mainPanel;
@@ -19,23 +22,24 @@ public class TravelSelectorGUI extends JFrame {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final Font font = new Font("Arial", Font.PLAIN, 14);
 
+    /**
+     * Constructs the TravelSelectorGUI and initializes its components.
+     */
     public TravelSelectorGUI() {
         setTitle("Travel Selector");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(1400, 800);
 
-        // Initialize main panel
         mainPanel = new JPanel(new BorderLayout());
         packageTable = new JTable();
         jScrollPane = new JScrollPane(packageTable);
         mainPanel.add(jScrollPane, BorderLayout.CENTER);
         packageTable.setFont(font);
 
-        // Create table model
         tableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return column == 11; // Make only the Actions column editable
+                return column == 11; // Only the Actions column is editable
             }
 
             @Override
@@ -44,7 +48,18 @@ public class TravelSelectorGUI extends JFrame {
             }
         };
 
-        // Add columns
+        initializeColumns();
+        loadPackages();
+        configureTable();
+        setupBackButton();
+
+        add(mainPanel);
+    }
+
+    /**
+     * Adds columns to the table model.
+     */
+    private void initializeColumns() {
         tableModel.addColumn("PackageID");
         tableModel.addColumn("From City");
         tableModel.addColumn("To City");
@@ -57,8 +72,12 @@ public class TravelSelectorGUI extends JFrame {
         tableModel.addColumn("Start Date");
         tableModel.addColumn("End Date");
         tableModel.addColumn("Actions");
+    }
 
-        // Load packages
+    /**
+     * Loads available packages into the table.
+     */
+    private void loadPackages() {
         PackageManager.packageDictGenerator();
         for (int id : PackageManager.packageDict.keySet()) {
             if (Objects.equals(PackageManager.retrievePackage(id).getType(), "offered")) {
@@ -75,14 +94,12 @@ public class TravelSelectorGUI extends JFrame {
                 rowData[9] = PackageManager.retrievePackage(id).getDateStart().format(DATE_FORMATTER);
                 rowData[10] = PackageManager.retrievePackage(id).getDateEnd().format(DATE_FORMATTER);
 
-                // Create Details button
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
                 JButton detailsButton = new JButton("Details");
                 detailsButton.setFont(font);
 
                 detailsButton.addActionListener(e -> {
-              //      new PackageDetailsGUI(packageId).setVisible(true);
-                    new PaymentGUI((Customer)App.user,PackageManager.retrievePackage(id)).setVisible(true);
+                    new PaymentGUI((Customer) App.user, PackageManager.retrievePackage(id)).setVisible(true);
                 });
 
                 buttonPanel.add(detailsButton);
@@ -91,8 +108,12 @@ public class TravelSelectorGUI extends JFrame {
                 tableModel.addRow(rowData);
             }
         }
+    }
 
-        // Configure table
+    /**
+     * Configures the table's settings and behavior.
+     */
+    private void configureTable() {
         packageTable.setRowHeight(60);
         packageTable.setModel(tableModel);
         packageTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -106,8 +127,12 @@ public class TravelSelectorGUI extends JFrame {
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
         sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
         sorter.setSortKeys(sortKeys);
+    }
 
-        // back button
+    /**
+     * Sets up the back button for returning to the previous screen.
+     */
+    private void setupBackButton() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton backButton = new JButton("Back");
         backButton.setFont(font);
@@ -115,18 +140,23 @@ public class TravelSelectorGUI extends JFrame {
         mainPanel.add(buttonPanel, BorderLayout.NORTH);
 
         backButton.addActionListener(e -> backReturn());
-
-        add(mainPanel);
     }
 
+    /**
+     * Returns to the appropriate UI based on the user's role.
+     */
     public void backReturn() {
         dispose();
-        if(!App.isAdmin){
-        new CustomerUI().setVisible(true);
+        if (!App.isAdmin) {
+            new CustomerUI().setVisible(true);
+        } else {
+            new AdminGUI().setVisible(true);
+        }
     }
-        else{new AdminGUI().setVisible(true);}}
 
-    // Button renderer for the Actions column
+    /**
+     * Button renderer for the Actions column.
+     */
     class ButtonRenderer implements TableCellRenderer {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
@@ -135,7 +165,9 @@ public class TravelSelectorGUI extends JFrame {
         }
     }
 
-    // Button editor for the Actions column
+    /**
+     * Button editor for the Actions column.
+     */
     class ButtonEditor extends AbstractCellEditor implements TableCellEditor {
         private JPanel panel;
 
@@ -157,6 +189,10 @@ public class TravelSelectorGUI extends JFrame {
         }
     }
 
+    /**
+     * Launches the TravelSelectorGUI.
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             TravelSelectorGUI gui = new TravelSelectorGUI();

@@ -15,6 +15,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Represents a flight product with details such as airline, departure/arrival times,
+ * ticket class, and availability management.
+ */
 public class Flight extends Product {
     private String flightID;
     private String airline;
@@ -31,20 +35,27 @@ public class Flight extends Product {
     private LocalTime leg2DepartureTime;
     private LocalTime leg2ArrivalTime;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-    // New boolean indicating if the flight crosses midnight
-    private boolean dayChange;
+    private boolean dayChange; // Indicates if the flight crosses midnight
+    private HashMap<LocalDate, Integer> availableDates; // Availability map: date -> capacity
 
-    // 1) A map to store availability: date -> capacity
-    private HashMap<LocalDate, Integer> availableDates;
-
-    // Constructor for direct flights
+    /**
+     * Constructor for direct flights.
+     *
+     * @param airline         The airline operating the flight.
+     * @param departureCity   The city of departure.
+     * @param arrivalCity     The destination city.
+     * @param availableCount  Initial seat availability.
+     * @param departureTime   Departure time in HH:mm format.
+     * @param arrivalTime     Arrival time in HH:mm format.
+     * @param ticketClass     The ticket class (e.g., Economy, Business).
+     * @param price           The price of the ticket.
+     * @param id              Unique flight ID.
+     */
     public Flight(String airline, String departureCity, String arrivalCity,
                   int availableCount, String departureTime, String arrivalTime,
                   String ticketClass, double price, int id) {
         super(availableCount);
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-
         this.airline = airline;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
@@ -52,31 +63,39 @@ public class Flight extends Product {
         this.arrivalTime = LocalTime.parse(arrivalTime, formatter);
         this.ticketClass = ticketClass;
         this.price = price;
-        this.stopoverCity = null; // No stopover for direct flights
-        this.finalArrivalCity = null; // No final arrival city for direct flights
+        this.stopoverCity = null;
+        this.finalArrivalCity = null;
         this.leg1DepartureTime = null;
         this.leg1ArrivalTime = null;
         this.leg2DepartureTime = null;
         this.leg2ArrivalTime = null;
-        this.flightID = String.valueOf(id); // ensure flightID is consistent with int ID
-
-        // Determine if this flight ends after midnight compared to its departure
-        // (arrivalTime < departureTime means it rolled into the next day)
+        this.flightID = String.valueOf(id);
         this.dayChange = this.arrivalTime.isBefore(this.departureTime);
-
-        // Initialize the availability map to avoid NullPointerExceptions
         this.availableDates = new HashMap<>();
     }
 
-    // Constructor for stopover flights
-    public Flight( String airline, String departureCity, String stopoverCity,
+    /**
+     * Constructor for flights with a stopover.
+     *
+     * @param airline            The airline operating the flight.
+     * @param departureCity      The city of departure.
+     * @param stopoverCity       The city where the flight stops.
+     * @param finalArrivalCity   The final destination city.
+     * @param leg1DepartureTime  Departure time for the first leg.
+     * @param leg1ArrivalTime    Arrival time for the first leg.
+     * @param leg2DepartureTime  Departure time for the second leg.
+     * @param leg2ArrivalTime    Arrival time for the second leg.
+     * @param availableCount     Initial seat availability.
+     * @param ticketClass        The ticket class.
+     * @param price              The price of the ticket.
+     * @param id                 Unique flight ID.
+     */
+    public Flight(String airline, String departureCity, String stopoverCity,
                   String finalArrivalCity, String leg1DepartureTime, String leg1ArrivalTime,
                   String leg2DepartureTime, String leg2ArrivalTime, int availableCount,
-                  String ticketClass, double price,int id) {
+                  String ticketClass, double price, int id) {
         super(availableCount);
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-
         this.flightID = String.valueOf(id);
         this.airline = airline;
         this.departureCity = departureCity;
@@ -85,74 +104,63 @@ public class Flight extends Product {
         this.ticketClass = ticketClass;
         this.price = price;
         this.arrivalCity = finalArrivalCity;
-
-        // Leg 1 times
         this.leg1DepartureTime = LocalTime.parse(leg1DepartureTime, formatter);
-        this.leg1ArrivalTime   = LocalTime.parse(leg1ArrivalTime,   formatter);
-
-        // Leg 2 times
+        this.leg1ArrivalTime = LocalTime.parse(leg1ArrivalTime, formatter);
         this.leg2DepartureTime = LocalTime.parse(leg2DepartureTime, formatter);
-        this.leg2ArrivalTime   = LocalTime.parse(leg2ArrivalTime,   formatter);
-
-        // Overall departure and arrival times for convenience
+        this.leg2ArrivalTime = LocalTime.parse(leg2ArrivalTime, formatter);
         this.departureTime = this.leg1DepartureTime;
-        this.arrivalTime   = this.leg2ArrivalTime;
-
-        // For multi-leg flights, you could either check each leg
-        // or just check the overall departure vs. overall arrival:
+        this.arrivalTime = this.leg2ArrivalTime;
         this.dayChange = this.arrivalTime.isBefore(this.departureTime);
-
-        // Initialize the availability map
         this.availableDates = new HashMap<>();
     }
 
     /**
-     * Retrieves the Flight object from TravelParser's dictionary by ID.
+     * Retrieves the flight object by ID from TravelParser.
+     *
+     * @param id Flight ID.
+     * @return The corresponding Flight object.
      */
     public static Flight retrieveFlight(int id) {
         return TravelParser.getFlightsDict().get(id);
     }
 
-    public static ArrayList<Flight> selectByCity(String city,String depCity) {
-        // Create a list to store all matching flights
+    /**
+     * Filters flights by departure and arrival cities.
+     *
+     * @param city    Arrival city.
+     * @param depCity Departure city.
+     * @return List of matching flights.
+     */
+    public static ArrayList<Flight> selectByCity(String city, String depCity) {
         ArrayList<Flight> flightsInCity = new ArrayList<>();
-
-        // Iterate through all flights in the TravelParser's dictionary
         for (Flight flight : TravelParser.getFlightsDict().values()) {
-            // Compare city names, ignoring case to make the search more robust
-            if (flight.getArrivalCity().equalsIgnoreCase(city)&&flight.getDepartureCity().equalsIgnoreCase(depCity)) {
+            if (flight.getArrivalCity().equalsIgnoreCase(city) && flight.getDepartureCity().equalsIgnoreCase(depCity)) {
                 flightsInCity.add(flight);
             }
         }
-
         return flightsInCity;
     }
 
     /**
-     * 2) Reads 'flightavailability.txt' to populate the availableDates map
-     *    with (date -> capacity) for this flight's ID.
+     * Loads flight availability from a file.
+     *
+     * @throws FileNotFoundException If the file is not found.
      */
     public void flightAvailabilityParser() throws FileNotFoundException {
         File file = new File("products/flightavailability.txt");
         Scanner reader = new Scanner(file);
-        // Clear old data to avoid duplicates
         this.availableDates.clear();
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         while (reader.hasNextLine()) {
             String line = reader.nextLine();
             String[] dataArray = line.split(",");
-            // Expect at least 3 parts: id, date, capacity
-            if (dataArray.length < 3) {
-                continue; // skip malformed lines
-            }
+            if (dataArray.length < 3) continue;
 
             int lineId = Integer.parseInt(dataArray[0]);
             LocalDate date = LocalDate.parse(dataArray[1], formatter);
             int capacity = Integer.parseInt(dataArray[2]);
 
-            // Only load for this specific flight
             if (lineId == this.getId()) {
                 this.availableDates.put(date, capacity);
             }
@@ -161,27 +169,23 @@ public class Flight extends Product {
     }
 
     /**
-     * 3) Rewrites 'flightavailability.txt' to reflect updated capacities
-     *    for all flights, including this one.
+     * Updates the availability file with current data.
+     *
+     * @throws FileNotFoundException If the file is not found.
      */
     public void updateFile() throws FileNotFoundException {
         File file = new File("products/flightavailability.txt");
         List<String> lines = new ArrayList<>();
-
-        // 1) Read all lines from the original file
         try (Scanner reader = new Scanner(file)) {
             while (reader.hasNextLine()) {
                 lines.add(reader.nextLine());
             }
         }
 
-        // 2) Prepare for parsing and rewriting
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         List<String> updatedLines = new ArrayList<>();
-        // Track which dates we've updated to avoid duplicating
         Set<LocalDate> updatedDates = new HashSet<>();
 
-        // 3) Loop through existing lines
         for (String line : lines) {
             String[] dataArray = line.split(",");
             if (dataArray.length < 3) {
@@ -193,18 +197,15 @@ public class Flight extends Product {
             LocalDate lineDate = LocalDate.parse(dataArray[1], formatter);
             int lineCapacity = Integer.parseInt(dataArray[2]);
 
-            // If this line belongs to our flight & date is in our map, replace it
             if (lineId == this.getId() && availableDates.containsKey(lineDate)) {
                 int newCapacity = availableDates.get(lineDate);
                 updatedLines.add(this.getId() + "," + lineDate.format(formatter) + "," + newCapacity);
                 updatedDates.add(lineDate);
             } else {
-                // Otherwise, keep the existing line
                 updatedLines.add(line);
             }
         }
 
-        // 4) Add lines for any date in availableDates not in the original file
         for (LocalDate date : availableDates.keySet()) {
             if (!updatedDates.contains(date)) {
                 int newCapacity = availableDates.get(date);
@@ -212,7 +213,6 @@ public class Flight extends Product {
             }
         }
 
-        // 5) Rewrite the entire file with updated lines
         try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
             for (String updatedLine : updatedLines) {
                 writer.println(updatedLine);
@@ -223,19 +223,16 @@ public class Flight extends Product {
     }
 
     /**
-     * 4) Books a seat for the specified date.
-     *    - If the date doesn't exist, set a default capacity, then decrement.
-     *    - If the date exists & capacity > 0, decrement.
-     *    - updateFile() afterward to persist changes.
+     * Books a seat for a given date.
+     *
+     * @param date Date of the flight.
      */
     public void book(LocalDate date) {
         try {
-            // 1) Ensure availability is loaded
             if (availableDates == null || availableDates.isEmpty()) {
                 flightAvailabilityParser();
             }
 
-            // 2) Check if the date is in our map
             if (availableDates.containsKey(date)) {
                 int currentCap = availableDates.get(date);
                 if (currentCap > 0) {
@@ -245,34 +242,31 @@ public class Flight extends Product {
                     return;
                 }
             } else {
-                // 3) If date not present, add a default capacity & decrement
-                int defaultCapacity = getAvailableCount();  // choose a default
+                int defaultCapacity = getAvailableCount();
                 availableDates.put(date, defaultCapacity - 1);
             }
 
-            // 4) Persist changes
             updateFile();
-            Logger.logFlightreservation(App.user.getUsername(),this.toString(),departureTime.format(formatter),arrivalTime.format(formatter),ticketClass);
+            Logger.logFlightreservation(App.user.getUsername(), this.toString(), departureTime.format(formatter), arrivalTime.format(formatter), ticketClass);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * @param date
+     * Cancels a booking for a given date.
+     *
+     * @param date Date of the flight.
      */
     public void cancelBook(LocalDate date) {
         try {
-            // 1) Ensure availability is loaded
             if (availableDates == null || availableDates.isEmpty()) {
                 flightAvailabilityParser();
             }
 
-            // 2) Check if the date is in our map
             if (availableDates.containsKey(date)) {
                 int currentCap = availableDates.get(date);
                 int maxCapacity = getAvailableCount();
-                // Ensure we don't exceed the maximum seat capacity
                 if (currentCap < maxCapacity) {
                     availableDates.put(date, currentCap + 1);
                     System.out.println("Flight booking cancelled successfully for " + date);
@@ -281,14 +275,11 @@ public class Flight extends Product {
                     return;
                 }
             } else {
-                // 3) If date not present, can't cancel a non-existent booking
                 System.out.println("No flight booking record found for " + date);
                 return;
             }
 
-            // 4) Persist changes
             updateFile();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -355,21 +346,15 @@ public class Flight extends Product {
         return leg2ArrivalTime;
     }
 
-    /**
-     * A boolean property that returns true if the flight spans into the next day.
-     */
     public boolean isDayChange() {
         return dayChange;
     }
 
-    /**
-     * Override getId so that we can align with flight availability file (IDs).
-     */
     public int getId() {
         return Integer.parseInt(flightID);
     }
+
     public int getAvailabilityForDate(LocalDate date) {
-        // Ensure the availability data is loaded
         if (availableDates == null || availableDates.isEmpty()) {
             try {
                 flightAvailabilityParser();
@@ -377,20 +362,18 @@ public class Flight extends Product {
                 e.printStackTrace();
             }
         }
-
-        // Return capacity if present; otherwise the default
         return availableDates.getOrDefault(date, getAvailableCount());
     }
-    public static ArrayList<Flight> availableSeatsListMaker(LocalDate dateStart,ArrayList<Flight> arrayList){
-        ArrayList<Flight> newFlightsList = new ArrayList<Flight>();
-        for(Flight flight : arrayList) {
+
+    public static ArrayList<Flight> availableSeatsListMaker(LocalDate dateStart, ArrayList<Flight> arrayList) {
+        ArrayList<Flight> newFlightsList = new ArrayList<>();
+        for (Flight flight : arrayList) {
             if (flight.isDayChange()) {
-                if(flight.getAvailabilityForDate(dateStart.minusDays(1))>0){
+                if (flight.getAvailabilityForDate(dateStart.minusDays(1)) > 0) {
                     newFlightsList.add(flight);
                 }
-            }
-            else{
-                if(flight.getAvailabilityForDate(dateStart)>0){
+            } else {
+                if (flight.getAvailabilityForDate(dateStart) > 0) {
                     newFlightsList.add(flight);
                 }
             }
@@ -398,29 +381,17 @@ public class Flight extends Product {
         return newFlightsList;
     }
 
-
     public String getDuration() {
-        // 1) Create a LocalDateTime for the departure (arbitrary date, e.g. Jan 1, 2000).
-        LocalDateTime departureDateTime = LocalDateTime.of(
-                LocalDate.of(2000, 1, 1),
-                this.departureTime
-        );
-
-        // 2) Create a LocalDateTime for the arrival.
-        //    If the flight crosses midnight (dayChange == true), shift arrival to Jan 2, 2000.
+        LocalDateTime departureDateTime = LocalDateTime.of(LocalDate.of(2000, 1, 1), this.departureTime);
         LocalDateTime arrivalDateTime = this.dayChange
                 ? LocalDateTime.of(LocalDate.of(2000, 1, 2), this.arrivalTime)
                 : LocalDateTime.of(LocalDate.of(2000, 1, 1), this.arrivalTime);
 
-        // 3) Calculate the Duration
         Duration duration = Duration.between(departureDateTime, arrivalDateTime);
-
-        // 4) Convert the Duration to hours/minutes
         long totalMinutes = duration.toMinutes();
         long hours = totalMinutes / 60;
         long minutes = totalMinutes % 60;
 
-        // 5) Return a simple string format: e.g. "2h 45m"
         return hours + "h " + minutes + "m";
     }
 }

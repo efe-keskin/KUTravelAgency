@@ -5,26 +5,38 @@ import reservationlogs.Logger;
 import services.TravelParser;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.Reader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
-public class Hotel extends Product{
+/**
+ * Represents a hotel with attributes such as name, city, room type, and availability.
+ * Handles booking and cancellation operations with file-based persistence.
+ */
+public class Hotel extends Product {
     private int id;
     private String name;
     private String city;
     private String roomType;
     private double pricePerNight;
     private double distanceToAirport;
-    private HashMap<LocalDate,Integer> availableDates;
+    private HashMap<LocalDate, Integer> availableDates;
 
-
-    public Hotel(String name,String city,String roomType, int availableCount, double pricePerNight, double distanceToAirport,int id) {
+    /**
+     * Constructs a Hotel instance.
+     *
+     * @param name             The name of the hotel.
+     * @param city             The city where the hotel is located.
+     * @param roomType         The type of rooms available.
+     * @param availableCount   Initial number of available rooms.
+     * @param pricePerNight    Price per night for a room.
+     * @param distanceToAirport Distance from the hotel to the nearest airport.
+     * @param id               Unique identifier for the hotel.
+     */
+    public Hotel(String name, String city, String roomType, int availableCount,
+                 double pricePerNight, double distanceToAirport, int id) {
         super(availableCount);
         this.name = name;
         this.city = city;
@@ -33,17 +45,29 @@ public class Hotel extends Product{
         this.distanceToAirport = distanceToAirport;
         this.availableDates = new HashMap<>();
         this.id = id;
-
     }
-    public static Hotel retrieveHotel(int id){
+
+    /**
+     * Retrieves a Hotel by its ID from the TravelParser.
+     *
+     * @param id The unique identifier of the hotel.
+     * @return The corresponding Hotel object.
+     */
+    public static Hotel retrieveHotel(int id) {
         return TravelParser.getHotelsDict().get(id);
-
     }
+
+    /**
+     * Parses hotel availability data from a file and populates the availability map.
+     *
+     * @throws FileNotFoundException If the file is not found.
+     */
     public void hotelAvailabilityParser() throws FileNotFoundException {
         File file = new File("products/hotelavailability.txt");
         Scanner reader = new Scanner(file);
         this.availableDates.clear();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         while (reader.hasNextLine()) {
             String data = reader.nextLine();
             String[] dataArray = data.split(",");
@@ -53,63 +77,61 @@ public class Hotel extends Product{
             if (id == this.id) {
                 this.availableDates.put(date, capacity);
             }
-
-
         }
         reader.close();
     }
+
+    /**
+     * Filters hotels by city.
+     *
+     * @param city The city to filter hotels by.
+     * @return A list of hotels located in the specified city.
+     */
     public static ArrayList<Hotel> selectByCity(String city) {
         TravelParser.parseHotels();
-        // Create a list to store all matching hotels
         ArrayList<Hotel> hotelsInCity = new ArrayList<>();
-
-        // Iterate through all hotels in the TravelParser's dictionary
         for (Hotel hotel : TravelParser.getHotelsDict().values()) {
-            // Compare city names, ignoring case to make the search more robust
             if (hotel.getCity().equalsIgnoreCase(city)) {
                 hotelsInCity.add(hotel);
             }
         }
-
         return hotelsInCity;
     }
 
+    /**
+     * Updates the hotel availability file with current data.
+     *
+     * @throws FileNotFoundException If the file is not found.
+     */
     public void updateFile() throws FileNotFoundException {
-        // 1) Read all lines from the original file
         File file = new File("products/hotelavailability.txt");
         java.util.List<String> lines = new java.util.ArrayList<>();
+
         try (Scanner reader = new Scanner(file)) {
             while (reader.hasNextLine()) {
                 lines.add(reader.nextLine());
             }
         }
 
-        // 2) Prepare for parsing and rewriting
-        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         java.util.List<String> updatedLines = new java.util.ArrayList<>();
-        // We'll track which LocalDates we’ve already updated so we don't add duplicates later
-        java.util.Set<java.time.LocalDate> updatedDates = new java.util.HashSet<>();
+        java.util.Set<LocalDate> updatedDates = new java.util.HashSet<>();
 
-        // 3) Loop through existing lines
         for (String line : lines) {
             String[] dataArray = line.split(",");
             int lineId = Integer.parseInt(dataArray[0]);
-            java.time.LocalDate lineDate = java.time.LocalDate.parse(dataArray[1], formatter);
+            LocalDate lineDate = LocalDate.parse(dataArray[1], formatter);
             int lineCapacity = Integer.parseInt(dataArray[2]);
 
-            // If this line belongs to the same hotel (id) and date is in our availableDates, we replace it
             if (lineId == this.id && availableDates.containsKey(lineDate)) {
                 int newCapacity = availableDates.get(lineDate);
                 updatedLines.add(this.id + "," + lineDate.format(formatter) + "," + newCapacity);
                 updatedDates.add(lineDate);
             } else {
-                // Otherwise, keep the existing line
                 updatedLines.add(line);
             }
         }
 
-        // 4) Add lines for any date in availableDates that didn’t appear in the original file
         for (LocalDate date : availableDates.keySet()) {
             if (!updatedDates.contains(date)) {
                 int newCapacity = availableDates.get(date);
@@ -117,7 +139,6 @@ public class Hotel extends Product{
             }
         }
 
-        // 5) Rewrite the entire file with updated lines
         try (java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.FileWriter(file))) {
             for (String updatedLine : updatedLines) {
                 writer.println(updatedLine);
@@ -126,50 +147,51 @@ public class Hotel extends Product{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Books a room for the specified date.
+     *
+     * @param date The date for which a room is to be booked.
+     */
     public void book(LocalDate date) {
         try {
-            // 1) Ensure availableDates is loaded
             if (availableDates == null || availableDates.isEmpty()) {
                 hotelAvailabilityParser();
             }
 
-            // 2) Check if the date exists in the dictionary
             if (availableDates.containsKey(date)) {
                 int currentCap = availableDates.get(date);
-                // 3) Check if there's at least 1 available room
                 if (currentCap > 0) {
                     availableDates.put(date, currentCap - 1);
                 } else {
-                    // No rooms left, just return or handle accordingly
                     System.out.println("No more available rooms on " + date);
                     return;
                 }
             } else {
-                // 4) If this date doesn't exist, add a default capacity and deduct 1
-                int defaultCapacity = getAvailableCount(); // can be any default capacity you want
+                int defaultCapacity = getAvailableCount();
                 availableDates.put(date, defaultCapacity - 1);
             }
 
-            // 5) Update the file to reflect the new availability
             updateFile();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Cancels a booking for the specified date.
+     *
+     * @param date The date for which the booking is to be canceled.
+     */
     public void cancelBook(LocalDate date) {
         try {
-            // 1) Ensure availableDates is loaded
             if (availableDates == null || availableDates.isEmpty()) {
                 hotelAvailabilityParser();
             }
 
-            // 2) Check if the date exists in the dictionary
             if (availableDates.containsKey(date)) {
                 int currentCap = availableDates.get(date);
-                // 3) Add 1 to available capacity
                 int maxCapacity = getAvailableCount();
-                // Ensure we don't exceed the maximum capacity
                 if (currentCap < maxCapacity) {
                     availableDates.put(date, currentCap + 1);
                     System.out.println("Booking cancelled successfully for " + date);
@@ -178,43 +200,41 @@ public class Hotel extends Product{
                     return;
                 }
             } else {
-                // 4) If this date doesn't exist, something is wrong
                 System.out.println("No booking record found for " + date);
                 return;
             }
 
-            // 5) Update the file to reflect the new availability
             updateFile();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public static ArrayList<Hotel> availableRoomsListMaker(LocalDate dateStart,
-                                                  LocalDate dateEnd,
-                                                  ArrayList<Hotel> hotelList)
-    {
+
+    /**
+     * Filters hotels based on availability within a date range.
+     *
+     * @param dateStart Start date of the range.
+     * @param dateEnd   End date of the range.
+     * @param hotelList List of hotels to filter.
+     * @return A list of hotels available for all dates in the range.
+     */
+    public static ArrayList<Hotel> availableRoomsListMaker(LocalDate dateStart, LocalDate dateEnd, ArrayList<Hotel> hotelList) {
         ArrayList<Hotel> newHotelList = new ArrayList<>();
 
-        // If dateEnd is before dateStart, just return an empty list
         if (dateEnd.isBefore(dateStart)) {
             return newHotelList;
         }
 
-        // Check each hotel in the provided list
         for (Hotel hotel : hotelList) {
             boolean allDatesAvailable = true;
 
-            // Loop from dateStart to dateEnd (inclusive)
             for (LocalDate d = dateStart; !d.isAfter(dateEnd); d = d.plusDays(1)) {
-                // If the hotel has 0 or fewer rooms for any date in the range, it fails
                 if (hotel.getAvailabilityForDate(d) <= 0) {
                     allDatesAvailable = false;
-                    break; // No need to check further dates for this hotel
+                    break;
                 }
             }
 
-            // If the hotel had >0 availability on every date in the range, add it to the list
             if (allDatesAvailable) {
                 newHotelList.add(hotel);
             }
@@ -222,12 +242,6 @@ public class Hotel extends Product{
 
         return newHotelList;
     }
-
-
-
-
-
-
 
     @Override
     public String toString() {
@@ -253,9 +267,11 @@ public class Hotel extends Product{
     public double getDistanceToAirport() {
         return distanceToAirport;
     }
-    public int getId(){
+
+    public int getId() {
         return id;
     }
+
     public int getAvailabilityForDate(LocalDate date) {
         if (availableDates == null || availableDates.isEmpty()) {
             try {

@@ -14,11 +14,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Manages travel packages including creation, modification, and persistence of package data.
+ * Handles package operations such as creating, editing, and retrieving travel packages.
+ */
 public class PackageManager {
-public static HashMap<Integer,Package> packageDict;
-private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-private static int newID=400000;
+    public static HashMap<Integer,Package> packageDict;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static int newID=400000;
+
+    /**
+     * Loads package data from file into packageDict HashMap.
+     */
     public static void packageDictGenerator() {
         packageDict = new HashMap<Integer,Package>();
         try {
@@ -46,16 +54,18 @@ private static int newID=400000;
         } catch (FileNotFoundException f) {
             System.out.println(f);
         }
-
     }
+
+    /**
+     * Marks a package as "not offered" instead of physically deleting it.
+     * @param packageId ID of the package to delete
+     */
     public static void deletePackage(int packageId) {
-        // Make sure packageDict is loaded
         if (packageDict == null) {
             packageDict = new HashMap<>();
             packageDictGenerator();
         }
 
-        // Retrieve the package
         Package toDelete = packageDict.get(packageId);
 
         if (toDelete == null) {
@@ -63,15 +73,16 @@ private static int newID=400000;
             return;
         }
 
-        // Set its type to "not offered"
         toDelete.setType("not offered");
-
-        // Rewrite the packages file to persist changes
         updatePackagesFile();
-
         System.out.println("Package " + packageId + " is now marked as 'not offered'.");
     }
-public static HashMap<Integer,Package> getActivePackages(){
+
+    /**
+     * Returns all packages that are currently being offered.
+     * @return HashMap of active packages with their IDs as keys
+     */
+    public static HashMap<Integer,Package> getActivePackages(){
         packageDictGenerator();
         HashMap<Integer,Package> returnDict = new HashMap<Integer,Package>();
         for(Package p: packageDict.values()) {
@@ -80,29 +91,48 @@ public static HashMap<Integer,Package> getActivePackages(){
             }
         }
         return returnDict;
-}
-public static int getNewID(){
+    }
+
+    /**
+     * @return The next available package ID
+     */
+    public static int getNewID(){
         return newID;
-}
+    }
+
+    /**
+     * Retrieves a specific package by its ID.
+     * @param packageId ID of the package to retrieve
+     * @return The requested Package object or null if not found
+     */
     public static Package retrievePackage(int packageId) {
-        // Make sure packageDict is initialized
-
-            packageDictGenerator();  // loads from packages.txt
-
-
-        // Retrieve the package from the dictionary
+        packageDictGenerator();
         return packageDict.get(packageId);
     }
+
+    /**
+     * Generates the next available package ID.
+     */
     public static void idGenerator() {
         if (packageDict == null|| packageDict.isEmpty()) {
             packageDictGenerator();
         }
-            int lastID = 400000;
-            lastID = lastID+ packageDict.size();
-            newID = lastID + 1;
+        int lastID = 400000;
+        lastID = lastID+ packageDict.size();
+        newID = lastID + 1;
     }
 
-
+    /**
+     * Creates a new package with the specified components.
+     * @param type Package type
+     * @param hotelID Hotel component ID
+     * @param flightID Flight component ID
+     * @param taxiID Taxi component ID
+     * @param dateStart Start date of the package
+     * @param dateEnd End date of the package
+     * @param taxiTime Scheduled taxi pickup time
+     * @return The newly created Package object
+     */
     public static Package makePackage(String type, int hotelID, int flightID, int taxiID, LocalDate dateStart, LocalDate dateEnd, LocalDateTime taxiTime){
         idGenerator();
         Package newPack = new Package(type,hotelID,flightID,taxiID,dateStart,dateEnd,taxiTime,newID);
@@ -110,8 +140,13 @@ public static int getNewID(){
         packageDict.put(newID,newPack);
         updatePackagesFile();
         return newPack;
-
     }
+
+    /**
+     * Creates a copy of an existing package with a new ID.
+     * @param pck Package to duplicate
+     * @return The duplicated Package object
+     */
     public static Package duplicatePackage(Package pck){
         idGenerator();
         Package newPack = new Package(pck);
@@ -121,6 +156,9 @@ public static int getNewID(){
         return newPack;
     }
 
+    /**
+     * Updates the packages.txt file with current package data.
+     */
     public static void updatePackagesFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("services/packages.txt"))) {
             for (int id : packageDict.keySet()) {
@@ -137,7 +175,16 @@ public static int getNewID(){
         }
     }
 
-
+    /**
+     * Creates a new package based on an existing one with updated components.
+     * @param packageId ID of the package to edit
+     * @param newHotelId New hotel ID (optional)
+     * @param newFlightId New flight ID (optional)
+     * @param newTaxiId New taxi ID (optional)
+     * @param newDateStart New start date (optional)
+     * @param newDateEnd New end date (optional)
+     * @return The newly created Package object with updated components
+     */
     public static Package editPackage(int packageId, Integer newHotelId, Integer newFlightId, Integer newTaxiId,
                                       LocalDate newDateStart, LocalDate newDateEnd) {
         PackageManager.packageDictGenerator();
@@ -147,10 +194,9 @@ public static int getNewID(){
             return null;
         }
 
-        // Mark the current package as "not offered" before creating the new one
         packageDict.get(packageId).setType("not offered");
         updatePackagesFile();
-        // Use existing values if new ones aren't provided
+
         int hotelId = newHotelId != null ? newHotelId : currentPackage.getHotel().getId();
         int flightId = newFlightId != null ? newFlightId : currentPackage.getFlight().getId();
         int taxiId = newTaxiId != null ? newTaxiId : currentPackage.getTaxi().getId();
@@ -158,13 +204,9 @@ public static int getNewID(){
         LocalDate dateEnd = newDateEnd != null ? newDateEnd : currentPackage.getDateEnd();
         LocalDateTime taxiTime = LocalDateTime.of(dateStart, Flight.retrieveFlight(flightId).getArrivalTime());
 
-        // Create the new package with updated components
         Package newPackage = makePackage("offered", hotelId, flightId, taxiId, dateStart, dateEnd, taxiTime);
-
-        // Save the updated package details
         updatePackagesFile();
 
         return newPackage;
     }
-
 }
