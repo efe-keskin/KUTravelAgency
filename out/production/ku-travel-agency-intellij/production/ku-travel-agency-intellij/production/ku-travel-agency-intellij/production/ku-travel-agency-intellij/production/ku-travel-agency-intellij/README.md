@@ -1,1 +1,0 @@
-# ku-travel-agency-intellij
