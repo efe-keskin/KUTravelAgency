@@ -71,7 +71,7 @@ Admins enjoy additional privileges to manage users, reservations, and packages.
 ### Usage
 1. **Login as Admin or Customer.**
 2. Explore features through intuitive GUIs for booking, creating, and managing packages.
-3. For detailed steps, refer to [User Guide](#).
+3. For detailed steps, refer to [User Guide]([#](https://github.com/efe-keskin/KUTravelAgency/blob/main/COMP132-ProjectReportTemplate.pdf)).
 
 ---
 
